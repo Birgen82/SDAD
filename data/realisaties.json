@@ -1,0 +1,245 @@
+[
+ {
+  "slug": "gevel-villa-te-knokke",
+  "title": "Gevel villa te Knokke",
+  "img": "2044_knokke_na_1_3.webp",
+  "type": "particulier",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "nieuwbouwappartement-te-kuurne",
+  "title": "Nieuwbouwappartement te Kuurne",
+  "img": "1829_rita_9.webp",
+  "type": "particulier",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "make-over-voorgevel-te-izegem",
+  "title": "Make-over voorgevel te Izegem",
+  "img": "1783_izegem_gevel_1.webp",
+  "type": "particulier",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "rood-leefruimte-te-marke-stop-rood",
+  "title": "Leefruimte te Marke",
+  "img": "1968_lagast_8.webp",
+  "type": "particulier",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "kaleien-van-achtergevel-te-kortrijk",
+  "title": "Kaleien van achtergevel te Kortrijk",
+  "img": "1883_nathalie_na_kortrijk_2.webp",
+  "type": "particulier",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "woonkamer-te-deerlijk",
+  "title": "Woonkamer te deerlijk",
+  "img": "1789_peter_na_4.webp",
+  "type": "particulier",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "villa-te-meulebeke",
+  "title": "Villa te Meulebeke",
+  "img": "1817_depaepe_na_2.webp",
+  "type": "particulier",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "leefruimte-te-aalbeke",
+  "title": "Leefruimte en keuken te Aalbeke",
+  "img": "1948_dirk_3.webp",
+  "type": "particulier",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "gevel-villa-te-kortrijk",
+  "title": "Kaleien gevel van villa te Kortrijk",
+  "img": "1936_bouw_id_12-1.webp",
+  "type": "particulier",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "villa-te-zwijnaarde",
+  "title": "Villa van boven tot onder te Zwijnaarde",
+  "img": "1811_zwijn_22-1.webp",
+  "type": "particulier",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "schilderen-gevel-te-marke",
+  "title": "Schilderen gevel bungalow te Marke",
+  "img": "1954_marke_15.webp",
+  "type": "particulier",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "schilderen-gevel-te-kortrijk",
+  "title": "Schilderen gevel te Kortrijk",
+  "img": "1795_kortrijk_afgewerkt_11.webp",
+  "type": "particulier",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "babu-gent",
+  "title": "Babu@Gent",
+  "img": "2306_babu_7.webp",
+  "type": "project",
+  "cats": [
+   "binnen",
+   "buiten"
+  ]
+ },
+ {
+  "slug": "buitenschilderwerken-kasteel-blauwhuis-te-izegem",
+  "title": "Buiten- & binnenschilderwerken kasteel Blauwhuis te Izegem",
+  "img": "1913_blauwhuis_voorzijde_afgewerkt.webp",
+  "type": "project",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "residentie-sint-rafael-te-izegem",
+  "title": "Residentie Sint Rafaël - betonlazuur",
+  "img": "1820_st_rafael_3.webp",
+  "type": "project",
+  "cats": []
+ },
+ {
+  "slug": "plak-en-schilderwerken-te-poperinge",
+  "title": "Pleister en schilderwerken volledig appartementsgebouw te Poperinge",
+  "img": "1826_poperinge_1.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "plakwerken-boerenhoeve-te-koolskamp",
+  "title": "Plamuurwerken boerenhoeve te Koolskamp",
+  "img": "1909_koolskamp_11.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "boetiek-gastronomiek-culix-te-merelbeke",
+  "title": "Boetiek gastronomiek Culix te Merelbeke",
+  "img": "1835_oblix_1.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "residentie-kolleblomme-te-roeselare",
+  "title": "Residentie Kolleblomme te Roeselare in een kaleien jasje",
+  "img": "1786_kolleblomme_na_2.webp",
+  "type": "project",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "tastoe-roeselare",
+  "title": "Broodbar Tastoe te Roeselare",
+  "img": "1521_tastoe_48.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "frituur-de-platse-lendelede",
+  "title": "Frituur De Platse Lendelede",
+  "img": "1962_frituur_1.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "sportcomplex-rhizo-te-kortrijk",
+  "title": "Sportcomplex Rhizo te Kortrijk",
+  "img": "1792_rhizo_website-1.webp",
+  "type": "project",
+  "cats": [
+   "binnen",
+   "buiten"
+  ]
+ },
+ {
+  "slug": "rood-residentie-porto-fino-te-wenduine-stop-rood",
+  "title": "Residentie Porto Fino te Wenduine",
+  "img": "1832_porto_fino_wenduine-1.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "residentie-ter-vichte",
+  "title": "Residentie Ter Vichte",
+  "img": "1903_residentie_ter_vichte_2.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "bowls-kortrijk",
+  "title": "Bowls Kortrijk",
+  "img": "1798_bowls_1.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ },
+ {
+  "slug": "kaleiproject-te-oudenaarde",
+  "title": "Kaleien van 3 woningen te Oudenaarde",
+  "img": "1814_oudenaarde_afgewerkt_3.webp",
+  "type": "project",
+  "cats": [
+   "buiten"
+  ]
+ },
+ {
+  "slug": "residentie-jolies-te-moorslede",
+  "title": "Residentie Jolies te Moorslede",
+  "img": "1906_hectaar_27.webp",
+  "type": "project",
+  "cats": [
+   "binnen"
+  ]
+ }
+]
