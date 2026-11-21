@@ -37,7 +37,8 @@ REAL = json.loads((ROOT / "data/realisaties.json").read_text(encoding="utf8"))
 BLOG = json.loads((ROOT / "data/blog.json").read_text(encoding="utf8"))
 DETAILS = json.loads((ROOT / "data/details.json").read_text(encoding="utf8"))
 LABELS = {"binnen": "Binnen", "buiten": "Buiten", "gordijnen": "Gordijnen", "lamellen": "Lamellen", "decoratieve-technieken": "Decoratieve technieken"}
-PAGES = {"", "over-sdad/", "realisaties/", "blog/", "contact/"} | {p for _, items in [
+LEGAL = json.loads((ROOT / "data/legal.json").read_text(encoding="utf8"))
+PAGES = {"", "over-sdad/", "realisaties/", "blog/", "contact/"} | {f"{k}/" for k in LEGAL} | {p for _, items in [
     ("", [("", "diensten/schilderwerken/binnen/"), ("", "diensten/schilderwerken/buiten/"), ("", "diensten/schilderwerken/decoratieve-technieken/"),
           ("", "diensten/interieurafwerking/gordijnen/"), ("", "diensten/interieurafwerking/lamellen/")])] for _, p in items} \
     | {f"realisaties/{r['slug']}/" for r in REAL} | {f"blog/{b['slug']}/" for b in BLOG}
@@ -103,9 +104,9 @@ def footer(pg):
   </div>
   <div class="subfooter">
     <span>© 2026 SDAD. Alle rechten voorbehouden.</span>
-    <a href="{SITE}/cookie-en-privacybeleid/">Cookie- en privacybeleid</a>
-    <a href="{SITE}/disclaimer/">Disclaimer</a>
-    <a href="{SITE}/algemene-voorwaarden/">Algemene Voorwaarden BV SDAD</a>
+    <a href="{pg.u('cookie-en-privacybeleid/')}">Cookie- en privacybeleid</a>
+    <a href="{pg.u('disclaimer/')}">Disclaimer</a>
+    <a href="{pg.u('algemene-voorwaarden/')}">Algemene Voorwaarden BV SDAD</a>
   </div>
 </div></footer>
 <div class="mobile-bar"><a href="tel:{PHONES[0][2]}">Bel ons</a><a href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek</a></div>"""
@@ -650,7 +651,7 @@ def contact():
       <div><label for="f-e">E-mail *</label><input id="f-e" name="email" type="email" required autocomplete="email"></div>
       <div class="hp" aria-hidden="true"><label for="f-w">Website</label><input id="f-w" name="website" tabindex="-1" autocomplete="off"></div>
       <div class="full"><label for="f-m">Hoe kunnen we je helpen? *</label><textarea id="f-m" name="bericht" rows="5" required></textarea></div>
-      <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="{SITE}/cookie-en-privacybeleid/" target="_blank" rel="noopener">Cookie- en privacybeleid</a></span></label></div>
+      <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">Cookie- en privacybeleid</a></span></label></div>
     </div>
     <button class="btn" type="submit" style="margin-top:20px">Verstuur bericht</button>
     <p class="form-note" aria-live="polite"></p>
@@ -746,6 +747,21 @@ def blog_pages():
         write(pg, layout(pg, f"{d['title']} | Blog SDAD", d["desc"] or b["excerpt"], body))
 
 
+# ---------- Juridische pagina's ----------
+def legal_pages():
+    meta = {
+        "cookie-en-privacybeleid": ("Cookie- en privacybeleid", "cookie-en privacybeleid SDAD",
+                                    "<p class=\"lead\">BV Schilder &amp; Decoratiewerken Arne Deseure verwerkt persoonsgegevens overeenkomstig deze privacyverklaring.</p>"),
+        "disclaimer": ("Disclaimer", "Disclaimer | Schilderwerken Izegem | SDAD", ""),
+        "algemene-voorwaarden": ("Algemene Voorwaarden BV SDAD", "Algemene Voorwaarden BV SDAD", ""),
+    }
+    for slug, (h1, title, lead) in meta.items():
+        pg = Page(f"{slug}/")
+        body = page_hero(pg, [(h1, None)], "Juridisch", h1, lead)
+        body += f'<section class="section"><div class="wrap"><article class="narrow prose legal">{fix_links(pg, LEGAL[slug]["html"])}</article></div></section>'
+        write(pg, layout(pg, title, f"{h1} van SDAD bv, Prinsdomlaan 50, 8870 Izegem.", body))
+
+
 if __name__ == "__main__":
-    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages):
+    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages, legal_pages):
         f()

@@ -8,6 +8,6 @@ Herbouw van sdad.be met dezelfde inhoud en huisstijl (rood #da291c, antraciet #4
 
 ## Nog te doen vóór livegang
 - Contactformulier: opent nu het e-mailprogramma van de bezoeker (er is geen server). Koppel een formulierdienst of het bestaande CMS.
-- De juridische pagina's (privacybeleid, disclaimer, algemene voorwaarden) linken nog naar sdad.be.
+- Het cookie- en privacybeleid noemt nog cookies van Google en Facebook; deze site plaatst die niet. Laat de tekst juridisch nakijken en bijwerken (ook het oude adres van de privacycommissie).
 - Lettertype: Avenir Next (Typekit-licentie van de huidige site) valt terug op Nunito Sans; koppel de Typekit-kit voor exacte huisstijl.
 - Google Tag Manager en Meta-pixel zijn bewust weggelaten; terugplaatsen kan alleen met cookietoestemming.

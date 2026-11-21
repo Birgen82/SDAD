@@ -337,3 +337,5 @@ ul { padding-left: 1.2em; }
 .prose table { width: 100%; border-collapse: collapse; margin: 0 0 1.2em; font-size: .95rem; }
 .prose td, .prose th { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
 .page-hero h1 { overflow-wrap: anywhere; }
+.legal h3 { font-size: 1.35rem; margin-top: 1.8em; }
+.legal h3:first-child { margin-top: 0; }
