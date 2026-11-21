@@ -156,6 +156,53 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 """
 
 
+GARANTIE_VOORWAARDE = "mits een geschikte ondergrond en een correct opgebouwd verfsysteem"
+
+
+def trust_strip(pg):
+    """Korte strook met kernbeloftes onder de hero (alleen claims die al op de site staan)."""
+    items = [
+        ("25+ jaar", "ervaring in het schildersvak"),
+        ("10 jaar garantie", f'op gevelschilderwerk, {GARANTIE_VOORWAARDE} <a href="{pg.u("diensten/schilderwerken/buiten/")}#garantie">Meer info</a>'),
+        ("Vrijblijvend", "plaatsbezoek met persoonlijk advies"),
+        ("Eén traject", "van kleuradvies tot oplevering"),
+    ]
+    cells = "".join(f"<li><strong>{t}</strong><span>{s}</span></li>" for t, s in items)
+    return f'<section class="trust" aria-label="Waarom SDAD"><div class="wrap"><ul>{cells}</ul></div></section>'
+
+
+def werkwijze(pg):
+    """Werkwijze in 5 stappen, opgebouwd uit teksten die al op de site staan."""
+    steps = [
+        ("Plaatsbezoek", "We komen vrijblijvend langs, luisteren naar uw wensen en bekijken samen de mogelijkheden en de staat van de ondergrond."),
+        ("Kleuradvies", "We denken mee over kleuren, materialen en afwerking, afgestemd op de ruimte, de lichtinval en uw stijl."),
+        ("Offerte en planning", "U ontvangt een duidelijke offerte en planning, zodat u precies weet wat u mag verwachten."),
+        ("Voorbereiding en uitvoering", "Eerst een correcte voorbereiding van de ondergrond, daarna een vakkundige uitvoering. Met duidelijke communicatie en netheid op de werf."),
+        ("Oplevering", "Een afwerking tot in de kleinste details en een zorgeloze samenwerking tot de oplevering. We doen wat we zeggen en zeggen wat we doen."),
+    ]
+    items = "".join(f"<li><span class=\"step-nr\">{i}</span><h3>{t}</h3><p>{d}</p></li>" for i, (t, d) in enumerate(steps, 1))
+    return f"""<section class="section section--dark" id="werkwijze"><div class="wrap">
+  <span class="eyebrow">Onze werkwijze</span><h2>Zo pakken we uw project aan</h2>
+  <p class="lead narrow">Een mooi resultaat begint lang voor de eerste verflaag. Van het eerste gesprek tot de oplevering weet u steeds waar u aan toe bent.</p>
+  <ol class="steps">{items}</ol>
+  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plan stap 1: uw plaatsbezoek</a></div>
+</div></section>"""
+
+
+def garantie_block(pg):
+    return f"""<section class="section section--soft" id="garantie" style="scroll-margin-top:90px"><div class="wrap">
+  <div class="guarantee">
+    <div class="guarantee__badge" aria-hidden="true"><strong>10</strong><span>jaar</span></div>
+    <div>
+      <span class="eyebrow">Garantie</span><h2>10 jaar garantie op gevelschilderwerk</h2>
+      {p(f"Voor gevelschilderwerken kunnen wij, {GARANTIE_VOORWAARDE}, opleveren met <strong>10 jaar garantie</strong>.",
+         "Daarom besteden we veel aandacht aan een correcte voorbereiding van de ondergrond, technisch advies en het gebruik van hoogwaardige kwaliteitsproducten.",
+         "Voor schilderwerken aan buitenschrijnwerk gelden andere omstandigheden. Houten ramen en deuren worden veel intensiever belast door zon, regen, temperatuurschommelingen en mechanische belasting. Deze werken kunnen daarom niet met dezelfde garantievoorwaarden worden opgeleverd als gevelschilderwerken.")}
+    </div>
+  </div>
+</div></section>"""
+
+
 def cta(pg, title="Een mooi resultaat begint met een goed gesprek.",
         text="Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking."):
     return f"""<section class="section"><div class="wrap"><div class="cta">
@@ -256,6 +303,7 @@ def home():
   </div>
   <div class="hero__img">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD", lazy=False)}</div>
 </div></section>
+{trust_strip(pg)}
 
 <section class="section"><div class="wrap">
   <div class="head-row"><div><span class="eyebrow">Onze diensten</span><h2>Wat we voor u doen</h2></div></div>
@@ -273,6 +321,7 @@ def home():
   </div>
   <div>{pg.img("1_kleurbepaling_linkedin.webp", "Kleurbepaling met kleurstalen bij SDAD")}</div>
 </div>{pg.img("red_deco.png", "", cls="deco deco--br", w=220, h=240)}</section>
+{werkwijze(pg)}
 
 <section class="section"><div class="wrap">
   <span class="eyebrow">Waarom SDAD</span><h2>Daarom kiezen klanten voor SDAD</h2>
@@ -338,6 +387,7 @@ def over():
      "Elke medewerker brengt zijn eigen ervaring en talenten mee, maar deelt dezelfde visie: afspraken nakomen, kwalitatief werk afleveren en trots zijn op het resultaat dat wordt afgeleverd.",
      "Samen vormen zij de kracht achter SDAD en zorgen zij er elke dag voor dat klanten kunnen rekenen op kwaliteit, vakmanschap en een betrouwbare partner.")}</div>
 </div></section>
+{werkwijze(pg)}
 
 <section class="section section--soft"><div class="wrap">
   <span class="eyebrow">Onze waarden</span><h2>Het DNA van SDAD</h2>
@@ -433,7 +483,8 @@ def buiten():
             "Schilderwerken SDAD uit Izegem heeft een getraind oog en ziet wat uw project nodig heeft. Gevel laten schilderen of uw buitenmuren afwerken? Dat kan!",
             ("Schilderwerken", "Buitenschilderwerken"), "Professionele buitenschilderwerken",
             p("Uw gevel, buitenschrijnwerk of gevelbekleding bepalen mee de eerste indruk van uw woning of bedrijfspand. Een professionele afwerking zorgt niet alleen voor een verzorgde uitstraling, maar beschermt ook jarenlang tegen weer, wind en vervuiling.",
-              "Bij SDAD combineren we technisch advies, kwaliteitsproducten en vakmanschap tot een duurzaam eindresultaat waarop u jarenlang kunt vertrouwen."),
+              "Bij SDAD combineren we technisch advies, kwaliteitsproducten en vakmanschap tot een duurzaam eindresultaat waarop u jarenlang kunt vertrouwen.") +
+            '<p class="hero-badge"><strong>10 jaar garantie</strong> op gevelschilderwerk <a href="#garantie">Voorwaarden</a></p>',
             "1345_gevel_kortrijk.webp",
             [lambda pg: f"""<section class="section"><div class="wrap grid grid--2" style="align-items:start">
   <div><span class="eyebrow">Gevelbescherming</span><h2>Duurzame bescherming voor uw gevel</h2>
@@ -444,6 +495,7 @@ def buiten():
      "Na de reiniging volgt uiteraard de afwerking. We schilderen de gevel met een primerlaag gevolgd door de nodige afwerkingslagen. Liever kaleien? Ook daarvoor bent u bij SDAD aan het juiste adres. We werken zowel met minerale kalei als met decoratieve kwartstechnieken, afhankelijk van de gewenste uitstraling.",
      "Voor elk buitenproject geeft SDAD steeds voorafgaand technisch advies over het meest geschikte verfsysteem en de ondergrond.")}</div>
 </div></section>""",
+             garantie_block,
              lambda pg: text_section("Ramen en deuren", "Schilderen of oliën van buitenschrijnwerk", p(
                  "Een gevel nieuw leven in blazen zonder het schrijnwerk van de ramen en deuren af te werken? Dat lijkt natuurlijk nergens naar en komt slordig over. SDAD zorgt er dan ook voor dat het gebouw helemaal piekfijn in orde wordt gebracht door het buitenschrijnwerk ook te schilderen of te oliën."),
                  soft=True, aside=pg.img("1636_ramen_deerlijk.webp", "Geschilderd buitenschrijnwerk in Deerlijk")),

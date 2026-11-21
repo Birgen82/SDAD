@@ -339,3 +339,44 @@ ul { padding-left: 1.2em; }
 .page-hero h1 { overflow-wrap: anywhere; }
 .legal h3 { font-size: 1.35rem; margin-top: 1.8em; }
 .legal h3:first-child { margin-top: 0; }
+
+/* Vertrouwensstrook */
+.trust { background: #fff; border-bottom: 1px solid var(--line); }
+.trust ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+.trust li { padding: 24px 22px; border-left: 1px solid var(--line); font-size: .92rem; line-height: 1.45; }
+.trust li:first-child { border-left: 0; padding-left: 0; }
+.trust strong { display: block; font: 700 1.45rem/1.1 var(--head); color: var(--red); margin-bottom: 4px; }
+.trust a { white-space: nowrap; }
+@media (max-width: 900px) {
+  .trust ul { grid-template-columns: 1fr 1fr; }
+  .trust li { padding: 18px 14px; }
+  .trust li:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .trust li:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+
+/* Werkwijze */
+.steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; counter-reset: s; }
+.steps li { position: relative; padding-top: 64px; }
+.steps li::before { content: ""; position: absolute; top: 22px; left: 52px; right: -24px; height: 2px; background: #2a3236; }
+.steps li:last-child::before { display: none; }
+.step-nr { position: absolute; top: 0; left: 0; width: 46px; height: 46px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font: 700 1.35rem/1 var(--head); }
+.steps h3 { font-size: 1.35rem; margin-bottom: 8px; }
+.steps p { font-size: .95rem; margin: 0; }
+@media (max-width: 980px) {
+  .steps { grid-template-columns: 1fr; gap: 0; }
+  .steps li { padding: 0 0 28px 66px; min-height: 46px; }
+  .steps li::before { top: 52px; bottom: 4px; left: 22px; right: auto; width: 2px; height: auto; }
+}
+
+/* Garantie */
+.guarantee { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; max-width: 960px; }
+.guarantee__badge { width: 150px; height: 150px; border-radius: 50%; background: var(--red); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 0 10px rgba(218,41,28,.12); }
+.guarantee__badge strong { font: 700 3.6rem/1 var(--head); }
+.guarantee__badge span { font: 700 1rem/1 var(--body); text-transform: uppercase; letter-spacing: .14em; }
+.hero-badge { display: inline-block; background: #fff; border-left: 3px solid var(--red); padding: 10px 14px; margin-top: 4px; font-size: .95rem; }
+.hero-badge a { margin-left: 6px; font-weight: 700; }
+@media (max-width: 600px) {
+  .guarantee { grid-template-columns: 1fr; }
+  .guarantee__badge { width: 110px; height: 110px; }
+  .guarantee__badge strong { font-size: 2.6rem; }
+}
