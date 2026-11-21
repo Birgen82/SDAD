@@ -14,6 +14,7 @@ SITE = "https://sdad.be"
 BOOKING = "https://afspraaksdad.youcanbook.me/"
 MAIL = "info@sdad.be"
 PHONES = [("Lies Nuyttens", "0473 52 09 20", "+32473520920"), ("Arne Deseure", "0478 42 81 95", "+32478428195")]
+REGIO = "Oost- en West-Vlaanderen"
 MAPS = "https://www.google.com/maps/search/?api=1&query=Prinsdomlaan+50+8870+Izegem"
 SOCIAL = {
     "Facebook": "https://www.facebook.com/DeseureArneNuyttensLies/",
@@ -73,7 +74,7 @@ def nav(pg):
     links = "".join(f'<a href="{pg.u(p)}"{" aria-current=page" if p == cur else ""}>{n}</a>' for n, p in MENU)
     return f"""<a class="skip" href="#main">Naar inhoud</a>
 <div class="topbar"><div class="wrap">
-  <span>Prinsdomlaan 50, 8870 Izegem</span>
+  <span>Prinsdomlaan 50, 8870 Izegem · actief in {REGIO}</span>
   <a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a>
   <a href="mailto:{MAIL}">{MAIL}</a>
 </div></div>
@@ -96,7 +97,7 @@ def footer(pg):
     return f"""<footer class="footer"><div class="wrap">
   <div class="footer-grid">
     <div>{pg.img("logo.png", "SDAD – Schilderkracht tot de vierde macht", cls="footer-logo", w=66, h=92)}</div>
-    <div><h4>Bedrijfsgegevens</h4><p><strong style="color:#fff">SDAD bv</strong><br>Prinsdomlaan 50<br>8870 Izegem<br><br>BE0823.935.816</p><a href="{MAPS}" target="_blank" rel="noopener">Route plannen →</a></div>
+    <div><h4>Bedrijfsgegevens</h4><p><strong style="color:#fff">SDAD bv</strong><br>Prinsdomlaan 50<br>8870 Izegem<br><br>BE0823.935.816<br><br>Werkgebied: {REGIO}</p><a href="{MAPS}" target="_blank" rel="noopener">Route plannen →</a></div>
     <div><h4>Diensten</h4><ul>{dienst_links}</ul></div>
     <div><h4>Website</h4><ul>{menu_links}</ul></div>
     <div><h4>Advies nodig?</h4><ul><li><a href="mailto:{MAIL}">{MAIL}</a></li>{phones}</ul>
@@ -118,6 +119,7 @@ SCHEMA = json.dumps({
     "telephone": PHONES[0][2], "vatID": "BE0823.935.816", "image": SITE + "/site/assets/files/1/kleurbepaling_linkedin.jpeg",
     "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870",
                 "addressLocality": "Izegem", "addressCountry": "BE"},
+    "areaServed": [{"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "West-Vlaanderen"}],
     "sameAs": list(SOCIAL.values()),
 }, ensure_ascii=False)
 
@@ -164,8 +166,8 @@ def trust_strip(pg):
     items = [
         ("25+ jaar", "ervaring in het schildersvak"),
         ("10 jaar garantie", f'op gevelschilderwerk, {GARANTIE_VOORWAARDE} <a href="{pg.u("diensten/schilderwerken/buiten/")}#garantie">Meer info</a>'),
-        ("Vrijblijvend", "plaatsbezoek met persoonlijk advies"),
-        ("Eén traject", "van kleuradvies tot oplevering"),
+        ("Snel antwoord", "op uw vraag, met een vrijblijvend plaatsbezoek"),
+        (REGIO, f'ons werkgebied, vanuit Izegem <a href="{pg.u()}#werkgebied">Bekijk waar</a>'),
     ]
     cells = "".join(f"<li><strong>{t}</strong><span>{s}</span></li>" for t, s in items)
     return f'<section class="trust" aria-label="Waarom SDAD"><div class="wrap"><ul>{cells}</ul></div></section>'
@@ -200,6 +202,26 @@ def garantie_block(pg):
          "Voor schilderwerken aan buitenschrijnwerk gelden andere omstandigheden. Houten ramen en deuren worden veel intensiever belast door zon, regen, temperatuurschommelingen en mechanische belasting. Deze werken kunnen daarom niet met dezelfde garantievoorwaarden worden opgeleverd als gevelschilderwerken.")}
     </div>
   </div>
+</div></section>"""
+
+
+def werkgebied(pg):
+    """Werkgebied met plaatsen uit de eigen realisaties als bewijs."""
+    seen, tags = set(), []
+    for r in REAL:
+        m = re.search(r"(?:\bte\s+|@)([a-zë]+)", r["title"], re.I)
+        place = m.group(1).capitalize() if m else None
+        if not place and not r["title"].startswith("Residentie") and re.search(r"\s([A-Z][a-z]+)$", r["title"]):
+            place = r["title"].split()[-1]  # bv. "Frituur De Platse Lendelede"
+        if place and place not in seen:
+            seen.add(place)
+            href = pg.u("realisaties/" + r["slug"] + "/")
+            tags.append(f'<li><a href="{href}">{place}</a></li>')
+    return f"""<section class="section" id="werkgebied" style="scroll-margin-top:90px"><div class="wrap split" style="align-items:start">
+  <div><span class="eyebrow">Werkgebied</span><h2>Actief in heel {REGIO}</h2>
+  <p>Vanuit Izegem werken we voor particulieren en bedrijven in heel {REGIO}. We reageren snel op uw vraag en plannen graag een vrijblijvend plaatsbezoek bij u ter plaatse.</p>
+  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div></div>
+  <div><h3>Hier werkten we al</h3><ul class="tags place-tags">{"".join(tags)}</ul></div>
 </div></section>"""
 
 
@@ -288,7 +310,7 @@ def home():
     body = f"""
 <section class="hero"><div class="wrap">
   <div>
-    <span class="eyebrow">Schilderwerken &amp; interieurafwerking · Izegem</span>
+    <span class="eyebrow">Schilderwerken &amp; interieurafwerking · {REGIO}</span>
     <h1>Een mooi resultaat begint lang voor de eerste verflaag.</h1>
     <p class="lead">Wij begeleiden u van kleuradvies tot een perfect afgewerkt eindresultaat. Met persoonlijk advies, duidelijke communicatie en een ervaren team zorgen we voor een zorgeloos traject van begin tot einde.</p>
     <p class="power-title">Wij bezorgen Schilderkracht tot de vierde macht</p>
@@ -332,9 +354,10 @@ def home():
   <div class="head-row"><div><span class="eyebrow">Portfolio</span><h2>Recente realisaties</h2></div><a class="arrow-link" href="{pg.u('realisaties/')}">Alle realisaties</a></div>
   <div class="grid grid--3">{recent_cards}</div>
 </div></section>
+{werkgebied(pg)}
 {cta(pg)}"""
     write(pg, layout(pg, "Schilderwerken SDAD | binnen, buiten en interieurafwerking",
-                     "Bij schilderwerken SDAD uit Izegem kunt u terecht voor professionele binnen en buiten schilderwerken, decoratieve afwerkingen en raamdecoratie", body))
+                     "Bij schilderwerken SDAD uit Izegem kunt u terecht voor professionele binnen en buiten schilderwerken, decoratieve afwerkingen en raamdecoratie in Oost- en West-Vlaanderen.", body))
 
 
 # ---------- Over SDAD ----------
@@ -683,7 +706,7 @@ def contact():
     pg = Page("contact/")
     people = "".join(f'<div class="contact-card"><h3>{n}</h3><p><a href="tel:{t}">{d}</a></p></div>' for n, d, t in PHONES)
     body = page_hero(pg, [("Contact", None)], "Contact", "Contacteer ons",
-                     '<p class="lead">Schilderwerken, gordijnen of lamellen in het vooruitzicht? Neem contact op. Wij helpen u graag verder!</p>') + f"""
+                     '<p class="lead">Schilderwerken, gordijnen of lamellen in het vooruitzicht? Neem contact op. Wij helpen u graag verder en reageren snel op uw vraag. We werken in heel Oost- en West-Vlaanderen.</p>') + f"""
 <section class="section"><div class="wrap split" style="align-items:start">
   <div class="contact-cards">
     <div class="contact-card"><h3>SDAD bv</h3><p>Prinsdomlaan 50<br>8870 Izegem<br>BE0823.935.816</p><p style="margin-top:10px"><a href="{MAPS}" target="_blank" rel="noopener" style="font-size:1rem">Route plannen →</a></p></div>
@@ -706,7 +729,7 @@ def contact():
       <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">Cookie- en privacybeleid</a></span></label></div>
     </div>
     <button class="btn" type="submit" style="margin-top:20px">Verstuur bericht</button>
-    <p class="form-note" aria-live="polite"></p>
+    <p class="form-note" aria-live="polite">We reageren snel op uw vraag.</p>
   </form>
 </div></section>
 {cta(pg)}"""

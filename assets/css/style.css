@@ -380,3 +380,5 @@ ul { padding-left: 1.2em; }
   .guarantee__badge { width: 110px; height: 110px; }
   .guarantee__badge strong { font-size: 2.6rem; }
 }
+.place-tags a { color: inherit; text-decoration: none; }
+.place-tags li:hover { border-color: var(--red); color: var(--red); }
