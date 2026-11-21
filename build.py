@@ -5,6 +5,7 @@ Header, footer en gedeelde blokken staan hier één keer; elke pagina wordt
 als <map>/index.html weggeschreven zodat de URL's gelijk blijven aan sdad.be.
 """
 import json
+import re
 from html import escape
 from pathlib import Path
 
@@ -34,6 +35,16 @@ MENU = [("Realisaties", "realisaties/"), ("Over SDAD", "over-sdad/"), ("Blog", "
 
 REAL = json.loads((ROOT / "data/realisaties.json").read_text(encoding="utf8"))
 BLOG = json.loads((ROOT / "data/blog.json").read_text(encoding="utf8"))
+DETAILS = json.loads((ROOT / "data/details.json").read_text(encoding="utf8"))
+LABELS = {"binnen": "Binnen", "buiten": "Buiten", "gordijnen": "Gordijnen", "lamellen": "Lamellen", "decoratieve-technieken": "Decoratieve technieken"}
+PAGES = {"", "over-sdad/", "realisaties/", "blog/", "contact/"} | {p for _, items in [
+    ("", [("", "diensten/schilderwerken/binnen/"), ("", "diensten/schilderwerken/buiten/"), ("", "diensten/schilderwerken/decoratieve-technieken/"),
+          ("", "diensten/interieurafwerking/gordijnen/"), ("", "diensten/interieurafwerking/lamellen/")])] for _, p in items} \
+    | {f"realisaties/{r['slug']}/" for r in REAL} | {f"blog/{b['slug']}/" for b in BLOG}
+
+
+def short(t, n=180):
+    return t if len(t) < n + 10 else t[:n].rsplit(" ", 1)[0] + "…"
 
 
 # ---------- bouwstenen ----------
@@ -225,7 +236,7 @@ def home():
         "Ervaren vakmensen", "Persoonlijke aanpak", "Meedenkend advies", "Nakomen van afspraken &amp; planning",
         "Capaciteit en flexibiliteit", "Tijdige en heldere offertes", "Duidelijke communicatie", "Netheid op de werf"])
     recent = [r for s in ["babu-gent", "buitenschilderwerken-kasteel-blauwhuis-te-izegem", "gevel-villa-te-knokke"] for r in REAL if r["slug"] == s]
-    recent_cards = "".join(card(pg, f"{SITE}/realisaties/{r['slug']}/", r["img"], r["title"], more="Bekijk realisatie", external=True) for r in recent)
+    recent_cards = "".join(card(pg, pg.u(f"realisaties/{r['slug']}/"), r["img"], r["title"], more="Bekijk realisatie") for r in recent)
     body = f"""
 <section class="hero"><div class="wrap">
   <div>
@@ -574,15 +585,15 @@ def lamellen():
 # ---------- Realisaties ----------
 def realisaties():
     pg = Page("realisaties/")
-    labels = {"binnen": "Binnen", "buiten": "Buiten", "gordijnen": "Gordijnen", "lamellen": "Lamellen", "decoratieve-technieken": "Decoratieve technieken"}
+    labels = LABELS
     present = [k for k in labels if any(k in r["cats"] for r in REAL)]
     btns = '<button type="button" data-filter="alle" aria-pressed="true">Alle realisaties</button>' + "".join(
         f'<button type="button" data-filter="{k}" aria-pressed="false">{labels[k]}</button>' for k in present)
 
     def group(typ, anchor, title, other_anchor, other_label):
         cards = "".join(
-            f'<div data-cats="{" ".join(r["cats"])}">' + card(pg, f"{SITE}/realisaties/{r['slug']}/", r["img"], r["title"], more="Bekijk realisatie",
-                                                             meta=" · ".join(labels[c] for c in r["cats"]), external=True) + "</div>"
+            f'<div data-cats="{" ".join(r["cats"])}">' + card(pg, pg.u(f"realisaties/{r['slug']}/"), r["img"], r["title"], more="Bekijk realisatie",
+                                                             meta=" · ".join(LABELS[c] for c in r["cats"])) + "</div>"
             for r in REAL if r["type"] == typ)
         return f"""<div data-group id="{anchor}" style="scroll-margin-top:100px;margin-bottom:64px">
   <div class="head-row"><h2>{title}</h2><a class="arrow-link" href="#{other_anchor}">{other_label}</a></div>
@@ -604,8 +615,7 @@ def realisaties():
 # ---------- Blog ----------
 def blog():
     pg = Page("blog/")
-    cards = "".join(card(pg, f"{SITE}/blog/{b['slug']}/", b["img"], b["title"],
-                         b["excerpt"] if len(b["excerpt"]) < 190 else b["excerpt"][:180].rsplit(" ", 1)[0] + "…", external=True) for b in BLOG)
+    cards = "".join(card(pg, pg.u(f"blog/{b['slug']}/"), b["img"], b["title"], short(b["excerpt"])) for b in BLOG)
     socials = " · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in SOCIAL.items())
     body = page_hero(pg, [("Blog", None)], "Tips &amp; advies", "Blogberichten",
                      f'<p class="lead">Met meer dan 25 jaar ervaring in ons vak delen we onze opgebouwde expertise graag met u.</p><p>Volg ons: {socials}</p>') + f"""
@@ -651,6 +661,91 @@ def contact():
                      "Schilderwerken in het vooruitzicht? Neem contact op met schilderwerken SDAD uit Izegem, West-Vlaanderen. Wij helpen u graag verder!", body))
 
 
+# ---------- Detailpagina's (realisaties en blog) ----------
+def fix_links(pg, html):
+    """Interne sdad.be-links naar de nieuwe pagina's laten wijzen; externe links in een nieuw tabblad."""
+    def repl(m):
+        href = m.group(1)
+        path = re.sub(r"^(https?://(www\.)?sdad\.be)?/", "", href) if re.match(r"^(https?://(www\.)?sdad\.be)?/", href) else None
+        if path is not None:
+            path = path.split("#")[0].split("?")[0]
+            if path and not path.endswith("/"):
+                path += "/"
+            if path in PAGES:
+                return f'<a href="{pg.u(path)}">'
+            return f'<a href="{SITE}/{path}">'
+        if href.startswith(("http", "//")):
+            return f'<a href="{href}" target="_blank" rel="noopener">'
+        return m.group(0)
+    return re.sub(r'<a href="([^"]*)">', repl, html)
+
+
+def split_heading(html):
+    m = re.match(r"\s*<h2>(.*?)</h2>(.*)", html, re.S)
+    return (m.group(1).strip(), m.group(2)) if m else ("", html)
+
+
+def detail_sections(pg, secs, alt):
+    out = ""
+    soft = False
+    for s in secs:
+        title, rest = split_heading(fix_links(pg, s["html"]))
+        imgs = s["imgs"]
+        if len(imgs) > 1:
+            out += gallery(pg, title or "Sfeerbeelden", imgs, alt_base=alt) if not rest.strip() else \
+                f'<section class="section"><div class="wrap"><div class="narrow">{f"<h2>{title}</h2>" if title else ""}{rest}</div></div></section>' + gallery(pg, "Sfeerbeelden", imgs, alt_base=alt)
+            soft = False
+            continue
+        if not title and not rest.strip() and not imgs:
+            continue
+        soft = not soft
+        head = f"<h2>{title}</h2>" if title else ""
+        if imgs:
+            inner = f'<div class="split"><div>{head}{rest}</div><div>{pg.img(imgs[0], title or alt)}</div></div>'
+        else:
+            inner = f'<div class="narrow prose">{head}{rest}</div>'
+        out += f'<section class="section{" section--soft" if soft else ""}"><div class="wrap">{inner}</div></section>'
+    return out
+
+
+def realisatie_pages():
+    for i, r in enumerate(REAL):
+        pg = Page(f"realisaties/{r['slug']}/")
+        d = DETAILS["realisaties"][r["slug"]]
+        first, rest = d["sections"][0], d["sections"][1:]
+        hero_img = first["imgs"][0] if first["imgs"] else r["img"]
+        meta = ("Particulier" if r["type"] == "particulier" else "Project") + "".join(f" · {LABELS[c]}" for c in r["cats"])
+        others = [o for o in REAL if o is not r and (set(o["cats"]) & set(r["cats"]) or not r["cats"])][:3] or [o for o in REAL if o is not r][:3]
+        more = "".join(card(pg, pg.u(f"realisaties/{o['slug']}/"), o["img"], o["title"], more="Bekijk realisatie") for o in others)
+        body = page_hero(pg, [("Realisaties", "realisaties/"), (escape(r["title"]), None)], meta, escape(r["title"]),
+                         fix_links(pg, first["html"]), hero_img, r["title"])
+        body += detail_sections(pg, rest, r["title"])
+        body += f"""<section class="section section--soft"><div class="wrap">
+  <div class="head-row"><div><span class="eyebrow">Portfolio</span><h2>Meer realisaties</h2></div><a class="arrow-link" href="{pg.u('realisaties/')}">Alle realisaties</a></div>
+  <div class="grid grid--3">{more}</div>
+</div></section>{cta(pg)}"""
+        desc = d["desc"] or short(re.sub("<[^>]+>", " ", first["html"]).strip(), 150)
+        write(pg, layout(pg, f"{r['title']} | Realisaties SDAD", re.sub(r"\s+", " ", desc), body))
+
+
+def blog_pages():
+    for i, b in enumerate(BLOG):
+        pg = Page(f"blog/{b['slug']}/")
+        d = DETAILS["blog"][b["slug"]]
+        first, rest = d["sections"][0], d["sections"][1:]
+        hero_img = first["imgs"][0] if first["imgs"] else b["img"]
+        others = [BLOG[(i + k) % len(BLOG)] for k in (1, 2, 3)]
+        more = "".join(card(pg, pg.u(f"blog/{o['slug']}/"), o["img"], o["title"], short(o["excerpt"], 120)) for o in others)
+        body = page_hero(pg, [("Blog", "blog/"), (escape(d["title"]), None)], "Tips &amp; advies", escape(d["title"]),
+                         fix_links(pg, first["html"]), hero_img, d["title"])
+        body += detail_sections(pg, rest, d["title"])
+        body += f"""<section class="section section--soft"><div class="wrap">
+  <div class="head-row"><div><span class="eyebrow">Blog</span><h2>Lees ook</h2></div><a class="arrow-link" href="{pg.u('blog/')}">Alle blogberichten</a></div>
+  <div class="grid grid--3">{more}</div>
+</div></section>{cta(pg)}"""
+        write(pg, layout(pg, f"{d['title']} | Blog SDAD", d["desc"] or b["excerpt"], body))
+
+
 if __name__ == "__main__":
-    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact):
+    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages):
         f()
