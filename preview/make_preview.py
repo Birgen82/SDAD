@@ -44,13 +44,19 @@ def fix(page, html):
     return re.sub(r'(<a\b[^>]*?)href="([^"]*)"', link, html)
 
 
+def no_video(html):
+    """In het voorbeeldbestand: video vervangen door de stilstaande poster (video zit niet in het bestand)."""
+    poster = "data:image/webp;base64," + base64.b64encode((ROOT / "assets/video/hero-poster.webp").read_bytes()).decode()
+    return re.sub(r"<video\b.*?</video>", f'<img class="hx__video" src="{poster}" alt="">', html, flags=re.S)
+
+
 home = (ROOT / "index.html").read_text()
 head, foot = fix("", home.split('<main id="main">')[0]), fix("", home.split("</main>")[1])
 mains = []
 for pg in PAGES:
     h = (ROOT / pg / "index.html").read_text()
     title = re.search(r"<title>(.*?)</title>", h).group(1)
-    body = fix(pg, h.split('<main id="main">')[1].split("</main>")[0])
+    body = fix(pg, no_video(h.split('<main id="main">')[1].split("</main>")[0]))
     mains.append(f'<div class="pv-page" data-page="{pg}" data-title="{title}" hidden>{body}</div>')
 css = (ROOT / "assets/css/style.css").read_text() + "\n" + (ROOT / "assets/css/v2.css").read_text()
 css = re.sub(r"url\(\.\./img/([^)]+)\)", lambda m: "url(data:image/" + ("svg+xml" if m.group(1).endswith(".svg") else "png") + ";base64," + base64.b64encode((ROOT / "assets/img" / m.group(1)).read_bytes()).decode() + ")", css)

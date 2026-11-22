@@ -307,3 +307,13 @@ document.querySelectorAll('.hx__slides').forEach(box => {
   let t = setInterval(() => go(i + 1), 5500);
   document.addEventListener('visibilitychange', () => { clearInterval(t); if (!document.hidden) t = setInterval(() => go(i + 1), 5500); });
 });
+
+// Hero-video: pauzeknop, respect voor 'minder beweging', terugval naar poster
+document.querySelectorAll('.hx__video').forEach(v => {
+  const btn = document.querySelector('.hx__pause');
+  const set = paused => { if (btn) { btn.setAttribute('aria-pressed', paused); btn.setAttribute('aria-label', paused ? 'Video afspelen' : 'Video pauzeren'); } };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); set(true); }
+  btn?.addEventListener('click', () => { if (v.paused) { v.play(); set(false); } else { v.pause(); set(true); } });
+  v.addEventListener('pause', () => set(true)); v.addEventListener('play', () => set(false));
+  const p = v.play && v.play(); if (p && p.catch) p.catch(() => set(true));
+});

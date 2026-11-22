@@ -384,7 +384,12 @@ def home():
         "Capaciteit en flexibiliteit", "Tijdige en heldere offertes", "Duidelijke communicatie", "Netheid op de werf"]))
     body = f"""
 <section class="hx hx--full">
-  <div class="hx__slides" aria-hidden="true">{slides}</div>
+  <div class="hx__slides hx__slides--video" aria-hidden="true">
+    <video class="hx__video" autoplay muted loop playsinline preload="auto" poster="{pg.r}assets/video/hero-poster.webp">
+      <source src="{pg.r}assets/video/hero-m.mp4" type="video/mp4" media="(max-width: 700px)">
+      <source src="{pg.r}assets/video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="wrap hx__inner">
     <div class="hx__content">
     <span class="eyebrow">Schilderwerken &amp; interieurafwerking<span class="hide-m"> · {REGIO}</span></span>
@@ -397,7 +402,7 @@ def home():
       <li><b data-count="10">10</b>jaar garantie op gevels* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
     </ul>
     </div>
-    <a class="hx__caption" href="{pg.u(f"realisaties/{SLIDES[0][0]}/")}"><span class="hx__dots">{dots}</span><span class="hx__label">{SLIDES[0][2]}</span></a>
+    <div class="hx__vctl"><button type="button" class="hx__pause" aria-label="Video pauzeren" aria-pressed="false"></button><span>Video: Lion Eyes</span></div>
   </div>
 </section>
 
