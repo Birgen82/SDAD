@@ -99,7 +99,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Verschijnen bij scrollen (ook automatisch voor blokken op andere pagina's)
 document.querySelectorAll('main .section .wrap > *:not(.rv), main .grid > *, main .gallery > button, main .faq details').forEach((el, i, all) => {
-  if (el.closest('.hx, .rv, .tool, .flow, .wiz') || el.tagName === 'SCRIPT') return;
+  if (el.closest('.hx, .rv, .flow, .wiz') || el.tagName === 'SCRIPT') return;
   el.classList.add('rv');
   if (el.parentElement.matches('.grid, .gallery, .faq')) el.style.setProperty('--i', [...el.parentElement.children].indexOf(el) % 4);
 });
@@ -149,25 +149,6 @@ document.querySelectorAll('.s-list').forEach(list => {
     const b = li.querySelector('button');
     b.addEventListener('mouseenter', () => set(li)); b.addEventListener('focus', () => set(li)); b.addEventListener('click', () => set(li));
   });
-});
-
-// Kleurtool
-document.querySelectorAll('.tool').forEach(tool => {
-  const walls = { all: tool.querySelectorAll('.wall'), accent: tool.querySelectorAll('.wall.accent') };
-  const base = '#EEEAE2';
-  let mode = 'all', color = base;
-  const name = tool.querySelector('.swatch-name'), hex = tool.querySelector('.swatch-hex');
-  const paint = () => {
-    tool.querySelectorAll('.wall').forEach(w => w.setAttribute('fill', mode === 'all' || w.classList.contains('accent') ? color : base));
-  };
-  tool.querySelectorAll('.swatches button').forEach(b => b.addEventListener('click', () => {
-    tool.querySelectorAll('.swatches button').forEach(x => x.setAttribute('aria-pressed', x === b));
-    color = b.dataset.color; name.textContent = b.dataset.name; hex.textContent = b.dataset.color; paint();
-  }));
-  tool.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
-    tool.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
-    mode = b.dataset.mode; paint();
-  }));
 });
 
 // Werkwijze: stappen lichten op tijdens scrollen

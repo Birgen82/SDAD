@@ -314,44 +314,6 @@ def places():
     return out
 
 
-COLORS = [("Kalkwit", "#EEEAE2"), ("Linnen", "#E2D8C6"), ("Zandsteen", "#CDB998"), ("Saliegroen", "#A3AE97"),
-          ("Olijf", "#6F7356"), ("Terracotta", "#B8674A"), ("Okergeel", "#C9963E"), ("Oudroze", "#C99A92"),
-          ("Duifgrijs", "#A7A6A1"), ("Nachtblauw", "#26364A"), ("Antraciet", "#3E4245"), ("SDAD-rood", "#DA291C")]
-
-ROOM_SVG = """<svg viewBox="0 0 800 520" role="img" aria-label="Woonkamer waarvan u de muurkleur kunt kiezen">
-  <defs>
-    <linearGradient id="shade" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".08"/></linearGradient>
-    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfeef5"/><stop offset="1" stop-color="#b9d3df"/></linearGradient>
-    <linearGradient id="light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-  </defs>
-  <rect class="wall" x="0" y="0" width="360" height="400" fill="#EEEAE2"/>
-  <rect class="wall accent" x="360" y="0" width="440" height="400" fill="#EEEAE2"/>
-  <rect x="0" y="0" width="800" height="400" fill="url(#shade)"/>
-  <polygon points="120,330 330,330 420,400 40,400" fill="url(#light)"/>
-  <rect x="0" y="0" width="800" height="14" fill="#fff" opacity=".7"/>
-  <g><rect x="96" y="70" width="208" height="250" rx="3" fill="#fbfaf7"/><rect x="108" y="82" width="88" height="226" fill="url(#glass)"/><rect x="204" y="82" width="88" height="226" fill="url(#glass)"/>
-    <path d="M118 290 L150 200 L170 240 L186 210 L196 230 L196 308 L108 308 Z" fill="#9fb9a6" opacity=".6"/></g>
-  <path d="M70 52 Q76 200 64 400 L104 400 Q96 220 100 52 Z" fill="#e7e0d3"/><path d="M80 60 Q84 220 78 398" stroke="#d6ccbb" stroke-width="3" fill="none"/>
-  <path d="M296 52 Q304 220 296 400 L334 400 Q326 200 330 52 Z" fill="#e7e0d3"/><path d="M314 60 Q318 220 312 398" stroke="#d6ccbb" stroke-width="3" fill="none"/>
-  <rect x="58" y="44" width="290" height="8" rx="4" fill="#3e4245"/>
-  <rect x="470" y="104" width="190" height="130" fill="#fbfaf7"/><rect x="482" y="116" width="166" height="106" fill="#f1ece4"/>
-  <circle cx="540" cy="170" r="30" fill="#DA291C" opacity=".85"/><rect x="560" y="140" width="66" height="66" fill="#3e4245" opacity=".85"/>
-  <rect x="0" y="392" width="800" height="10" fill="#f7f5f1"/>
-  <rect x="0" y="400" width="800" height="120" fill="#c59f78"/>
-  <g stroke="#b28a63" stroke-width="2"><line x1="0" y1="430" x2="800" y2="430"/><line x1="0" y1="462" x2="800" y2="462"/><line x1="0" y1="494" x2="800" y2="494"/><line x1="140" y1="400" x2="140" y2="430"/><line x1="420" y1="430" x2="420" y2="462"/><line x1="260" y1="462" x2="260" y2="494"/><line x1="610" y1="400" x2="610" y2="430"/><line x1="700" y1="462" x2="700" y2="494"/></g>
-  <ellipse cx="560" cy="470" rx="230" ry="26" fill="#000" opacity=".12"/>
-  <g><rect x="400" y="300" width="330" height="96" rx="18" fill="#3b3f44"/><rect x="388" y="262" width="354" height="70" rx="22" fill="#45494f"/>
-    <rect x="420" y="276" width="140" height="52" rx="14" fill="#52575e"/><rect x="570" y="276" width="140" height="52" rx="14" fill="#52575e"/>
-    <rect x="384" y="300" width="36" height="96" rx="14" fill="#4b4f55"/><rect x="710" y="300" width="36" height="96" rx="14" fill="#4b4f55"/>
-    <rect x="436" y="250" width="58" height="46" rx="10" fill="#DA291C" transform="rotate(-8 465 273)"/><rect x="640" y="252" width="56" height="44" rx="10" fill="#e7e0d3" transform="rotate(7 668 274)"/>
-    <rect x="410" y="396" width="10" height="16" fill="#2c2f33"/><rect x="712" y="396" width="10" height="16" fill="#2c2f33"/></g>
-  <g><rect x="338" y="344" width="44" height="52" rx="6" fill="#d8cfc1"/>
-    <path d="M360 344 C340 300 322 290 316 262 C340 274 352 296 360 330 C362 290 372 262 392 246 C392 282 378 306 362 344 Z" fill="#5f7a5c"/>
-    <path d="M360 344 C366 312 382 300 404 296 C396 318 380 332 362 344 Z" fill="#6f8a69"/></g>
-  <g><line x1="772" y1="150" x2="772" y2="412" stroke="#2c2f33" stroke-width="5"/><path d="M742 150 L802 150 L790 106 L754 106 Z" fill="#f3ead9"/><ellipse cx="772" cy="414" rx="24" ry="6" fill="#2c2f33"/></g>
-</svg>"""
-
-
 def home():
     pg = Page("")
     tiles = "".join(f"""<a class="tile rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="num">0{n + 1}</span><span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>"""
@@ -366,7 +328,6 @@ def home():
     four = [("Stielkennis", "voor een vakkundige uitvoering."), ("Service", "voor een zorgeloze samenwerking."),
             ("Snelheid", "voor een vlotte en duidelijke planning."), ("Stijl", "voor een afwerking tot in de kleinste details.")]
     four_li = "".join(f'<li{" class=on" if n == 0 else ""}><button type="button"><span class="s-word">{w}</span><span class="s-desc">{d[0].upper() + d[1:]}</span></button></li>' for n, (w, d) in enumerate(four))
-    swatches = "".join(f'<li><button type="button" style="background:{c}" data-color="{c}" data-name="{n}" aria-label="{n}" aria-pressed="{str(i == 0).lower()}"></button></li>' for i, (n, c) in enumerate(COLORS))
     ticks = "".join(f'<li class="rv" style="--i:{i % 4}">{b}</li>' for i, b in enumerate([
         "Ervaren vakmensen", "Persoonlijke aanpak", "Meedenkend advies", "Nakomen van afspraken &amp; planning",
         "Capaciteit en flexibiliteit", "Tijdige en heldere offertes", "Duidelijke communicatie", "Netheid op de werf"]))
@@ -402,19 +363,6 @@ def home():
   <div class="rv"><span class="four__big" aria-hidden="true">S<sup>4</sup></span>
     <h2>Schilderkracht tot de vierde macht</h2><p>Zo creëren we ruimtes waar mensen graag wonen, werken en leven.</p></div>
   <ul class="s-list rv" style="--i:1">{four_li}</ul>
-</div></section>
-
-<section class="section" id="kleurtool"><div class="wrap tool">
-  <div class="room rv">{ROOM_SVG}</div>
-  <div class="rv" style="--i:1">
-    <span class="eyebrow">Probeer het zelf</span><h2>Welke kleur past bij <em class="stroke">uw interieur</em>?</h2>
-    <p>De juiste kleur bepaalt mee de sfeer van een ruimte. Kies een kleur en zie het verschil.</p>
-    <div class="seg" role="group" aria-label="Wat schilderen"><button type="button" data-mode="all" aria-pressed="true">Hele muur</button><button type="button" data-mode="accent" aria-pressed="false">Accentmuur</button></div>
-    <p class="swatch-name" aria-live="polite">Kalkwit</p><p class="swatch-hex">#EEEAE2</p>
-    <ul class="swatches">{swatches}</ul>
-    <p class="note">Indicatief: kleuren op een scherm wijken af van echte verf. Elke kleur heeft een andere uitstraling afhankelijk van de ruimte en de lichtinval. Daarom bekijken we kleuren samen met u ter plaatse.</p>
-    <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Kleuradvies bij u thuis</a></div>
-  </div>
 </div></section>
 
 <section class="section section--soft"><div class="wrap split">
