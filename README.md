@@ -22,3 +22,8 @@ Herbouw van sdad.be met dezelfde inhoud en huisstijl (rood #da291c, antraciet #4
 - Nog aan te leveren door SDAD: voor/na-foto's; nieuwe reviews verzamelen (Trustpilot meldt 1 review in de afgelopen 12 maanden).
 - Het formulier In deze demo opent het bij verzenden het e-mailprogramma; voor livegang koppelen aan het bestaande Webflow/HubSpot-formulier.
 - Afspraken: offerteschilderwerken.be gebruikt YouCanBook-domein `schilderwerkensdad`, sdad.be `afspraaksdad`. Laat SDAD kiezen welke de juiste is.
+
+## Offertepagina gordijnen (voorstel)
+- Staat op `/offerte-gordijnen/` (functie `offerte_gordijnen_page()`), afgeleide stijl `theme-soft`: zelfde logo, letters en rode knoppen, maar zachtere linnentinten en geen zwarte blokken.
+- Formulier: soort raamdecoratie, aantal ramen, bediening, klanttype, contact.
+- VOORLOPIG: sfeerbeelden komen van de gordijnen/lamellen-pagina's van sdad.be; SDAD moet bevestigen welke eigen werk zijn. Reviews: 2 die gordijnen/raamdecoratie noemen + 2 algemene (CURTAIN_REVIEWS).

@@ -940,3 +940,22 @@ html.menu-lock { overflow: hidden; }
 @media (max-width: 980px) { .lp-gallery.gallery { grid-template-columns: 1fr 1fr; gap: 8px; } }
 @media (max-width: 600px) { .lp-cap { left: 8px; right: 8px; bottom: 7px; font-size: .74rem; white-space: normal; } .lp-cap b { display: block; } }
 @media (max-width: 600px) { .lp-sep { display: none; } }
+
+/* ================= Afgeleide stijl: gordijnen (zachter, linnen) ================= */
+.theme-soft { --plaster: #f7f3ee; --plaster-2: #efe7dd; --ink-soft: #3a302a; }
+.theme-soft .lp-hero { background: var(--ink-soft); }
+.theme-soft .lp-hero::after { background: linear-gradient(90deg, rgba(42,33,27,.82) 0%, rgba(42,33,27,.5) 50%, rgba(42,33,27,.15) 100%); }
+.theme-soft .lp-hero__bg img { object-position: 50% 35%; }
+.theme-soft .stroke::after { height: .14em; bottom: .02em; background: var(--red); border-radius: 2px; opacity: .9; transform: none; }
+.theme-soft .lp-steps-sec { background: var(--plaster); }
+.theme-soft .lp-steps-sec h2, .theme-soft .lp-steps h3 { color: var(--ink); }
+.theme-soft .lp-steps p { color: var(--gray); }
+.theme-soft .lp-steps-sec .eyebrow { color: var(--red-text); }
+.theme-soft .footer { background: var(--ink-soft); }
+.theme-soft .cta { background: var(--ink-soft); }
+.theme-soft .cta .btn { background: var(--red); border-color: var(--red); color: #fff; }
+.theme-soft .lp-cta .callback .btn { background: #fff; border-color: #fff; color: var(--ink); }
+.theme-soft .rv-card, .theme-soft .lp-services li, .theme-soft .ask { border: 1px solid #e6dccf; box-shadow: none; }
+@media (max-width: 980px) {
+  .theme-soft .lp-hero__bg::after { background: linear-gradient(0deg, var(--ink-soft), rgba(42,33,27,0)); }
+}

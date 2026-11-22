@@ -336,7 +336,7 @@ document.querySelectorAll('.hx__video').forEach(v => {
 
 // Offerteformulier: ingevulde gegevens bewaren tijdens het bezoek (bij terugkeren of herladen)
 document.querySelectorAll('.lp-wiz form').forEach(form => {
-  const KEY = 'sdad-offerte';
+  const KEY = 'sdad-offerte-' + location.pathname;
   const save = () => { try {
     const data = {}; form.querySelectorAll('input, textarea').forEach(el => {
       if (el.name === 'website') return;

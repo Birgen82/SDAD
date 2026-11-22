@@ -165,7 +165,7 @@ def asset_version():
     return h.hexdigest()[:8]
 
 
-def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp", landing=False):
+def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp", landing=False, body_cls=""):
     return f"""<!doctype html>
 <html lang="nl-BE">
 <head>
@@ -195,7 +195,7 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp", landin
 <link rel="stylesheet" href="{pg.r}assets/css/v2.css?v={VER}">
 <script type="application/ld+json">{SCHEMA}</script>
 </head>
-<body>
+<body{f' class="{body_cls}"' if body_cls else ""}>
 {landing_nav(pg) if landing else nav(pg)}
 <main id="main">
 {body}
@@ -1201,6 +1201,132 @@ OFFER_SHOTS = [("1893_kortrijk_afgewerkt.webp", "Gevel geschilderd", "Kortrijk")
                ("2044_knokke_na_1_3.webp", "Villa, gevel", "Knokke"), ("1835_oblix_1.webp", "Restaurant", "Merelbeke")]
 
 
+CURTAIN_REVIEWS = [  # letterlijk van Trustpilot; reviews die gordijnen/raamdecoratie noemen + algemene
+    ("Franky H.", "juni 2023", 5, "… onze gordijnen zijn een streling voor het oog. We waren ook zeer tevreden, alles werd tot in de puntjes verzorgd en proper afgewerkt …"),
+    ("Karel D.", "november 2023", 5, "Ons nieuw opgeleverd appartement werd zeer vakkundig geschilderd en top perfect afgewerkt. Ook de raamdecoratie werd prima verzorgd."),
+    ("Sofie C.", "oktober 2025", 5, "Zeer correcte en vlotte communicatie! Alles wordt duidelijk afgesproken en nadien ook zo uitgevoerd."),
+    ("Roger V.", "september 2026", 5, "In enkele woorden: TOP resultaat. En niet te vergeten: na de werken is alles netjes achtergelaten."),
+]
+CURTAIN_SHOTS = [("1644_app_kortrijk_4.webp", "Overgordijnen", "Kortrijk"), ("1647_lamel_combo_gordijn.webp", "Lamellen met gordijn", None),
+                 ("1644_0166.webp", "Rolgordijnen", None), ("1644_cambr_diaz_3_-_kopie_0.webp", "Rolgordijn", None),
+                 ("1351_modelapp_3.webp", "Overgordijnen", None), ("1647_0085.webp", "Lamellen", None)]
+
+
+def curtain_wizard(pg):
+    def opts(name, items, kind="radio", need=None):
+        n = f' data-need="{need}"' if need else ""
+        return f'<div class="opts"{n}>' + "".join(f'<label><input type="{kind}" name="{name}" value="{v}"><span>{v}</span></label>' for v in items) + "</div>"
+    def field(label, name, typ="text", req=True, ac="", mode="", hint=""):
+        h = f'<small class="fhint">{hint}</small>' if hint else ""
+        return (f'<div class="full"><label for="g-{name}">{label}{" *" if req else " <span class=opt>(optioneel)</span>"}</label>'
+                f'<input id="g-{name}" name="{name}" type="{typ}"{" required" if req else ""}{f" autocomplete={ac!r}" if ac else ""}{f" inputmode={mode!r}" if mode else ""}>{h}</div>')
+    return f"""<div class="wiz lp-wiz" data-subject="Offerteaanvraag gordijnen via offertegordijnen" data-submit="Vraag mijn gratis offerte aan"><form onsubmit="return false" novalidate>
+  <div class="wiz__body">
+    <p class="lp-wiz__title">Gratis offerte in 3 stappen <span>Opmeting aan huis</span></p>
+    <div class="wiz__bar"><span></span></div>
+    <fieldset class="wiz__step"><legend>Wat zoekt u?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
+      {opts("Raamdecoratie", ["Overgordijnen", "Inbetweens", "Rolgordijnen", "Vouwgordijnen", "Lamellen", "Nog niet zeker, ik wil advies"], "checkbox", "Kies minstens één optie.")}</fieldset>
+    <fieldset class="wiz__step"><legend>Over uw ramen</legend><p class="hint">Een schatting volstaat.</p>
+      {opts("Aantal ramen", ["1 à 2", "3 tot 5", "6 of meer", "Weet ik nog niet"], "radio", "Kies het aantal ramen.")}
+      <p class="hint" style="margin-top:18px">Bediening</p>
+      {opts("Bediening", ["Manueel", "Elektrisch", "Weet ik nog niet"], "radio", "Kies een bediening.")}
+      <p class="hint" style="margin-top:18px">Voor wie is het?</p>
+      {opts("Klanttype", ["Particulier", "Professioneel"], "radio", "Kies particulier of professioneel.")}
+    </fieldset>
+    <fieldset class="wiz__step"><legend>Waar kunnen we u bereiken?</legend><p class="hint">We nemen snel contact op om de opmeting af te spreken.</p>
+      <div class="form-grid lp-grid">{field("Naam", "Naam", ac="name")}{field("Telefoon", "Telefoon", "tel", ac="tel", hint="Om de opmeting af te spreken.")}{field("E-mail", "E-mail", "email", ac="email")}{field("Postcode", "Postcode", ac="postal-code", mode="numeric")}
+        <div class="full"><label for="g-besch">Korte beschrijving <span class="opt">(optioneel)</span></label><textarea id="g-besch" name="Beschrijving" rows="3" placeholder="bv. living met schuifraam, verduisterend in de slaapkamer"></textarea></div>
+        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
+      </div></fieldset>
+    <p class="wiz__err" aria-live="polite"></p>
+    <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
+    <p class="lp-legal">Gratis en zonder verplichtingen. Uw gegevens gebruiken we alleen voor uw aanvraag (<a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a>).</p>
+  </div>
+  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>We nemen snel contact met u op.</p></div>
+</form></div>"""
+
+
+def offerte_gordijnen_page():
+    pg = Page("offerte-gordijnen/")
+    trust = f'<a class="tp" href="{TRUSTPILOT}" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>{TP_SCORE}</b> op 5 · {TP_COUNT} reviews op Trustpilot</span></a>'
+    types = "".join(f'<li class="rv" style="--i:{n}">{pg.img(thumb(i, 640), t, w=320, h=240)}<div><h3>{t}</h3><p>{x}</p></div></li>' for n, (i, t, x) in enumerate([
+        ("1644_app_kortrijk_4.webp", "Overgordijnen", "Sfeer, warmte en een betere akoestiek. Elegant tot op de vloer."),
+        ("1644_0166.webp", "Rol- en vouwgordijnen", "Strak en praktisch, ook verduisterend voor de slaapkamer."),
+        ("1647_lamel_combo_gordijn.webp", "Lamellen", "Hout, aluminium, pvc of textiel. Horizontaal of verticaal."),
+        ("1647_0085.webp", "Elektrische bediening", "Manueel of elektrisch, afgestemd op uw gebruiksgemak.")]))
+    shots = "".join(f'<button type="button" class="rv" style="--i:{n % 3}" data-full="{pg.r}assets/img/{i}">{pg.img(i, t, w=600, h=450)}<span class="lp-cap"><b>{t}</b>{f"<span class=lp-sep> · </span>{pl}" if pl else ""}</span></button>' for n, (i, t, pl) in enumerate(CURTAIN_SHOTS))
+    cards = "".join(f'''<figure class="rv-card rv" style="--i:{n}"><div class="rv-stars" aria-label="{st} op 5 sterren">{"★" * st}</div>
+      <blockquote>“{t}”</blockquote><figcaption><b>{nm}</b> · {d}</figcaption></figure>''' for n, (nm, d, st, t) in enumerate(CURTAIN_REVIEWS))
+    steps = "".join(f'<li class="rv" style="--i:{n}"><span class="lp-step">{n + 1}</span><h3>{t}</h3><p>{d}</p></li>' for n, (t, d) in enumerate([
+        ("Aanvraag", "U vult het formulier in of belt ons."), ("Advies en opmeting", "We komen langs, tonen stalen en meten nauwkeurig op."),
+        ("Offerte", "U krijgt een duidelijke offerte op maat."), ("Plaatsing", "We plaatsen alles netjes en vakkundig.")]))
+    qa = [("Komen jullie zelf opmeten?", "Ja. Een correcte opmeting is essentieel voor een mooi resultaat. Daarom komen we steeds ter plaatse om de ramen nauwkeurig op te meten."),
+          ("Geven jullie advies over stoffen en kleuren?", "Ja. Tijdens het bezoek bekijken we samen welke stoffen, kleuren en afwerkingen het best aansluiten bij uw interieur, lichtinval en wensen."),
+          ("Zijn elektrische gordijnen en lamellen mogelijk?", "Ja. Afhankelijk van het gekozen systeem kunnen gordijnen en lamellen manueel of elektrisch bediend worden."),
+          ("Plaatsen jullie ook?", "Ja. Naast advies en opmeting verzorgen wij ook de professionele plaatsing."),
+          ("Kan ik gordijnen combineren met lamellen?", "Ja. Zo combineert u het praktische karakter van lamellen met de zachtheid en gezelligheid van gordijnen."),
+          ("Kunnen jullie ook schilderen?", f"Ja. SDAD is in de eerste plaats een schildersbedrijf. Muren, kleuren en raamdecoratie stemmen we graag samen op elkaar af. <a href=\"{pg.u('offerte/')}\">Offerte voor schilderwerken</a>")]
+    faqs = "".join(f"<details><summary>{q}</summary><div class=\"answer\">{a}</div></details>" for q, a in qa)
+    body = f"""<section class="lp-hero">
+  <div class="lp-hero__bg" aria-hidden="true">{pg.img("1644_app_kortrijk_4.webp", "", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
+  <div class="wrap lp-hero__grid">
+    <div class="lp-hero__text">
+      {trust}
+      <h1>Gordijnen en lamellen op maat, <em class="stroke">mooi afgewerkt</em></h1>
+      <p class="lead">Advies, opmeting en plaatsing door het team van Arne en Lies uit Izegem. Afgestemd op uw interieur, licht en privacy.</p>
+      <ul class="lp-usp"><li>Gratis advies en opmeting aan huis</li><li>Plaatsing inbegrepen</li><li>Kleuren van muren en stoffen op elkaar afgestemd</li></ul>
+      <p class="lp-alt">Liever bellen? <a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="{BOOKING}" target="_blank" rel="noopener">Zelf een afspraak inplannen</a></p>
+    </div>
+    <div id="offerte" class="lp-hero__form">{curtain_wizard(pg)}</div>
+  </div>
+</section>
+
+<section class="section" id="reviews"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Wat klanten zeggen</span><h2><span class="tp-big">{TP_SCORE}</span> op 5 op Trustpilot</h2>
+    <p class="rv-sub">Gemiddelde van {TP_COUNT} reviews. <a href="{TRUSTPILOT}" target="_blank" rel="noopener">Lees alle reviews</a></p></div><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div>
+  <div class="rv-grid">{cards}</div>
+</div></section>
+
+<section class="section section--soft"><div class="wrap">
+  <div class="rv"><span class="eyebrow">Wat we plaatsen</span><h2>Raamdecoratie voor elke ruimte</h2></div>
+  <ul class="lp-services">{types}</ul>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Inspiratie</span><h2>Sfeerbeelden</h2></div><a class="arrow-link" href="#offerte">Vraag uw offerte</a></div>
+  <div class="lp-gallery gallery">{shots}</div>
+</div></section>
+
+<section class="section section--soft"><div class="wrap split">
+  <div class="rv">{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens van SDAD")}</div>
+  <div class="rv" style="--i:1"><span class="eyebrow">Wie komt er langs?</span><h2>Eén aanspreekpunt voor muren én ramen</h2>
+    <p>Lies begeleidt u van het eerste contact tot de plaatsing en denkt mee over stoffen, kleuren en bediening. Omdat SDAD ook schildert, stemmen we de kleuren van muren en gordijnen perfect op elkaar af.</p>
+    <ul class="checks"><li>Persoonlijk advies aan huis</li><li>Nauwkeurige opmeting</li><li>Vakkundige plaatsing</li><li>Nakomen van afspraken &amp; planning</li></ul>
+    <div class="btns"><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div></div>
+</div></section>
+
+<section class="section lp-steps-sec"><div class="wrap">
+  <div class="rv"><span class="eyebrow">Zo werkt het</span><h2>In 4 stappen naar raamdecoratie op maat</h2></div>
+  <ol class="lp-steps">{steps}</ol>
+</div></section>
+
+<section class="section section--soft"><div class="wrap faq2">
+  <div class="faq2__aside rv"><span class="eyebrow">Vragen</span><h2>Goed om te weten</h2>
+    <div class="ask"><p><strong>Andere vraag?</strong><br>Lies helpt u graag verder.</p><a class="ask__tel" href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a></div></div>
+  <div class="faq rv" style="--i:1">{faqs}</div>
+</div></section>
+
+<section class="section"><div class="wrap"><div class="cta lp-cta">
+  <h2>Klaar voor raamdecoratie op maat?</h2><p>Vraag uw gratis offerte aan, of laat uw nummer achter en we bellen u terug.</p>
+  <div class="btns"><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div>
+  <form class="callback" novalidate><label for="cb-tel" class="sr-only">Telefoonnummer</label><input id="cb-tel" type="tel" required autocomplete="tel" placeholder="Uw telefoonnummer"><button class="btn btn--ghost no-arrow" type="submit">Bel mij terug</button>
+  <p class="callback__ok" hidden>Bedankt! We bellen u zo snel mogelijk terug.</p></form>
+</div></div></section>"""
+    write(pg, layout(pg, "Offerte gordijnen en lamellen op maat | SDAD Izegem",
+                     "Gratis offerte voor gordijnen, rolgordijnen en lamellen op maat in West- en Oost-Vlaanderen. Advies, opmeting en plaatsing door SDAD uit Izegem.",
+                     body, landing=True, body_cls="theme-soft"))
+
+
 def offerte_page():
     pg = Page("offerte/")
     trust = f'<a class="tp" href="{TRUSTPILOT}" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>{TP_SCORE}</b> op 5 · {TP_COUNT} reviews op Trustpilot</span></a>'
@@ -1297,5 +1423,5 @@ def legal_pages():
 
 if __name__ == "__main__":
     VER = asset_version()
-    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages, legal_pages, offerte_page):
+    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages, legal_pages, offerte_page, offerte_gordijnen_page):
         f()
