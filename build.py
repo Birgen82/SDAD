@@ -1233,20 +1233,25 @@ def curtain_wizard(pg):
                 f'<input id="g-{name}" name="{name}" type="{typ}"{" required" if req else ""}{f" autocomplete={ac!r}" if ac else ""}{f" inputmode={mode!r}" if mode else ""}>{h}</div>')
     return f"""<div class="wiz lp-wiz" data-subject="Offerteaanvraag gordijnen via offertegordijnen" data-submit="Vraag mijn gratis offerte aan"><form onsubmit="return false" novalidate>
   <div class="wiz__body">
-    <p class="lp-wiz__title">Gratis offerte in 3 stappen <span>Opmeting aan huis</span></p>
+    <p class="lp-wiz__title">Gratis offerte in 4 stappen <span>Opmeting aan huis</span></p>
     <div class="wiz__bar"><span></span></div>
     <fieldset class="wiz__step"><legend>Wat zoekt u?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
       {opts("Raamdecoratie", ["Overgordijnen", "Inbetweens", "Rolgordijnen", "Vouwgordijnen", "Lamellen", "Nog niet zeker, ik wil advies"], "checkbox", "Kies minstens één optie.")}</fieldset>
-    <fieldset class="wiz__step"><legend>Over uw ramen</legend><p class="hint">Een schatting volstaat.</p>
-      {opts("Aantal ramen", ["1 à 2", "3 tot 5", "6 of meer", "Weet ik nog niet"], "radio", "Kies het aantal ramen.")}
-      <p class="hint" style="margin-top:18px">Bediening</p>
+    <fieldset class="wiz__step"><legend>Wat is voor u het belangrijkst?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
+      {opts("Wens", ["Verduisteren", "Privacy", "Licht regelen", "Sfeer en warmte", "Akoestiek"], "checkbox", "Kies minstens één wens.")}
+      <p class="hint" style="margin-top:18px">Om hoeveel ramen gaat het? Een schatting volstaat.</p>
+      {opts("Aantal ramen", ["1", "2 à 3", "4 tot 6", "7 of meer"], "radio", "Kies het aantal ramen.")}
+    </fieldset>
+    <fieldset class="wiz__step"><legend>Nog twee korte vragen</legend><p class="hint">Bediening</p>
       {opts("Bediening", ["Manueel", "Elektrisch", "Weet ik nog niet"], "radio", "Kies een bediening.")}
+      <p class="hint" style="margin-top:18px">Wanneer?</p>
+      {opts("Timing", ["Zo snel mogelijk", "Binnen 1 à 3 maanden", "Bij verbouwing of nieuwbouw"], "radio", "Kies een periode.")}
       <p class="hint" style="margin-top:18px">Voor wie is het?</p>
       {opts("Klanttype", ["Particulier", "Professioneel"], "radio", "Kies particulier of professioneel.")}
     </fieldset>
     <fieldset class="wiz__step"><legend>Waar kunnen we u bereiken?</legend><p class="hint">We nemen snel contact op om de opmeting af te spreken.</p>
       <div class="form-grid lp-grid">{field("Naam", "Naam", ac="name")}{field("Telefoon", "Telefoon", "tel", ac="tel", hint="Om de opmeting af te spreken.")}{field("E-mail", "E-mail", "email", ac="email")}{field("Postcode", "Postcode", ac="postal-code", mode="numeric")}
-        <div class="full"><label for="g-besch">Korte beschrijving <span class="opt">(optioneel)</span></label><textarea id="g-besch" name="Beschrijving" rows="3" placeholder="bv. living met schuifraam, verduisterend in de slaapkamer"></textarea></div>
+        <div class="full"><label for="g-besch">Korte beschrijving <span class="opt">(optioneel)</span></label><textarea id="g-besch" name="Beschrijving" rows="3" placeholder="bv. living met schuifraam, verduisterend in de slaapkamer, voorkeur voor een moment van opmeting"></textarea></div>
         <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
       </div></fieldset>
     <p class="wiz__err" aria-live="polite"></p>
@@ -1268,13 +1273,23 @@ def offerte_gordijnen_page():
     shots = "".join(f'<button type="button" class="rv" style="--i:{n % 3}" data-full="{pg.r}assets/img/{i}">{pg.img(i, t, w=600, h=450)}<span class="lp-cap"><b>{t}</b>{f"<span class=lp-sep> · </span>{pl}" if pl else ""}</span></button>' for n, (i, t, pl) in enumerate(CURTAIN_SHOTS))
     cards = "".join(f'''<figure class="rv-card rv" style="--i:{n}"><div class="rv-stars" aria-label="{st} op 5 sterren">{"★" * st}</div>
       <blockquote>“{t}”</blockquote><figcaption><b>{nm}</b> · {d}</figcaption></figure>''' for n, (nm, d, st, t) in enumerate(CURTAIN_REVIEWS))
+    wishes = "".join(f'<li class="rv" style="--i:{n % 4}"><h3>{w}</h3><p>{d}</p><span class="wish__tip">Ons advies: {t}</span></li>' for n, (w, d, t) in enumerate([
+        ("Verduisteren", "Rust in de slaapkamer of kinderkamer, ook overdag.", "verduisterende rol- of overgordijnen"),
+        ("Privacy", "Geen inkijk, wel daglicht.", "lichtdoorlatende stoffen, inbetweens of lamellen"),
+        ("Licht regelen", "Zelf bepalen hoeveel licht en inkijk u wenst.", "lamellen: kantelen of opzij schuiven"),
+        ("Sfeer en akoestiek", "Een warme, rustige ruimte met minder galm.", "overgordijnen tot op de vloer")]))
     steps = "".join(f'<li class="rv" style="--i:{n}"><span class="lp-step">{n + 1}</span><h3>{t}</h3><p>{d}</p></li>' for n, (t, d) in enumerate([
-        ("Aanvraag", "U vult het formulier in of belt ons."), ("Advies en opmeting", "We komen langs, tonen stalen en meten nauwkeurig op."),
+        ("Aanvraag", "U vult het formulier in of belt ons."), ("Advies en opmeting", "We komen langs, adviseren over stof, kleur en bediening en meten zelf nauwkeurig op."),
         ("Offerte", "U krijgt een duidelijke offerte op maat."), ("Plaatsing", "We plaatsen alles netjes en vakkundig.")]))
-    qa = [("Komen jullie zelf opmeten?", "Ja. Een correcte opmeting is essentieel voor een mooi resultaat. Daarom komen we steeds ter plaatse om de ramen nauwkeurig op te meten."),
+    qa = [("Is de opmeting gratis en vrijblijvend?", "Ja. Het advies en de opmeting aan huis zijn gratis en zonder verplichtingen."),
+          ("Komen jullie zelf opmeten?", "Ja. Een correcte opmeting is essentieel voor een mooi resultaat. Daarom komen we steeds ter plaatse om de ramen nauwkeurig op te meten."),
+          ("Wat is het verschil tussen verduisterend en lichtdoorlatend?", "Verduisterende stoffen houden (bijna) al het licht tegen, ideaal voor slaapkamers. Lichtdoorlatende stoffen en inbetweens filteren het licht en geven privacy. Bij gordijnen langs de zijkant valt altijd wat licht binnen; we adviseren u over de beste oplossing per raam."),
+          ("Wat kies ik voor de badkamer of keuken?", "In vochtige ruimtes kiezen we materialen die daartegen bestand zijn, zoals aluminium of kunststof. We bekijken dit samen tijdens het bezoek."),
+          ("Wat is veilig in een kinderkamer?", "Voor kinderkamers raden we koordloze of elektrische bediening aan. We adviseren u graag over de veiligste oplossing."),
           ("Geven jullie advies over stoffen en kleuren?", "Ja. Tijdens het bezoek bekijken we samen welke stoffen, kleuren en afwerkingen het best aansluiten bij uw interieur, lichtinval en wensen."),
           ("Zijn elektrische gordijnen en lamellen mogelijk?", "Ja. Afhankelijk van het gekozen systeem kunnen gordijnen en lamellen manueel of elektrisch bediend worden."),
           ("Plaatsen jullie ook?", "Ja. Naast advies en opmeting verzorgen wij ook de professionele plaatsing."),
+          ("Doen jullie ook projecten voor bedrijven?", "Ja. Ook voor omvangrijke projecten zoals de inrichting van een hotel, kantoor of bedrijvencentrum kunt u bij ons terecht."),
           ("Kan ik gordijnen combineren met lamellen?", "Ja. Zo combineert u het praktische karakter van lamellen met de zachtheid en gezelligheid van gordijnen."),
           ("Kunnen jullie ook schilderen?", f"Ja. SDAD is in de eerste plaats een schildersbedrijf. Muren, kleuren en raamdecoratie stemmen we graag samen op elkaar af. <a href=\"{site_link(pg, 'offerte/')}\">Offerte voor schilderwerken</a>")]
     faqs = "".join(f"<details><summary>{q}</summary><div class=\"answer\">{a}</div></details>" for q, a in qa)
@@ -1299,7 +1314,9 @@ def offerte_gordijnen_page():
 </div></section>
 
 <section class="section section--soft"><div class="wrap">
-  <div class="rv"><span class="eyebrow">Wat we plaatsen</span><h2>Raamdecoratie voor elke ruimte</h2></div>
+  <div class="rv"><span class="eyebrow">Wat wilt u bereiken?</span><h2>Kies op basis van uw wens</h2></div>
+  <ul class="wish">{wishes}</ul>
+  <div class="rv" style="margin-top:clamp(40px,6vw,64px)"><span class="eyebrow">Wat we plaatsen</span><h2>Raamdecoratie voor elke ruimte</h2></div>
   <ul class="lp-services">{types}</ul>
 </div></section>
 
