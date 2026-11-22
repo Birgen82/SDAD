@@ -13,6 +13,8 @@ ROOT = Path(__file__).parent
 SITE = "https://sdad.be"
 # Demo-modus: houdt zoekmachines weg van de voorbeeldsite. Zet op False bij livegang op sdad.be.
 DEMO = True
+# Basisadres voor deel-links (WhatsApp, Facebook, LinkedIn…): de demo op GitHub Pages of de echte site.
+BASE = "https://birgen82.github.io/SDAD/" if DEMO else SITE + "/"
 BOOKING = "https://afspraaksdad.youcanbook.me/"
 MAIL = "info@sdad.be"
 PHONES = [("Lies Nuyttens", "0473 52 09 20", "+32473520920"), ("Arne Deseure", "0478 42 81 95", "+32478428195")]
@@ -155,12 +157,18 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 <script>document.documentElement.classList.add("js")</script>
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(desc)}">
-<link rel="canonical" href="{SITE}/{pg.path}">
+<link rel="canonical" href="{BASE}{pg.path}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(desc)}">
-<meta property="og:url" content="{SITE}/{pg.path}">
-<meta property="og:image" content="{SITE}/site/assets/files/1/kleurbepaling_linkedin.1200x628.jpeg">
+<meta property="og:url" content="{BASE}{pg.path}">
+<meta property="og:site_name" content="SDAD">
+<meta property="og:locale" content="nl_BE">
+<meta property="og:image" content="{BASE}assets/img/og-sdad.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo van SDAD – Schilderkracht tot de vierde macht">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00080a">
 {'<meta name="robots" content="noindex, nofollow">' if DEMO else ""}
 <link rel="icon" href="{pg.r}assets/img/list_icon.png">
