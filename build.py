@@ -427,68 +427,74 @@ def over():
               ("Duurzaamheid", "we kiezen voor kwalitatieve oplossingen die mooi blijven op lange termijn en bouwen graag aan duurzame klantenrelaties."),
               ("Gegarandeerd", "we voeren elk project zorgvuldig, correct en volgens de afgesproken kwaliteitsnormen uit."),
               ("Open communicatief", "we luisteren naar elkaar, maken alles bespreekbaar en communiceren open en eerlijk.")]
-    vals = "".join(f'<div class="value"><h3>{n}</h3><p>{t[0].upper() + t[1:]}</p></div>' for n, t in values)
-    links = [("Binnenschilderwerken", pg.u("diensten/schilderwerken/binnen/")), ("Buitenschilderwerken", pg.u("diensten/schilderwerken/buiten/")),
-             ("Decoratieve technieken", pg.u("diensten/schilderwerken/decoratieve-technieken/")), ("Gordijnen", pg.u("diensten/interieurafwerking/gordijnen/")),
-             ("Lamellen", pg.u("diensten/interieurafwerking/lamellen/"))]
+    vals = "".join(f'<li class="rv" style="--i:{i % 3}"><span class="val-nr">0{i + 1}</span><h3>{n}</h3><p>{t[0].upper() + t[1:]}</p></li>' for i, (n, t) in enumerate(values))
+    timeline = [("2008", "De start", "Arne Deseure start zijn eenmanszaak."),
+                ("2016", "SDAD BV", "De eenmanszaak groeit uit tot SDAD BV."),
+                ("2017", "Lies stapt mee in de zaak", "Samen bouwen Arne en Lies verder aan een gedeelde visie op vakmanschap, kwaliteit en persoonlijke service."),
+                ("Vandaag", "Een team van vakmensen", "Een gevestigde waarde in de sector, met gespecialiseerde schilders voor particulieren en bedrijven.")]
+    tl = "".join(f'<li class="rv" style="--i:{i}"><span class="tl-year">{y}</span><h3>{t}</h3><p>{d}</p></li>' for i, (y, t, d) in enumerate(timeline))
     verthe = '<a href="https://www.verthe-interieurs.be/" target="_blank" rel="noopener">Verthe Interieurs</a>'
-    body = page_hero(pg, [("Over SDAD", None)], "Over SDAD", "Het verhaal achter SDAD", p(
-        "Wat in 2008 begon als de eenmanszaak van Arne Deseure, groeide in 2016 uit tot SDAD BV. Toen Lies in 2017 mee in de zaak stapte, werd verder gebouwd aan een gedeelde visie gebaseerd op vakmanschap, kwaliteit en persoonlijke service.",
-        "Vandaag is SDAD uitgegroeid tot een gevestigde waarde in de sector, met een team van gespecialiseerde schilders dat dagelijks particulieren en bedrijven begeleidt bij schilderwerken en interieurafwerking."),
-        "1378_linkedin_30_graden.webp", "SDAD viert 30 jaar vakmanschap") + f"""
+    tiles = "".join(f'<a class="tile tile--sm rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="go" aria-hidden="true">→</span><h3>{t}</h3></a>' for n, (h, i, t, x) in enumerate(SERVICES))
+    person = lambda img, name, role, paras: f"""<article class="person2 rv">
+    <div class="person2__img">{pg.img(img, name)}</div>
+    <div class="person2__text"><h3>{name}</h3><p class="role">{role}</p>{p(*paras)}</div></article>"""
+    body = service_hero(pg, [("Over SDAD", None)], "Over SDAD", 'Het <em class="stroke">verhaal</em> achter SDAD',
+        '<p class="lead">Wat in 2008 begon als de eenmanszaak van Arne Deseure, groeide in 2016 uit tot SDAD BV. Toen Lies in 2017 mee in de zaak stapte, werd verder gebouwd aan een gedeelde visie gebaseerd op vakmanschap, kwaliteit en persoonlijke service.</p>',
+        "<p>Vandaag is SDAD uitgegroeid tot een gevestigde waarde in de sector, met een team van gespecialiseerde schilders dat dagelijks particulieren en bedrijven begeleidt bij schilderwerken en interieurafwerking.</p>",
+        "1378_linkedin_30_graden.webp", "Bestelwagen met het logo van SDAD", ("Sinds 2008", "van eenmanszaak tot team van vakmensen")) + f"""
 
-<section class="section"><div class="wrap split">
-  <div>{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens")}</div>
-  <div><span class="eyebrow">Zaakvoerders</span><h2>Drijvende kracht achter SDAD</h2>
-  <p>Achter SDAD staan ondernemers Arne en Lies. Samen bouwen zij dagelijks verder aan een bedrijf waarin vakmanschap, kwaliteit en persoonlijke opvolging centraal staan. Arne bewaakt de technische uitvoering en kwaliteit op de werf, terwijl Lies klanten begeleidt van eerste contact tot oplevering. Elk vanuit hun eigen expertise vormen ze een sterk complementair duo.</p></div>
+<section class="section section--dark"><div class="wrap">
+  <div class="rv"><span class="eyebrow">Onze geschiedenis</span><h2>Van eenmanszaak tot <em class="stroke">gevestigde waarde</em></h2></div>
+  <ol class="timeline">{tl}</ol>
 </div></section>
 
-<section class="section section--soft"><div class="wrap grid grid--2" style="align-items:start">
-  <article class="person">{pg.img("1423_arne_bewerkt.webp", "Arne Deseure")}
-    <h2 style="margin-top:28px">Arne Deseure</h2><p class="role">Vakmanschap als fundament</p>
-    {p("Al meer dan 25 jaar leeft Arne Deseure voor het schildersvak. Wat begon als een passie, groeide uit tot een carrière waarin vakkennis, kwaliteit en voortdurende bijscholing centraal staan in alles wat hij doet.",
+<section class="section"><div class="wrap">
+  <div class="duo-intro rv"><div><span class="eyebrow">Zaakvoerders</span><h2>Drijvende kracht achter SDAD</h2></div>
+  <p class="lead">Achter SDAD staan ondernemers Arne en Lies. Samen bouwen zij dagelijks verder aan een bedrijf waarin vakmanschap, kwaliteit en persoonlijke opvolging centraal staan. Arne bewaakt de technische uitvoering en kwaliteit op de werf, terwijl Lies klanten begeleidt van eerste contact tot oplevering. Elk vanuit hun eigen expertise vormen ze een sterk complementair duo.</p></div>
+  <div class="duo-photo rv">{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens")}</div>
+  <div class="duo">
+  {person("1423_arne_bewerkt.webp", "Arne Deseure", "Vakmanschap als fundament", [
+       "Al meer dan 25 jaar leeft Arne Deseure voor het schildersvak. Wat begon als een passie, groeide uit tot een carrière waarin vakkennis, kwaliteit en voortdurende bijscholing centraal staan in alles wat hij doet.",
        "Als meewerkend zaakvoerder binnen SDAD bewaakt Arne dagelijks de kwaliteit van de uitvoering. Hij volgt projecten op, ondersteunt het team op de werf en deelt zijn ervaring met de vakmensen met wie hij samenwerkt.",
        "Daarnaast blijft hij zich verdiepen in nieuwe technieken, materialen en afwerkingsmethodes, zodat SDAD blijft inspelen op de nieuwste ontwikkelingen binnen het vak.",
-       "Zijn jarenlange ervaring en doorgedreven kennis vormen vandaag nog steeds een van de fundamenten waarop SDAD gebouwd is.")}
-  </article>
-  <article class="person">{pg.img("2436_profielfoto_lies.webp", "Lies Nuyttens")}
-    <h2 style="margin-top:28px">Lies Nuyttens</h2><p class="role">De verbindende schakel</p>
-    {p("Sinds Lies in 2017 mee in de zaak stapte, bouwt ze dagelijks mee aan de groei van SDAD. Vandaag vormt ze de verbindende schakel tussen klanten, medewerkers en organisatie.",
+       "Zijn jarenlange ervaring en doorgedreven kennis vormen vandaag nog steeds een van de fundamenten waarop SDAD gebouwd is."])}
+  {person("2436_profielfoto_lies.webp", "Lies Nuyttens", "De verbindende schakel", [
+       "Sinds Lies in 2017 mee in de zaak stapte, bouwt ze dagelijks mee aan de groei van SDAD. Vandaag vormt ze de verbindende schakel tussen klanten, medewerkers en organisatie.",
        "Voor veel klanten is Lies het eerste aanspreekpunt binnen SDAD. Ze begeleidt projecten van eerste kennismaking tot oplevering, denkt mee over kleuren en afwerkingen en zorgt voor een duidelijke communicatie gedurende het volledige traject.",
        "Daarnaast staat ze in voor de dagelijkse organisatie van het bedrijf. Van planning en personeelsopvolging tot administratie en klantencontacten: Lies zorgt ervoor dat zowel klanten als medewerkers kunnen rekenen op een vlotte en gestructureerde aanpak.",
-       "Met haar gedrevenheid, betrokkenheid en ondernemingszin bouwt ze samen met Arne verder aan één duidelijke ambitie: een bedrijf uitbouwen waar kwaliteit, vertrouwen en mensen centraal staan.")}
-  </article>
+       "Met haar gedrevenheid, betrokkenheid en ondernemingszin bouwt ze samen met Arne verder aan één duidelijke ambitie: een bedrijf uitbouwen waar kwaliteit, vertrouwen en mensen centraal staan."])}
+  </div>
 </div></section>
 
-<section class="section"><div class="wrap split split--rev">
-  <div>{pg.img("2438_teamfoto.webp", "Het team van SDAD")}</div>
-  <div><span class="eyebrow">Ons team</span><h2>Het team achter SDAD</h2>
+<section class="team-hero">
+  <div class="team-hero__img">{pg.img("2438_teamfoto.webp", "Het team van SDAD")}</div>
+  <div class="wrap"><div class="team-card rv"><span class="eyebrow">Ons team</span><h2>Het team achter SDAD</h2>
   {p("Achter elk geslaagd project staat een team van gemotiveerde vakmensen die elke dag het beste van zichzelf geven.",
      "Binnen SDAD geloven we dat kwaliteit niet alleen bepaald wordt door materialen of technieken, maar vooral door de mensen die het werk uitvoeren. Daarom investeren we in vakkennis, samenwerking en een positieve werkcultuur waarin verantwoordelijkheid en betrokkenheid centraal staan.",
      "Elke medewerker brengt zijn eigen ervaring en talenten mee, maar deelt dezelfde visie: afspraken nakomen, kwalitatief werk afleveren en trots zijn op het resultaat dat wordt afgeleverd.",
-     "Samen vormen zij de kracht achter SDAD en zorgen zij er elke dag voor dat klanten kunnen rekenen op kwaliteit, vakmanschap en een betrouwbare partner.")}</div>
-</div></section>
+     "Samen vormen zij de kracht achter SDAD en zorgen zij er elke dag voor dat klanten kunnen rekenen op kwaliteit, vakmanschap en een betrouwbare partner.")}</div></div>
+</section>
 {werkwijze(pg)}
 
 <section class="section section--soft"><div class="wrap">
-  <span class="eyebrow">Onze waarden</span><h2>Het DNA van SDAD</h2>
-  <p class="lead narrow">Deze waarden vormen de basis van hoe we samenwerken en onze projecten aanpakken.</p>
-  <div class="grid grid--3 values" style="margin-top:32px">{vals}</div>
+  <div class="intro-row rv"><div><span class="eyebrow">Onze waarden</span><h2>Het DNA van SDAD</h2></div>
+  <p>Deze waarden vormen de basis van hoe we samenwerken en onze projecten aanpakken.</p></div>
+  <ul class="dna">{vals}</ul>
 </div></section>
 
 <section class="section"><div class="wrap split">
-  <div><span class="eyebrow">Twee expertises, één visie</span><h2>Samen sterker voor onze klanten</h2>
+  <div class="rv"><span class="eyebrow">Twee expertises, één visie</span><h2>Samen sterker voor onze klanten</h2>
   {p("Vandaag hebben klanten meer keuzes dan ooit op vlak van interieur, materialen en afwerking. Net daarom geloven wij sterk in het samenbrengen van de juiste expertises rond één project.",
      f"Daarom werken SDAD Schilderwerken en {verthe} al jarenlang nauw samen. Wat ons verbindt, is dezelfde visie op kwaliteit, afwerking en begeleiding van klanten.",
      f"{verthe} begeleidt klanten bij interieuradvies, zit-, woon- en slaapcomfort en totaalinrichting. Bij SDAD vertalen we kleurkeuzes en afwerkingsmogelijkheden naar vakkundig uitgevoerde schilderwerken.",
      "Samen zorgen we ervoor dat interieur en afwerking elkaar versterken en keuzes niet los van elkaar worden gemaakt, maar samen één logisch geheel vormen. Met telkens hetzelfde doel: klanten helpen om met vertrouwen keuzes te maken die op elkaar afgestemd zijn.")}
   </div>
-  <div>{video(pg, "2434_thumbnail_video_sdad_verthe.webp", "https://www.youtube.com/watch?v=zO2ZFUFUiMw", "Bekijk de film: SDAD × Verthe Interieurs", "Film over de samenwerking tussen SDAD en Verthe Interieurs")}</div>
+  <div class="rv" style="--i:1">{video(pg, "2434_thumbnail_video_sdad_verthe.webp", "https://www.youtube.com/watch?v=zO2ZFUFUiMw", "Bekijk de film: SDAD × Verthe Interieurs", "Film over de samenwerking tussen SDAD en Verthe Interieurs")}</div>
 </div></section>
 
 <section class="section section--soft"><div class="wrap">
-  <span class="eyebrow">Ontdek onze diensten</span><h2>Waarmee kunnen we u helpen?</h2>
-  <ul class="tags" style="margin-top:20px">{"".join(f'<li><a href="{u}" style="text-decoration:none;color:inherit">{n}</a></li>' for n, u in links)}</ul>
+  <div class="head-row rv"><div><span class="eyebrow">Ontdek onze diensten</span><h2>Waarmee kunnen we u helpen?</h2></div></div>
+  <div class="related related--5">{tiles}</div>
 </div></section>
 {cta(pg)}"""
     write(pg, layout(pg, "Over SDAD | Schilderwerken en interieurafwerking in Izegem",
@@ -516,13 +522,13 @@ SVC = {
                   ("Ook voor badkamer en keuken", "Aqua Sensa is gemaakt voor intensief gebruikte ruimtes."),
                   ("Advies ter plaatse", "Samen kiezen we de techniek die past bij ruimte en budget.")]},
     "diensten/interieurafwerking/gordijnen/": {
-        "stroke": "sfeer, privacy en comfort", "badge": ("Op maat", "advies, opmeting en plaatsing"),
+        "stroke": "comfort", "badge": ("Op maat", "advies, opmeting en plaatsing"),
         "facts": [("Advies over stof en kleur", "Afgestemd op uw interieur en de lichtinval."),
                   ("Professionele opmeting", "Zodat alles perfect aansluit op ruimte en ramen."),
                   ("Elektrisch of manueel", "Bediening die past bij uw gebruiksgemak."),
                   ("Plaatsing inbegrepen", "Van advies tot een perfect afgewerkt resultaat.")]},
     "diensten/interieurafwerking/lamellen/": {
-        "stroke": "licht, privacy en uitstraling", "badge": ("Op maat", "advies, opmeting en plaatsing"),
+        "stroke": "uitstraling", "badge": ("Op maat", "advies, opmeting en plaatsing"),
         "facts": [("Vier materialen", "Hout, aluminium, pvc of textiel."),
                   ("Horizontaal of verticaal", "Verticaal ideaal voor grote glaspartijen en schuiframen."),
                   ("Elektrisch of manueel", "Zelf bepalen hoeveel licht en inkijk u wenst."),
@@ -820,29 +826,29 @@ def lamellen():
 
 
 # ---------- Realisaties ----------
+def shot(pg, r, extra=""):
+    chip = " · ".join(LABELS[c] for c in r["cats"]) or ("Project" if r["type"] == "project" else "Particulier")
+    return (f'<a class="shot"{extra} href="{pg.u(f"realisaties/{r["slug"]}/")}">{pg.img(r["img"], r["title"])}'
+            f'<span class="chip">{chip}</span><h3>{escape(r["title"])}</h3></a>')
+
+
 def realisaties():
     pg = Page("realisaties/")
-    labels = LABELS
-    present = [k for k in labels if any(k in r["cats"] for r in REAL)]
-    btns = '<button type="button" data-filter="alle" aria-pressed="true">Alle realisaties</button>' + "".join(
-        f'<button type="button" data-filter="{k}" aria-pressed="false">{labels[k]}</button>' for k in present)
-
-    def group(typ, anchor, title, other_anchor, other_label):
-        cards = "".join(
-            f'<div data-cats="{" ".join(r["cats"])}">' + card(pg, pg.u(f"realisaties/{r['slug']}/"), r["img"], r["title"], more="Bekijk realisatie",
-                                                             meta=" · ".join(LABELS[c] for c in r["cats"])) + "</div>"
-            for r in REAL if r["type"] == typ)
-        return f"""<div data-group id="{anchor}" style="scroll-margin-top:100px;margin-bottom:64px">
-  <div class="head-row"><h2>{title}</h2><a class="arrow-link" href="#{other_anchor}">{other_label}</a></div>
-  <div class="grid grid--3">{cards}</div><p class="empty">Geen realisaties in deze categorie.</p>
-</div>"""
-
-    body = page_hero(pg, [("Realisaties", None)], "Portfolio", "Een selectie van onze realisaties",
-                     '<p class="lead">Laat u inspireren door de vele realisaties, zowel particulier als op projectbasis, die SDAD reeds tot een goed einde bracht.</p>') + f"""
-<section class="section"><div class="wrap">
-  <div class="filter" role="group" aria-label="Filter op dienst">{btns}</div>
-  {group("particulier", "particulieren", "Particuliere realisaties", "projecten", "Bekijk realisaties op projectbasis")}
-  {group("project", "projecten", "Gerealiseerde projecten", "particulieren", "Bekijk particuliere realisaties")}
+    n_p = sum(r["type"] == "particulier" for r in REAL); n_j = len(REAL) - n_p
+    present = [k for k in LABELS if any(k in r["cats"] for r in REAL)]
+    items = "".join(shot(pg, r, f' data-type="{r["type"]}" data-cats="{" ".join(r["cats"])}" style="--i:{i % 3}"').replace('class="shot"', f'class="shot rv{" big" if i % 7 == 0 else (" wide" if i % 7 == 4 else "")}"', 1)
+                    for i, r in enumerate(REAL))
+    seg = '<button type="button" data-type="alle" aria-pressed="true">Alle</button><button type="button" data-type="particulier" aria-pressed="false">Particulier</button><button type="button" data-type="project" aria-pressed="false">Projecten</button>'
+    chips = '<button type="button" data-cat="alle" aria-pressed="true">Alle diensten</button>' + "".join(f'<button type="button" data-cat="{k}" aria-pressed="false">{LABELS[k]}</button>' for k in present)
+    body = f"""<section class="lh"><div class="wrap">
+  {crumbs(pg, [("Realisaties", None)])}<span class="eyebrow">Portfolio</span>
+  <h1>Een selectie van onze <em class="stroke">realisaties</em></h1>
+  <div class="lh__row"><p class="lead">Laat u inspireren door de vele realisaties, zowel particulier als op projectbasis, die SDAD reeds tot een goed einde bracht.</p>
+  <ul class="lh__stats"><li><b>{len(REAL)}</b>realisaties</li><li><b>{n_p}</b>particulier</li><li><b>{n_j}</b>projecten</li></ul></div>
+</div></section>
+<div class="fbar"><div class="wrap"><div class="seg" role="group" aria-label="Type">{seg}</div><div class="fchips" role="group" aria-label="Dienst">{chips}</div><span class="fcount" aria-live="polite">{len(REAL)} realisaties</span></div></div>
+<section class="section" style="padding-top:28px"><div class="wrap">
+  <h2 class="sr-only">Alle realisaties</h2><div class="mosaic">{items}</div><p class="empty">Geen realisaties voor deze combinatie.</p>
 </div></section>
 {cta(pg)}"""
     write(pg, layout(pg, "Realisaties schilderwerken SDAD Izegem",
@@ -850,13 +856,49 @@ def realisaties():
 
 
 # ---------- Blog ----------
+TOPICS = [("binnen", "Binnen", r"muur|muren|plafond|keuken|trap|deur|badkamer|vochtig|kleur|faience|wandtegel|gyproc|mdf|interieur|binnen"),
+          ("buiten", "Buiten", r"gevel|buiten|tuinhuis|kalei|aluminium|pvc|bakste"),
+          ("behang", "Behang", r"behang"),
+          ("techniek", "Voorbereiding en techniek", r"ontvet|verwijder|afplaktape|kit|strepen|kwaliteitsverf|lik verf|stappen")]
+
+
+def topics_of(b):
+    t = (b["title"] + " " + b["excerpt"]).lower()
+    return [k for k, _, rx in TOPICS if re.search(rx, t)] or ["techniek"]
+
+
+def read_min(slug):
+    words = sum(len(re.sub("<[^>]+>", " ", s["html"]).split()) for s in DETAILS["blog"][slug]["sections"])
+    return max(1, round(words / 200))
+
+
+def blog_card(pg, b, cls="card"):
+    tp = topics_of(b)
+    return (f'<a class="{cls} rv" data-topics="{" ".join(tp)}" data-search="{escape((b["title"] + " " + b["excerpt"]).lower())}" href="{pg.u(f"blog/{b["slug"]}/")}">'
+            f'<div class="card__img">{pg.img(b["img"], b["title"], w=500, h=375)}</div>'
+            f'<div class="card__body"><div class="card__meta">{dict((k, n) for k, n, _ in TOPICS)[tp[0]]} · {read_min(b["slug"])} min lezen</div>'
+            f'<h3>{b["title"]}</h3><p>{short(b["excerpt"], 150)}</p><span class="card__more">Lees meer</span></div></a>')
+
+
 def blog():
     pg = Page("blog/")
-    cards = "".join(card(pg, pg.u(f"blog/{b['slug']}/"), b["img"], b["title"], short(b["excerpt"])) for b in BLOG)
+    first, rest = BLOG[0], BLOG[1:]
     socials = " · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in SOCIAL.items())
-    body = page_hero(pg, [("Blog", None)], "Tips &amp; advies", "Blogberichten",
-                     f'<p class="lead">Met meer dan 25 jaar ervaring in ons vak delen we onze opgebouwde expertise graag met u.</p><p>Volg ons: {socials}</p>') + f"""
-<section class="section"><div class="wrap"><h2 class="sr-only">Alle blogberichten</h2><div class="grid grid--3">{cards}</div></div></section>
+    chips = '<button type="button" data-topic="alle" aria-pressed="true">Alle</button>' + "".join(f'<button type="button" data-topic="{k}" aria-pressed="false">{n}</button>' for k, n, _ in TOPICS)
+    body = f"""<section class="lh"><div class="wrap">
+  {crumbs(pg, [("Blog", None)])}<span class="eyebrow">Tips &amp; advies</span>
+  <h1><em class="stroke">Blogberichten</em></h1>
+  <div class="lh__row"><p class="lead">Met meer dan 25 jaar ervaring in ons vak delen we onze opgebouwde expertise graag met u.</p><p>Volg ons: {socials}</p></div>
+</div></section>
+<section class="section" style="padding-top:12px"><div class="wrap">
+  <h2 class="sr-only">Uitgelicht</h2>
+  <a class="feature rv" href="{pg.u(f"blog/{first['slug']}/")}"><div class="feature__img">{pg.img(first["img"], first["title"])}</div>
+    <div class="feature__text"><span class="chip">Nieuwste · {read_min(first["slug"])} min lezen</span><h3>{first["title"]}</h3><p>{first["excerpt"]}</p><span class="btn">Lees het artikel</span></div></a>
+  <div class="btool"><label class="bsearch"><span class="sr-only">Zoek in de blog</span><input type="search" placeholder="Zoek een onderwerp, bv. gevel of plafond"></label>
+    <div class="fchips" role="group" aria-label="Onderwerp">{chips}</div></div>
+  <h2 class="sr-only">Alle blogberichten</h2>
+  <div class="grid grid--3 bgrid">{"".join(blog_card(pg, b) for b in rest)}</div><p class="empty">Geen artikels gevonden. Probeer een ander woord.</p>
+</div></section>
 {cta(pg)}"""
     write(pg, layout(pg, "Blog over schilderwerken en afwerking | SDAD Izegem",
                      "Met meer dan 25 jaar ervaring in hun vak wil schilderwerken SDAD hun opgebouwde expertise graag met u delen in hun blogs.", body))
@@ -907,27 +949,36 @@ def split_heading(html):
     return (m.group(1).strip(), m.group(2)) if m else ("", html)
 
 
+def slugify(t):
+    return re.sub(r"[^a-z0-9]+", "-", re.sub("<[^>]+>", "", t).lower()).strip("-")[:50]
+
+
 def detail_sections(pg, secs, alt):
-    out = ""
-    soft = False
+    out, soft = "", False
     for s in secs:
         title, rest = split_heading(fix_links(pg, s["html"]))
         imgs = s["imgs"]
         if len(imgs) > 1:
-            out += gallery(pg, title or "Sfeerbeelden", imgs, alt_base=alt) if not rest.strip() else \
-                f'<section class="section"><div class="wrap"><div class="narrow">{f"<h2>{title}</h2>" if title else ""}{rest}</div></div></section>' + gallery(pg, "Sfeerbeelden", imgs, alt_base=alt)
+            if rest.strip():
+                out += f'<section class="section"><div class="wrap">{text_block(title, rest)}</div></section>'
+            out += gallery_bento(pg, title if not rest.strip() and title else "Sfeerbeelden", imgs, None, alt)
             soft = False
             continue
         if not title and not rest.strip() and not imgs:
             continue
         soft = not soft
-        head = f"<h2>{title}</h2>" if title else ""
         if imgs:
-            inner = f'<div class="split"><div>{head}{rest}</div><div>{pg.img(imgs[0], title or alt)}</div></div>'
+            inner = f'<div class="split"><div class="rv">{f"<h2>{title}</h2>" if title else ""}{rest}</div><div class="rv img-reveal" style="--i:1">{pg.img(imgs[0], title or alt)}</div></div>'
         else:
-            inner = f'<div class="narrow prose">{head}{rest}</div>'
+            inner = text_block(title, rest)
         out += f'<section class="section{" section--soft" if soft else ""}"><div class="wrap">{inner}</div></section>'
     return out
+
+
+def text_block(title, html):
+    if title:
+        return f'<div class="ed"><div class="ed__head"><h2>{title}</h2></div><div class="ed__body prose">{html}</div></div>'
+    return f'<div class="narrow prose rv">{html}</div>'
 
 
 def realisatie_pages():
@@ -936,16 +987,25 @@ def realisatie_pages():
         d = DETAILS["realisaties"][r["slug"]]
         first, rest = d["sections"][0], d["sections"][1:]
         hero_img = first["imgs"][0] if first["imgs"] else r["img"]
-        meta = ("Particulier" if r["type"] == "particulier" else "Project") + "".join(f" · {LABELS[c]}" for c in r["cats"])
-        others = [o for o in REAL if o is not r and (set(o["cats"]) & set(r["cats"]) or not r["cats"])][:3] or [o for o in REAL if o is not r][:3]
-        more = "".join(card(pg, pg.u(f"realisaties/{o['slug']}/"), o["img"], o["title"], more="Bekijk realisatie") for o in others)
-        body = page_hero(pg, [("Realisaties", "realisaties/"), (escape(r["title"]), None)], meta, escape(r["title"]),
-                         fix_links(pg, first["html"]), hero_img, r["title"])
-        body += detail_sections(pg, rest, r["title"])
-        body += f"""<section class="section section--soft"><div class="wrap">
-  <div class="head-row"><div><span class="eyebrow">Portfolio</span><h2>Meer realisaties</h2></div><a class="arrow-link" href="{pg.u('realisaties/')}">Alle realisaties</a></div>
-  <div class="grid grid--3">{more}</div>
-</div></section>{cta(pg)}"""
+        chips = "".join(f'<span class="chip">{c}</span>' for c in ["Particulier" if r["type"] == "particulier" else "Project"] + [LABELS[c] for c in r["cats"]])
+        prv, nxt = REAL[i - 1], REAL[(i + 1) % len(REAL)]
+        others = [o for o in REAL if o is not r and (set(o["cats"]) & set(r["cats"]) or not r["cats"])][:8] or [o for o in REAL if o is not r][:8]
+        body = f"""<section class="ih">
+  <div class="ih__img">{pg.img(hero_img, r["title"], lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
+  <div class="wrap ih__text">{crumbs(pg, [("Realisaties", "realisaties/"), (escape(r["title"]), None)])}<div class="ih__chips">{chips}</div><h1>{escape(r["title"])}</h1></div>
+</section>
+<section class="section"><div class="wrap"><div class="ed"><div class="ed__head rv"><span class="eyebrow">Het project</span><h2>Over deze realisatie</h2></div>
+  <div class="ed__body prose rv" style="--i:1">{fix_links(pg, first["html"])}</div></div></div></section>
+{detail_sections(pg, rest, r["title"])}
+<nav class="pn" aria-label="Andere realisaties"><div class="wrap pn__grid">
+  <a class="pn__item" href="{pg.u(f"realisaties/{prv['slug']}/")}">{pg.img(prv["img"], "")}<span><small>← Vorige realisatie</small>{escape(prv["title"])}</span></a>
+  <a class="pn__item pn__item--next" href="{pg.u(f"realisaties/{nxt['slug']}/")}"><span><small>Volgende realisatie →</small>{escape(nxt["title"])}</span>{pg.img(nxt["img"], "")}</a>
+</div></nav>
+<section class="section rail-wrap"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Portfolio</span><h2>Meer realisaties</h2></div>
+  <div class="rail-nav"><a class="arrow-link" href="{pg.u('realisaties/')}" style="align-self:center;margin-right:10px">Alle realisaties</a><button type="button" data-dir="-1" aria-label="Vorige">←</button><button type="button" data-dir="1" aria-label="Volgende">→</button></div></div>
+</div><div><div class="rail" tabindex="0" aria-label="Meer realisaties, horizontaal scrollen">{"".join(shot(pg, o) for o in others)}</div></div></section>
+{cta(pg)}"""
         desc = d["desc"] or short(re.sub("<[^>]+>", " ", first["html"]).strip(), 150)
         write(pg, layout(pg, f"{r['title']} | Realisaties SDAD", re.sub(r"\s+", " ", desc), body))
 
@@ -956,14 +1016,33 @@ def blog_pages():
         d = DETAILS["blog"][b["slug"]]
         first, rest = d["sections"][0], d["sections"][1:]
         hero_img = first["imgs"][0] if first["imgs"] else b["img"]
+        toc, art = [], ""
+        for s in rest:
+            title, html = split_heading(fix_links(pg, s["html"]))
+            if title:
+                sid = slugify(title); toc.append((sid, title))
+                art += f'<h2 id="{sid}">{title}</h2>'
+            art += html
+            if len(s["imgs"]) == 1:
+                art += f'<figure class="art-fig">{pg.img(s["imgs"][0], title or d["title"])}</figure>'
+            elif s["imgs"]:
+                art += '<div class="gallery art-gal">' + "".join(f'<button type="button" data-full="{pg.r}assets/img/{im}">{pg.img(im, d["title"], w=400, h=400)}</button>' for im in s["imgs"]) + "</div>"
+        toc_html = ('<nav class="toc" aria-label="Inhoud"><p>In dit artikel</p><ol>' + "".join(f'<li><a href="#{a}">{t}</a></li>' for a, t in toc) + "</ol></nav>") if len(toc) > 1 else ""
         others = [BLOG[(i + k) % len(BLOG)] for k in (1, 2, 3)]
-        more = "".join(card(pg, pg.u(f"blog/{o['slug']}/"), o["img"], o["title"], short(o["excerpt"], 120)) for o in others)
-        body = page_hero(pg, [("Blog", "blog/"), (escape(d["title"]), None)], "Tips &amp; advies", escape(d["title"]),
-                         fix_links(pg, first["html"]), hero_img, d["title"])
-        body += detail_sections(pg, rest, d["title"])
-        body += f"""<section class="section section--soft"><div class="wrap">
-  <div class="head-row"><div><span class="eyebrow">Blog</span><h2>Lees ook</h2></div><a class="arrow-link" href="{pg.u('blog/')}">Alle blogberichten</a></div>
-  <div class="grid grid--3">{more}</div>
+        tp = topics_of(b)
+        body = f"""<div class="progress" aria-hidden="true"><span></span></div>
+<section class="sh sh--article"><div class="wrap sh__grid">
+  <div class="sh__text">{crumbs(pg, [("Blog", "blog/"), (escape(d["title"]), None)])}<span class="eyebrow">{dict((k, n) for k, n, _ in TOPICS)[tp[0]]} · {read_min(b["slug"])} min lezen</span>
+  <h1>{escape(d["title"])}</h1><div class="lead">{fix_links(pg, first["html"])}</div></div>
+  <div class="sh__media"><div class="sh__img">{pg.img(hero_img, d["title"], lazy=False)}</div></div>
+</div></section>
+<section class="section"><div class="wrap art{" art--toc" if toc_html else ""}">
+  {f'<aside class="art__aside">{toc_html}</aside>' if toc_html else ""}
+  <article class="art__body prose">{art}</article>
+</div></section>
+<section class="section section--soft"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Blog</span><h2>Lees ook</h2></div><a class="arrow-link" href="{pg.u('blog/')}">Alle blogberichten</a></div>
+  <div class="grid grid--3">{"".join(blog_card(pg, o) for o in others)}</div>
 </div></section>{cta(pg)}"""
         write(pg, layout(pg, f"{d['title']} | Blog SDAD", d["desc"] or b["excerpt"], body))
 

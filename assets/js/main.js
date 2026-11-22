@@ -241,3 +241,49 @@ document.querySelectorAll('.tabs').forEach(tabs => {
     });
   });
 });
+
+// Realisaties: filteren op type en dienst
+document.querySelectorAll('.mosaic').forEach(m => {
+  const bar = document.querySelector('.fbar'); if (!bar) return;
+  let type = 'alle', cat = 'alle';
+  const items = [...m.children], count = bar.querySelector('.fcount'), empty = m.nextElementSibling;
+  const apply = () => {
+    let n = 0;
+    items.forEach(el => {
+      const ok = (type === 'alle' || el.dataset.type === type) && (cat === 'alle' || el.dataset.cats.split(' ').includes(cat));
+      el.hidden = !ok; if (ok) { n++; el.classList.add('in'); }
+    });
+    if (count) count.textContent = n + (n === 1 ? ' realisatie' : ' realisaties');
+    empty.style.display = n ? 'none' : 'block';
+  };
+  bar.querySelectorAll('[data-type]').forEach(b => b.addEventListener('click', () => { type = b.dataset.type; bar.querySelectorAll('[data-type]').forEach(x => x.setAttribute('aria-pressed', x === b)); apply(); }));
+  bar.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => { cat = b.dataset.cat; bar.querySelectorAll('[data-cat]').forEach(x => x.setAttribute('aria-pressed', x === b)); apply(); }));
+});
+
+// Blog: zoeken en filteren op onderwerp
+document.querySelectorAll('.bgrid').forEach(g => {
+  const input = document.querySelector('.bsearch input'), chips = document.querySelectorAll('.btool [data-topic]'), empty = g.nextElementSibling;
+  let topic = 'alle';
+  const apply = () => {
+    const q = (input.value || '').trim().toLowerCase(); let n = 0;
+    [...g.children].forEach(c => { const ok = (topic === 'alle' || c.dataset.topics.split(' ').includes(topic)) && (!q || c.dataset.search.includes(q)); c.hidden = !ok; if (ok) { n++; c.classList.add('in'); } });
+    empty.style.display = n ? 'none' : 'block';
+  };
+  input.addEventListener('input', apply);
+  chips.forEach(b => b.addEventListener('click', () => { topic = b.dataset.topic; chips.forEach(x => x.setAttribute('aria-pressed', x === b)); apply(); }));
+});
+
+// Blogartikel: leesvoortgang en actieve inhoudstafel
+const prog = document.querySelector('.progress span');
+const artBody = document.querySelector('.art__body');
+if (prog && artBody) {
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  const heads = tocLinks.map(a => document.querySelector(a.getAttribute('href')));
+  const upd = () => {
+    const r = artBody.getBoundingClientRect();
+    prog.style.transform = `scaleX(${Math.max(0, Math.min(1, (innerHeight * .5 - r.top) / r.height))})`;
+    let cur = -1; heads.forEach((h, i) => { if (h && h.getBoundingClientRect().top < 160) cur = i; });
+    tocLinks.forEach((a, i) => a.classList.toggle('on', i === cur));
+  };
+  addEventListener('scroll', upd, { passive: true }); upd();
+}
