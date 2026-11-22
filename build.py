@@ -315,10 +315,10 @@ def write(pg, html):
 
 
 SERVICES = [
-    ("diensten/schilderwerken/binnen/", "1340_hectaar_5.webp", "Binnenschilderwerken", "Van kleuradvies tot perfecte afwerking, alles voor een interieur dat klopt."),
+    ("diensten/schilderwerken/binnen/", "1627_nieuwpoort_living.webp", "Binnenschilderwerken", "Van kleuradvies tot perfecte afwerking, alles voor een interieur dat klopt."),
     ("diensten/schilderwerken/buiten/", "1345_gevel_kortrijk.webp", "Buitenschilderwerken", "Bescherming, uitstraling en vakmanschap voor uw gevel en buitenschrijnwerk."),
-    ("diensten/schilderwerken/decoratieve-technieken/", "2442_techniek_12.webp", "Decoratieve technieken", "Unieke afwerkingen met karakter, structuur en beleving."),
-    ("diensten/interieurafwerking/gordijnen/", "1351_modelapp_3.webp", "Gordijnen", "Sfeer, privacy en afwerking perfect afgestemd op uw interieur."),
+    ("diensten/schilderwerken/decoratieve-technieken/", "2502_aqua_sensa_1.webp", "Decoratieve technieken", "Unieke afwerkingen met karakter, structuur en beleving."),
+    ("diensten/interieurafwerking/gordijnen/", "1644_app_kortrijk_4.webp", "Gordijnen", "Sfeer, privacy en afwerking perfect afgestemd op uw interieur."),
     ("diensten/interieurafwerking/lamellen/", "1354_modelapp_4.webp", "Lamellen", "Modern, functioneel en perfect afgestemd op uw ruimte."),
 ]
 
@@ -341,11 +341,12 @@ def home():
     pg = Page("")
     tiles = "".join(f"""<a class="tile rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="num">0{n + 1}</span><span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>"""
                     for n, (h, i, t, x) in enumerate(SERVICES))
-    cpicks = [("gevel-villa-te-knokke", "cg1"), ("babu-gent", "cg2"), ("rood-leefruimte-te-marke-stop-rood", "cg3")]
-    collage = "".join(f'<a class="cg {c}" href="{pg.u(f"realisaties/{r["slug"]}/")}">{pg.img(r["img"], r["title"], lazy=False)}<span class="chip">{escape(r["title"])}</span></a>'
-                      for sl, c in cpicks for r in REAL if r["slug"] == sl)
-    picks = ["babu-gent", "buitenschilderwerken-kasteel-blauwhuis-te-izegem", "gevel-villa-te-knokke", "rood-leefruimte-te-marke-stop-rood",
-             "villa-te-zwijnaarde", "tastoe-roeselare", "schilderen-gevel-te-kortrijk", "boetiek-gastronomiek-culix-te-merelbeke"]
+    cpicks = [("schilderen-gevel-te-kortrijk", "cg1", "1893_kortrijk_afgewerkt.webp"), ("rood-residentie-porto-fino-te-wenduine-stop-rood", "cg2", "2020_wenduine_4.webp"),
+              ("babu-gent", "cg3", "2311_babu_na_1.webp")]
+    collage = "".join(f'<a class="cg {c}" href="{pg.u(f"realisaties/{r["slug"]}/")}">{pg.img(im, r["title"], lazy=False)}<span class="chip">{escape(r["title"])}</span></a>'
+                      for sl, c, im in cpicks for r in REAL if r["slug"] == sl)
+    picks = ["buitenschilderwerken-kasteel-blauwhuis-te-izegem", "rood-residentie-porto-fino-te-wenduine-stop-rood", "gevel-villa-te-knokke", "babu-gent",
+             "frituur-de-platse-lendelede", "gevel-villa-te-kortrijk", "villa-te-zwijnaarde", "schilderen-gevel-te-marke"]
     shots = "".join(
         f"""<a class="shot" href="{pg.u(f"realisaties/{r['slug']}/")}">{pg.img(r["img"], r["title"])}<span class="chip">{" · ".join(LABELS[c] for c in r["cats"]) or ("Project" if r["type"] == "project" else "Particulier")}</span><h3>{escape(r["title"])}</h3></a>"""
         for s_ in picks for r in REAL if r["slug"] == s_)
@@ -386,10 +387,10 @@ def home():
   <div class="bento">{tiles}</div>
 </div></section>
 
-<section class="section four" id="waarom"><div class="wrap four__grid">
-  <div class="rv"><span class="four__big" aria-hidden="true">S<sup>4</sup></span>
-    <h2>Schilderkracht tot de vierde macht</h2><p>Zo creëren we ruimtes waar mensen graag wonen, werken en leven.</p></div>
-  <ul class="s-list rv" style="--i:1">{four_li}</ul>
+<section class="section four" id="waarom"><div class="wrap four__grid four__grid--img">
+  <figure class="four__fig rv">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD")}<span class="four__big" aria-hidden="true">S<sup>4</sup></span></figure>
+  <div class="rv" style="--i:1"><h2>Schilderkracht tot de vierde macht</h2><p>Zo creëren we ruimtes waar mensen graag wonen, werken en leven.</p>
+  <ul class="s-list">{four_li}</ul></div>
 </div>
 <div class="wrap" style="margin-top:clamp(40px,6vw,72px)"><h3 class="rv" style="color:#fff;font-size:1.6rem;margin-bottom:18px">Daarom kiezen klanten voor SDAD</h3>
   <ul class="ticks">{ticks}</ul></div></section>

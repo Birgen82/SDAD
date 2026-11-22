@@ -665,3 +665,12 @@ html.menu-lock { overflow: hidden; }
   .mm-grid .mm-card:first-child .mm-img { aspect-ratio: 3/1; }
 }
 .cg2 .chip, .cg3 .chip { display: none; }
+/* Vier S met het SDAD-portret */
+.four__grid--img { grid-template-columns: .85fr 1.15fr; align-items: center; }
+.four__fig { position: relative; margin: 0; }
+.four__fig img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 28px; }
+.four__fig .four__big { position: absolute; right: -14px; bottom: -34px; font-size: clamp(5.5rem, 11vw, 9.5rem); text-shadow: 0 10px 30px rgba(0,0,0,.4); }
+.four__grid--img h2 { margin-bottom: 10px; }
+.four__grid--img .s-list { margin-top: 22px; }
+@media (max-width: 980px) { .four__grid--img { grid-template-columns: 1fr; } .four__fig { max-width: 420px; } .four__fig .four__big { right: 6px; bottom: -26px; } }
+.cg1 .chip { top: 12px; bottom: auto; }
