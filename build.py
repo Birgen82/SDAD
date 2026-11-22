@@ -347,8 +347,6 @@ def home():
   </div>
   <div class="hx__visual">
     <div class="blob">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
-    {pg.img("red_deco.png", "", cls="d1", w=220, h=240).replace("<img", '<img data-parallax="-0.08"')}
-    {pg.img("grey_deco.png", "", cls="d2", w=220, h=240).replace("<img", '<img data-parallax="0.12"')}
   </div>
 </div><span class="scroll-cue" aria-hidden="true"></span></section>
 

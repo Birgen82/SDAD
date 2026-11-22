@@ -3,11 +3,13 @@ const menuBtn = document.querySelector('.menu-btn');
 if (menuBtn) {
   menuBtn.addEventListener('click', () => {
     const open = document.body.classList.toggle('menu-open');
+    document.documentElement.classList.toggle('menu-lock', open);
     menuBtn.setAttribute('aria-expanded', open);
   });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
       document.body.classList.remove('menu-open');
+      document.documentElement.classList.remove('menu-lock');
       menuBtn.setAttribute('aria-expanded', false);
       menuBtn.focus();
     }
@@ -139,7 +141,7 @@ document.querySelectorAll('[data-count]').forEach(el => {
 });
 
 // Parallax van deco-vormen in de hero
-const decos = document.querySelectorAll('[data-parallax]');
+const decos = []; // parallax uitgeschakeld (gaf schokken op gsm)
 if (decos.length && !reduce) {
   addEventListener('scroll', () => decos.forEach(d => d.style.transform = `translateY(${scrollY * d.dataset.parallax}px) rotate(${scrollY * d.dataset.parallax * .15}deg)`), { passive: true });
 }
