@@ -53,7 +53,7 @@ for pg in PAGES:
     body = fix(pg, h.split('<main id="main">')[1].split("</main>")[0])
     mains.append(f'<div class="pv-page" data-page="{pg}" data-title="{title}" hidden>{body}</div>')
 css = (ROOT / "assets/css/style.css").read_text() + "\n" + (ROOT / "assets/css/v2.css").read_text()
-css = re.sub(r"url\(\.\./img/([^)]+)\)", lambda m: "url(data:image/png;base64," + base64.b64encode((ROOT / "assets/img" / m.group(1)).read_bytes()).decode() + ")", css)
+css = re.sub(r"url\(\.\./img/([^)]+)\)", lambda m: "url(data:image/" + ("svg+xml" if m.group(1).endswith(".svg") else "png") + ";base64," + base64.b64encode((ROOT / "assets/img" / m.group(1)).read_bytes()).decode() + ")", css)
 head = re.sub(r'<link rel="icon"[^>]*>', "", head)
 head = head.replace('<link rel="stylesheet" href="assets/css/v2.css">', "")
 head = head.replace('<link rel="stylesheet" href="assets/css/style.css">', "<style>" + css + ".pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>")

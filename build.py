@@ -496,21 +496,122 @@ def over():
 
 
 # ---------- Dienstpagina's ----------
+SVC = {
+    "diensten/schilderwerken/binnen/": {
+        "stroke": "juiste afwerking", "badge": ("25+ jaar", "vakmanschap in binnenschilderwerk"),
+        "facts": [("Kleuradvies", "We denken mee over kleuren, materialen en afwerking."),
+                  ("Plamuur en vliesbehang", "Een strakke, egale ondergrond als basis."),
+                  ("Deuren, ramen en trappen", "Ook binnenschrijnwerk voor een harmonieus geheel."),
+                  ("Particulier en bedrijf", "Woningen, kantoren, praktijken, horeca en projecten.")]},
+    "diensten/schilderwerken/buiten/": {
+        "stroke": "buitenschilderwerken", "badge": ("10 jaar", "garantie op gevelschilderwerk*"),
+        "facts": [("Schilderen of kaleien", "Advies over de techniek die esthetisch en technisch klopt."),
+                  ("Reiniging en ontmossing", "Gevels, blauwsteen en aluminiumprofielen eerst proper."),
+                  ("Buitenschrijnwerk", "Ramen en deuren schilderen of oliën."),
+                  ("10 jaar garantie", "Op gevelschilderwerk, mits geschikte ondergrond en correct verfsysteem.")]},
+    "diensten/schilderwerken/decoratieve-technieken/": {
+        "stroke": "karakter", "badge": ("Boss Paints", "uitsluitend kwaliteitsproducten"),
+        "facts": [("Vier signatuurtechnieken", "Limestone, Calco, Aqua Sensa en Stone Art."),
+                  ("Handwerk", "Manueel aangebracht, dus elke wand is uniek."),
+                  ("Ook voor badkamer en keuken", "Aqua Sensa is gemaakt voor intensief gebruikte ruimtes."),
+                  ("Advies ter plaatse", "Samen kiezen we de techniek die past bij ruimte en budget.")]},
+    "diensten/interieurafwerking/gordijnen/": {
+        "stroke": "sfeer, privacy en comfort", "badge": ("Op maat", "advies, opmeting en plaatsing"),
+        "facts": [("Advies over stof en kleur", "Afgestemd op uw interieur en de lichtinval."),
+                  ("Professionele opmeting", "Zodat alles perfect aansluit op ruimte en ramen."),
+                  ("Elektrisch of manueel", "Bediening die past bij uw gebruiksgemak."),
+                  ("Plaatsing inbegrepen", "Van advies tot een perfect afgewerkt resultaat.")]},
+    "diensten/interieurafwerking/lamellen/": {
+        "stroke": "licht, privacy en uitstraling", "badge": ("Op maat", "advies, opmeting en plaatsing"),
+        "facts": [("Vier materialen", "Hout, aluminium, pvc of textiel."),
+                  ("Horizontaal of verticaal", "Verticaal ideaal voor grote glaspartijen en schuiframen."),
+                  ("Elektrisch of manueel", "Zelf bepalen hoeveel licht en inkijk u wenst."),
+                  ("Ook voor projecten", "Van woning tot hotel of bedrijvencentrum.")]},
+}
+
+
+def service_hero(pg, crumb, eyebrow, title, lead, extra, img, alt, badge):
+    return f"""<section class="sh"><div class="wrap sh__grid">
+  <div class="sh__text">{crumbs(pg, crumb)}<span class="eyebrow">{eyebrow}</span><h1>{title}</h1>{lead}{extra}
+    <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a>
+    <a class="btn btn--ghost no-arrow" href="tel:{PHONES[0][2]}">Bel {PHONES[0][1]}</a></div></div>
+  <div class="sh__media"><div class="sh__img">{pg.img(img, alt, lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
+    <div class="sh__badge"><strong>{badge[0]}</strong><span>{badge[1]}</span></div>
+    {pg.img("red_deco.png", "", cls="sh__deco", w=220, h=240)}</div>
+</div></section>"""
+
+
+def facts_block(facts):
+    items = "".join(f'<li class="rv" style="--i:{i}"><span class="fact-nr">0{i + 1}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(facts))
+    return f'<section class="facts"><div class="wrap"><h2 class="sr-only">In het kort</h2><ul>{items}</ul></div></section>'
+
+
+def subnav(links):
+    items = "".join(f'<a href="#{i}">{n}</a>' for i, n in links)
+    return f'<nav class="subnav" aria-label="Op deze pagina"><div class="wrap"><span>Op deze pagina</span>{items}</div></nav>'
+
+
+def faq2(pg, title, qa):
+    items = "".join(f"<details><summary>{q}</summary><div class=\"answer\">{a}</div></details>" for q, a in qa)
+    return f"""<section class="section section--soft" id="vragen"><div class="wrap faq2">
+  <div class="faq2__aside rv"><span class="eyebrow">Veelgestelde vragen</span><h2>{title}</h2>
+    <div class="ask"><p><strong>Staat uw vraag er niet bij?</strong><br>Lies helpt u graag verder.</p>
+    <a class="ask__tel" href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a>
+    <a class="arrow-link" href="{pg.u('contact/')}">Stel uw vraag online</a></div></div>
+  <div class="faq rv" style="--i:1">{items}</div>
+</div></section>"""
+
+
+def related(pg, path):
+    tiles = "".join(f'<a class="tile tile--sm rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="go" aria-hidden="true">→</span><h3>{t}</h3></a>'
+                    for n, (h, i, t, x) in enumerate([sv for sv in SERVICES if sv[0] != path]))
+    return f"""<section class="section" id="andere"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Ook interessant</span><h2>Andere diensten</h2></div></div>
+  <div class="related">{tiles}</div>
+</div></section>"""
+
+
+def gallery_bento(pg, title, imgs, link, alt_base):
+    more = f'<a class="arrow-link" href="{pg.u(link)}">Bekijk volledige realisaties</a>' if link else ""
+    items = "".join(f'<button type="button" class="rv" style="--i:{n % 4}" data-full="{pg.r}assets/img/{i}">{pg.img(i, f"{alt_base} – sfeerbeeld {n + 1}", w=600, h=600)}</button>'
+                    for n, i in enumerate(imgs))
+    return f"""<section class="section" id="sfeerbeelden"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Inspiratie</span><h2>{title}</h2></div>{more}</div>
+  <div class="gallery gallery--bento">{items}</div>
+</div></section>"""
+
+
 def service(path, title, desc, crumb_group, hero_title, hero_html, hero_img, sections, gal_title, gal, faq_title, qa, gal_link=None):
     pg = Page(path)
     name = crumb_group[1]
-    body = page_hero(pg, [(crumb_group[0], None), (name, None)], crumb_group[0], hero_title, hero_html, hero_img, name)
-    for i, s in enumerate(sections):
-        body += s(pg) if callable(s) else s
-    body += gallery(pg, gal_title, gal, gal_link, name)
-    body += faq(faq_title, qa)
+    cfg = SVC[path]
+    t = hero_title.replace(cfg["stroke"], f'<em class="stroke">{cfg["stroke"]}</em>', 1)
+    m = re.match(r"\s*<p>(.*?)</p>(.*)", hero_html, re.S)
+    lead, rest = (f'<p class="lead">{m.group(1)}</p>', m.group(2)) if m else ("", hero_html)
+    extra = "".join(re.findall(r'<ul class="tags">.*?</ul>|<div class="tag-group">.*?</ul></div>', rest, re.S))
+    rest_p = "".join(re.findall(r"<p>.*?</p>", re.sub(r'<div class="tag-group">.*?</ul></div>', "", rest, flags=re.S), re.S))
+    body = service_hero(pg, [(crumb_group[0], None), (name, None)], crumb_group[0], t, lead, extra, hero_img, name, cfg["badge"])
+    body += facts_block(cfg["facts"])
+    main = ""
+    if rest_p:
+        main += text_section(name, "Over deze dienst", rest_p)
+    for s_ in sections:
+        main += s_(pg) if callable(s_) else s_
+    links = [("aanpak", "Aanpak")] + ([("garantie", "Garantie")] if 'id="garantie"' in main else []) + \
+            ([("technieken", "Technieken")] if 'id="technieken"' in main else []) + \
+            [("sfeerbeelden", "Sfeerbeelden"), ("vragen", "Vragen"), ("andere", "Andere diensten")]
+    body += subnav(links)
+    body += f'<div id="aanpak" class="anchor-wrap">{main}</div>'
+    body += gallery_bento(pg, gal_title, gal, gal_link, name)
+    body += faq2(pg, faq_title, qa)
+    body += related(pg, path)
     body += cta(pg)
     write(pg, layout(pg, title, desc, body))
 
 
 def text_section(eyebrow, title, html, soft=False, aside=""):
-    inner = f'<div class="split"><div><span class="eyebrow">{eyebrow}</span><h2>{title}</h2>{html}</div><div>{aside}</div></div>' if aside else \
-        f'<div class="narrow"><span class="eyebrow">{eyebrow}</span><h2>{title}</h2>{html}</div>'
+    inner = f'<div class="split"><div class="rv"><span class="eyebrow">{eyebrow}</span><h2>{title}</h2>{html}</div><div class="rv img-reveal" style="--i:1">{aside}</div></div>' if aside else \
+        f'<div class="ed"><div class="ed__head"><span class="eyebrow">{eyebrow}</span><h2>{title}</h2></div><div class="ed__body">{html}</div></div>'
     return f'<section class="section{" section--soft" if soft else ""}"><div class="wrap">{inner}</div></section>'
 
 
@@ -629,11 +730,13 @@ def decoratief():
     ]
 
     def offer(pg):
-        blocks = "".join(f"""<div class="technique split{' split--rev' if i % 2 else ''}">
-  <div>{pg.img(img, f"Decoratieve techniek {n.title()}")}</div>
-  <div><h3>{n}</h3><p class="sub">{sub}</p>{p(*txt)}</div>
+        tabs = "".join(f'<button type="button" role="tab" id="tab-{i}" aria-controls="tp-{i}" aria-selected="{str(i == 0).lower()}" tabindex="{0 if i == 0 else -1}">{n.title()}</button>' for i, (n, sub, img, txt) in enumerate(techs))
+        blocks = "".join(f"""<div class="tech-panel" role="tabpanel" id="tp-{i}" aria-labelledby="tab-{i}"{" hidden" if i else ""}>
+  <div class="tech-panel__img">{pg.img(img, f"Decoratieve techniek {n.title()}")}</div>
+  <div class="tech-panel__text"><span class="tech-nr">0{i + 1} / 0{len(techs)}</span><h3>{n}</h3><p class="sub">{sub}</p>{p(*txt)}</div>
 </div>""" for i, (n, sub, img, txt) in enumerate(techs))
-        return f"""<section class="section"><div class="wrap">
+        blocks = f'<div class="tabs rv"><div class="tablist" role="tablist" aria-label="Decoratieve technieken">{tabs}</div>{blocks}</div>'
+        return f"""<section class="section" id="technieken"><div class="wrap">
   <div class="narrow"><span class="eyebrow">Ons aanbod</span><h2>Inspiratie uit ons aanbod</h2>
   {p("Elke decoratieve afwerking heeft haar eigen uitstraling, structuur en toepassing. De mogelijkheden zijn bijzonder veelzijdig. Hieronder ontdekt u alvast enkele afwerkingen uit ons aanbod. Tijdens een vrijblijvend plaatsbezoek bekijken we samen welke techniek het best aansluit bij uw interieur, wensen en de functie van de ruimte.",
      "Voor het realiseren van deze technieken werken we uitsluitend met kwaliteitsproducten van Boss Paints. Zo bent u verzekerd van duurzame afwerkingen, hoogwaardige materialen en een professioneel eindresultaat.")}</div>

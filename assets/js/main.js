@@ -203,3 +203,41 @@ document.querySelectorAll('.wiz').forEach(wiz => {
   });
   show(0);
 });
+
+// Dienstpagina's: header-status doorgeven (voor de plakkende paginanavigatie)
+if (header) addEventListener('scroll', () => document.body.classList.toggle('hdr-hidden', header.classList.contains('is-hidden')), { passive: true });
+
+// Hero van dienstpagina's laten verschijnen
+document.querySelectorAll('.sh').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+// Paginanavigatie: actief hoofdstuk markeren
+document.querySelectorAll('.subnav').forEach(nav => {
+  const links = [...nav.querySelectorAll('a')];
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const upd = () => {
+    let cur = null;
+    targets.forEach(t => { if (t.getBoundingClientRect().top < 200) cur = t; });
+    links.forEach(a => {
+      const on = cur && a.getAttribute('href') === '#' + cur.id;
+      if (on && !a.classList.contains('on')) a.scrollIntoView({ block: 'nearest', inline: 'center' });
+      a.classList.toggle('on', on);
+    });
+  };
+  addEventListener('scroll', upd, { passive: true }); upd();
+});
+
+// Tabbladen (decoratieve technieken)
+document.querySelectorAll('.tabs').forEach(tabs => {
+  const btns = [...tabs.querySelectorAll('[role=tab]')];
+  const select = b => btns.forEach(x => {
+    const on = x === b; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
+    document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+  });
+  btns.forEach((b, i) => {
+    b.addEventListener('click', () => select(b));
+    b.addEventListener('keydown', e => {
+      const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!k) return;
+      const n = btns[(i + k + btns.length) % btns.length]; select(n); n.focus();
+    });
+  });
+});

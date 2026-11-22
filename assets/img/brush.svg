@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 80" preserveAspectRatio="none">
+  <defs>
+    <filter id="paint" x="-3%" y="-25%" width="106%" height="150%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.16" numOctaves="3" seed="11" result="edge"/>
+      <feDisplacementMap in="SourceGraphic" in2="edge" scale="11" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.0025 0.42" numOctaves="2" seed="5" result="bristle"/>
+      <feGaussianBlur in="bristle" stdDeviation="0.6 0.4" result="soft"/>
+      <feComposite in="soft" in2="shape" operator="in" result="height"/>
+      <feDiffuseLighting in="height" surfaceScale="2.6" diffuseConstant="1" lighting-color="#ffffff" result="diffuse">
+        <feDistantLight azimuth="235" elevation="52"/>
+      </feDiffuseLighting>
+      <feComposite in="diffuse" in2="shape" operator="arithmetic" k1="0.58" k2="0" k3="0.44" k4="0" result="shaded"/>
+      <feSpecularLighting in="height" surfaceScale="2.6" specularConstant="0.9" specularExponent="26" lighting-color="#fff4ef" result="spec">
+        <feDistantLight azimuth="235" elevation="58"/>
+      </feSpecularLighting>
+      <feComposite in="spec" in2="shape" operator="in" result="specIn"/>
+      <feComposite in="specIn" in2="shaded" operator="arithmetic" k1="0" k2="0.45" k3="1" k4="0" result="lit"/>
+      <feComposite in="lit" in2="shape" operator="in"/>
+    </filter>
+  </defs>
+  <g filter="url(#paint)" fill="#da291c">
+    <path d="M10 40 C14 18 50 10 120 11 C220 6 360 7 470 9 C530 10 570 13 588 22 C598 32 594 52 580 60 C540 70 450 70 330 71 C220 72 120 74 50 71 C18 69 6 56 10 40 Z"/>
+    <path d="M476 12 C526 12 566 14 598 20 L598 25 C566 19 526 18 478 19 Z" opacity=".9"/>
+    <path d="M486 64 C536 63 570 60 594 54 L592 59 C570 66 534 70 488 71 Z" opacity=".85"/>
+  </g>
+</svg>
