@@ -34,4 +34,5 @@ Herbouw van sdad.be met dezelfde inhoud en huisstijl (rood #da291c, antraciet #4
 - In live-modus verwijzen privacybeleid en kruislinks naar sdad.be en het andere offertedomein; canonical en deellinks wijzen naar het eigen domein.
 - Formulieren verzenden in de demo via het e-mailprogramma; koppel ze bij livegang aan een formulierdienst of het bestaande Webflow/HubSpot-formulier.
 - Onderzoek gordijnen (92 bronnen, via zoekfragmenten): toegepast = formulier in 4 stappen (product, wens + aantal ramen, bediening/timing/klanttype, contact), keuzehulp per wens, uitgebreide FAQ (verduisterend/lichtdoorlatend, vochtige ruimtes, kinderkamer, projecten).
-- Te bevestigen door SDAD vóór publicatie: levertijd, garantie (product/motor/plaatsing), stalen aan huis, verantwoordelijkheid voor de maat, merken/motoren (bv. Somfy), btw-tarief raamdecoratie binnen (vermoedelijk 21%), duur van het huisbezoek.
+- Bevestigd door SDAD: stalen aan huis, SDAD staat in voor de maat, verschillende merken.
+- Nog te bevestigen: levertijd, garantie (product/motor/plaatsing), duur van het huisbezoek, btw-tarief raamdecoratie binnen (vermoedelijk 21%).

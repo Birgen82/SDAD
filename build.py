@@ -1279,10 +1279,13 @@ def offerte_gordijnen_page():
         ("Licht regelen", "Zelf bepalen hoeveel licht en inkijk u wenst.", "lamellen: kantelen of opzij schuiven"),
         ("Sfeer en akoestiek", "Een warme, rustige ruimte met minder galm.", "overgordijnen tot op de vloer")]))
     steps = "".join(f'<li class="rv" style="--i:{n}"><span class="lp-step">{n + 1}</span><h3>{t}</h3><p>{d}</p></li>' for n, (t, d) in enumerate([
-        ("Aanvraag", "U vult het formulier in of belt ons."), ("Advies en opmeting", "We komen langs, adviseren over stof, kleur en bediening en meten zelf nauwkeurig op."),
+        ("Aanvraag", "U vult het formulier in of belt ons."), ("Advies en opmeting", "We komen langs met stalen, adviseren over stof, kleur en bediening en meten zelf nauwkeurig op."),
         ("Offerte", "U krijgt een duidelijke offerte op maat."), ("Plaatsing", "We plaatsen alles netjes en vakkundig.")]))
     qa = [("Is de opmeting gratis en vrijblijvend?", "Ja. Het advies en de opmeting aan huis zijn gratis en zonder verplichtingen."),
           ("Komen jullie zelf opmeten?", "Ja. Een correcte opmeting is essentieel voor een mooi resultaat. Daarom komen we steeds ter plaatse om de ramen nauwkeurig op te meten."),
+          ("Wie is verantwoordelijk als de maat niet klopt?", "Wij. Omdat we zelf opmeten, staan we in voor de maat."),
+          ("Kan ik stalen bekijken?", "Ja. We komen met stalen bij u thuis, zodat u stoffen en kleuren kunt bekijken in uw eigen interieur en licht."),
+          ("Met welke merken werken jullie?", "Met verschillende merken, zodat er voor ieder wat wils is, qua stijl en budget. We adviseren u welk product en merk het best past."),
           ("Wat is het verschil tussen verduisterend en lichtdoorlatend?", "Verduisterende stoffen houden (bijna) al het licht tegen, ideaal voor slaapkamers. Lichtdoorlatende stoffen en inbetweens filteren het licht en geven privacy. Bij gordijnen langs de zijkant valt altijd wat licht binnen; we adviseren u over de beste oplossing per raam."),
           ("Wat kies ik voor de badkamer of keuken?", "In vochtige ruimtes kiezen we materialen die daartegen bestand zijn, zoals aluminium of kunststof. We bekijken dit samen tijdens het bezoek."),
           ("Wat is veilig in een kinderkamer?", "Voor kinderkamers raden we koordloze of elektrische bediening aan. We adviseren u graag over de veiligste oplossing."),
@@ -1299,8 +1302,8 @@ def offerte_gordijnen_page():
     <div class="lp-hero__text">
       {trust}
       <h1>Gordijnen en lamellen op maat, <em class="stroke">mooi afgewerkt</em></h1>
-      <p class="lead">Advies, opmeting en plaatsing door het team van Arne en Lies uit Izegem. Afgestemd op uw interieur, licht en privacy.</p>
-      <ul class="lp-usp"><li>Gratis advies en opmeting aan huis</li><li>Plaatsing inbegrepen</li><li>Kleuren van muren en stoffen op elkaar afgestemd</li></ul>
+      <p class="lead">Advies met stalen aan huis, opmeting en plaatsing door het team van Arne en Lies uit Izegem. Verschillende merken, voor ieder wat wils.</p>
+      <ul class="lp-usp"><li>Gratis advies en opmeting aan huis, met stalen</li><li>Wij meten op, wij staan in voor de maat</li><li>Plaatsing inbegrepen</li></ul>
       <p class="lp-alt">Liever bellen? <a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="{BOOKING}" target="_blank" rel="noopener">Zelf een afspraak inplannen</a></p>
     </div>
     <div id="offerte" class="lp-hero__form">{curtain_wizard(pg)}</div>
@@ -1329,7 +1332,7 @@ def offerte_gordijnen_page():
   <div class="rv">{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens van SDAD")}</div>
   <div class="rv" style="--i:1"><span class="eyebrow">Wie komt er langs?</span><h2>Eén aanspreekpunt voor muren én ramen</h2>
     <p>Lies begeleidt u van het eerste contact tot de plaatsing en denkt mee over stoffen, kleuren en bediening. Omdat SDAD ook schildert, stemmen we de kleuren van muren en gordijnen perfect op elkaar af.</p>
-    <ul class="checks"><li>Persoonlijk advies aan huis</li><li>Nauwkeurige opmeting</li><li>Vakkundige plaatsing</li><li>Nakomen van afspraken &amp; planning</li></ul>
+    <ul class="checks"><li>Persoonlijk advies aan huis, met stalen</li><li>Verschillende merken, voor ieder wat wils</li><li>Wij meten op en staan in voor de maat</li><li>Vakkundige plaatsing, volgens afspraak</li></ul>
     <div class="btns"><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div></div>
 </div></section>
 
