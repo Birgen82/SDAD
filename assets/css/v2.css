@@ -901,3 +901,13 @@ html.menu-lock { overflow: hidden; }
 .checks li { padding-left: 34px; }
 .checks li::before { top: 9px; width: 22px; height: 22px; border-radius: 50%;
   background: var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/13px no-repeat; }
+
+/* Gsm-controle: kleine correcties */
+.fbar .seg button { border: 0; border-radius: 999px; background: none; }
+.fbar .seg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+@media (max-width: 600px) {
+  .mosaic .shot .chip, .shot .chip { font-size: .78rem; }
+  .lp-gallery figcaption { font-size: .8rem; }
+  .btool .fchips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 4px; width: calc(100% + 2 * var(--gutter)); }
+  .btool .fchips button { flex-shrink: 0; }
+}
