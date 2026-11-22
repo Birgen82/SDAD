@@ -22,7 +22,7 @@
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts/fonts.css?v=f89c956b">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=77bfeda5">
 <style>/* SDAD – huisstijl: rood #da291c, antraciet #4b4f54, zwart #00080a, Avenir Next */
 :root {
   --red: #da291c;
@@ -1381,7 +1381,7 @@ html.menu-lock { overflow: hidden; }
       <li><b>4,7</b><a class="tp-link" href="https://nl-be.trustpilot.com/review/sdad.be" target="_blank" rel="noopener">op 5 op Trustpilot</a></li>
     </ul>
     </div>
-    <div class="hx__vctl"><button type="button" class="hx__pause" aria-label="Video pauzeren" aria-pressed="false"></button><span>Video: Lion Eyes</span></div>
+
   </div>
 </section>
 
@@ -1515,7 +1515,6 @@ html.menu-lock { overflow: hidden; }
       <h1>Schilderwerken in West- en Oost-Vlaanderen, afgewerkt tot in de <em class="stroke">kleinste details</em></h1>
       <p class="lead">Binnen- en buitenschilderwerken door het team van Arne en Lies uit Izegem. Met persoonlijk advies en een vlotte planning.</p>
       <ul class="lp-usp"><li>Gratis plaatsbezoek en offerte</li><li>Meer dan 25 jaar vakmanschap</li><li>10 jaar garantie op gevelschilderwerk*</li></ul>
-      <div class="hx__vctl lp-vctl"><button type="button" class="hx__pause" aria-label="Video pauzeren" aria-pressed="false"></button><span>Video: Lion Eyes</span></div>
       <p class="lp-alt">Liever bellen? <a href="tel:+32473520920">0473 52 09 20</a> · <a href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Zelf een plaatsbezoek inplannen</a></p>
     </div>
     <div id="offerte" class="lp-hero__form"><div class="wiz lp-wiz" data-subject="Offerteaanvraag via offerteschilderwerken.be" data-submit="Vraag mijn gratis offerte aan"><form onsubmit="return false" novalidate>
@@ -3346,6 +3345,9 @@ document.querySelectorAll('.hx__video').forEach(v => {
   const set = paused => { if (btn) { btn.setAttribute('aria-pressed', paused); btn.setAttribute('aria-label', paused ? 'Video afspelen' : 'Video pauzeren'); } };
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); set(true); }
   btn?.addEventListener('click', () => { if (v.paused) { v.play(); set(false); } else { v.pause(); set(true); } });
+  // Zonder zichtbare knop: tikken op de video pauzeert of hervat (toegankelijkheid)
+  const zone = v.closest('.hx--full, .lp-hero');
+  zone?.addEventListener('click', e => { if (e.target.closest('a, button, input, label, textarea, form')) return; if (v.paused) v.play(); else v.pause(); });
   v.addEventListener('pause', () => set(true)); v.addEventListener('play', () => set(false));
   const p = v.play && v.play(); if (p && p.catch) p.catch(() => set(true));
 });

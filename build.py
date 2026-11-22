@@ -411,7 +411,7 @@ def home():
       <li><b>4,7</b><a class="tp-link" href="{TRUSTPILOT}" target="_blank" rel="noopener">op 5 op Trustpilot</a></li>
     </ul>
     </div>
-    <div class="hx__vctl"><button type="button" class="hx__pause" aria-label="Video pauzeren" aria-pressed="false"></button><span>Video: Lion Eyes</span></div>
+
   </div>
 </section>
 
@@ -1233,7 +1233,6 @@ def offerte_page():
       <h1>Schilderwerken in West- en Oost-Vlaanderen, afgewerkt tot in de <em class="stroke">kleinste details</em></h1>
       <p class="lead">Binnen- en buitenschilderwerken door het team van Arne en Lies uit Izegem. Met persoonlijk advies en een vlotte planning.</p>
       <ul class="lp-usp"><li>Gratis plaatsbezoek en offerte</li><li>Meer dan 25 jaar vakmanschap</li><li>10 jaar garantie op gevelschilderwerk*</li></ul>
-      <div class="hx__vctl lp-vctl"><button type="button" class="hx__pause" aria-label="Video pauzeren" aria-pressed="false"></button><span>Video: Lion Eyes</span></div>
       <p class="lp-alt">Liever bellen? <a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="{BOOKING}" target="_blank" rel="noopener">Zelf een plaatsbezoek inplannen</a></p>
     </div>
     <div id="offerte" class="lp-hero__form">{offerte_wizard(pg)}</div>

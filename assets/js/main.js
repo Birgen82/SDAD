@@ -327,6 +327,9 @@ document.querySelectorAll('.hx__video').forEach(v => {
   const set = paused => { if (btn) { btn.setAttribute('aria-pressed', paused); btn.setAttribute('aria-label', paused ? 'Video afspelen' : 'Video pauzeren'); } };
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); set(true); }
   btn?.addEventListener('click', () => { if (v.paused) { v.play(); set(false); } else { v.pause(); set(true); } });
+  // Zonder zichtbare knop: tikken op de video pauzeert of hervat (toegankelijkheid)
+  const zone = v.closest('.hx--full, .lp-hero');
+  zone?.addEventListener('click', e => { if (e.target.closest('a, button, input, label, textarea, form')) return; if (v.paused) v.play(); else v.pause(); });
   v.addEventListener('pause', () => set(true)); v.addEventListener('play', () => set(false));
   const p = v.play && v.play(); if (p && p.catch) p.catch(() => set(true));
 });
