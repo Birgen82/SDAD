@@ -143,7 +143,7 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 <link rel="icon" href="{pg.r}assets/img/list_icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Nunito+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..80,700..900&family=Nunito+Sans:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="{pg.r}assets/css/style.css">
 <link rel="stylesheet" href="{pg.r}assets/css/v2.css">
 <script type="application/ld+json">{SCHEMA}</script>
@@ -343,7 +343,7 @@ def home():
     </ul>
   </div>
   <div class="hx__visual">
-    <div class="blob">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD", lazy=False)}</div>
+    <div class="blob">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
     {pg.img("red_deco.png", "", cls="d1", w=220, h=240).replace("<img", '<img data-parallax="-0.08"')}
     {pg.img("grey_deco.png", "", cls="d2", w=220, h=240).replace("<img", '<img data-parallax="0.12"')}
   </div>
@@ -692,8 +692,8 @@ def lamellen():
     service("diensten/interieurafwerking/lamellen/", "Lamellen op maat | Lamellen Izegem | SDAD",
             "Houten, aluminium, pvc of textiel lamellen op maat. SDAD uit Izegem adviseert, meet op en plaatst. Vraag uw vrijblijvend plaatsbezoek aan.",
             ("Interieurafwerking", "Lamellen"), "Lamellen op maat voor licht, privacy en uitstraling",
-            '<div class="tag-group"><h3>Materialen</h3><ul class="tags"><li>Houten lamellen</li><li>Aluminium lamellen</li><li>Pvc lamellen</li><li>Textiel lamellen</li></ul>'
-            '<h3>Uitvoeringen</h3><ul class="tags"><li>Horizontale lamellen</li><li>Verticale lamellen</li><li>Elektrisch of manueel bedienbaar</li></ul></div>',
+            '<div class="tag-group"><p class="tag-label">Materialen</p><ul class="tags"><li>Houten lamellen</li><li>Aluminium lamellen</li><li>Pvc lamellen</li><li>Textiel lamellen</li></ul>'
+            '<p class="tag-label">Uitvoeringen</p><ul class="tags"><li>Horizontale lamellen</li><li>Verticale lamellen</li><li>Elektrisch of manueel bedienbaar</li></ul></div>',
             "1354_modelapp_4.webp",
             [lambda pg: text_section("Advies op maat", "Functioneel, stijlvol en volledig op maat", p(
                 "Lamellen combineren een strakke uitstraling met een grote flexibiliteit in lichtinval en privacy. Door de lamellen te kantelen bepaalt u zelf hoeveel licht binnenkomt en hoeveel inkijk u wenst.",
@@ -753,7 +753,7 @@ def blog():
     socials = " · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in SOCIAL.items())
     body = page_hero(pg, [("Blog", None)], "Tips &amp; advies", "Blogberichten",
                      f'<p class="lead">Met meer dan 25 jaar ervaring in ons vak delen we onze opgebouwde expertise graag met u.</p><p>Volg ons: {socials}</p>') + f"""
-<section class="section"><div class="wrap"><div class="grid grid--3">{cards}</div></div></section>
+<section class="section"><div class="wrap"><h2 class="sr-only">Alle blogberichten</h2><div class="grid grid--3">{cards}</div></div></section>
 {cta(pg)}"""
     write(pg, layout(pg, "Blog over schilderwerken en afwerking | SDAD Izegem",
                      "Met meer dan 25 jaar ervaring in hun vak wil schilderwerken SDAD hun opgebouwde expertise graag met u delen in hun blogs.", body))
@@ -766,7 +766,7 @@ def contact():
     body = page_hero(pg, [("Contact", None)], "Contact", "Contacteer ons",
                      '<p class="lead">Schilderwerken, gordijnen of lamellen in het vooruitzicht? Neem contact op. Wij helpen u graag verder en reageren snel op uw vraag. We werken in heel Oost- en West-Vlaanderen.</p>') + f"""
 <section class="section"><div class="wrap split" style="align-items:start">
-  <div class="contact-cards">
+  <div class="contact-cards"><h2 class="sr-only">Contactgegevens</h2>
     <div class="contact-card"><h3>SDAD bv</h3><p>Prinsdomlaan 50<br>8870 Izegem<br>BE0823.935.816</p><p style="margin-top:10px"><a href="{MAPS}" target="_blank" rel="noopener" style="font-size:1rem">Route plannen →</a></p></div>
     {people}
     <div class="contact-card"><h3>E-mail</h3><p><a href="mailto:{MAIL}">{MAIL}</a></p></div>
@@ -876,7 +876,7 @@ def legal_pages():
     for slug, (h1, title, lead) in meta.items():
         pg = Page(f"{slug}/")
         body = page_hero(pg, [(h1, None)], "Juridisch", h1, lead)
-        body += f'<section class="section"><div class="wrap"><article class="narrow prose legal">{fix_links(pg, LEGAL[slug]["html"])}</article></div></section>'
+        body += f'<section class="section"><div class="wrap"><article class="narrow prose legal">{fix_links(pg, LEGAL[slug]["html"]).replace("<h3>", "<h2>").replace("</h3>", "</h2>")}</article></div></section>'
         write(pg, layout(pg, title, f"{h1} van SDAD bv, Prinsdomlaan 50, 8870 Izegem.", body))
 
 
