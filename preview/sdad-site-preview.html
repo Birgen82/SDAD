@@ -22,7 +22,7 @@
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts/fonts.css?v=77bfeda5">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=c66a1104">
 <style>/* SDAD – huisstijl: rood #da291c, antraciet #4b4f54, zwart #00080a, Avenir Next */
 :root {
   --red: #da291c;
@@ -1340,6 +1340,16 @@ html.menu-lock { overflow: hidden; }
   .lp-vctl { top: 12px; }
   .lp-hero .tp { max-width: none; }
 }
+
+/* Offertepagina: realisaties klikbaar (lightbox), compact label */
+.lp-gallery.gallery { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.lp-gallery.gallery button { position: relative; aspect-ratio: 4/3; border-radius: 16px; overflow: hidden; cursor: zoom-in; }
+.lp-gallery.gallery button::after { content: ""; position: absolute; inset: 50% 0 0 0; background: linear-gradient(0deg, rgba(0,8,10,.75), rgba(0,8,10,0)); pointer-events: none; }
+.lp-cap { position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 1; color: #fff; font-size: .88rem; line-height: 1.25; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lp-cap b { font-weight: 700; }
+@media (max-width: 980px) { .lp-gallery.gallery { grid-template-columns: 1fr 1fr; gap: 8px; } }
+@media (max-width: 600px) { .lp-cap { left: 8px; right: 8px; bottom: 7px; font-size: .74rem; white-space: normal; } .lp-cap b { display: block; } }
+@media (max-width: 600px) { .lp-sep { display: none; } }
 .pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HousePainter", "name": "SDAD bv", "slogan": "Schilderkracht tot de vierde macht", "url": "https://sdad.be/", "email": "info@sdad.be", "telephone": "+32473520920", "vatID": "BE0823.935.816", "image": "https://sdad.be/site/assets/files/1/kleurbepaling_linkedin.jpeg", "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870", "addressLocality": "Izegem", "addressCountry": "BE"}, "areaServed": [{"@type": "AdministrativeArea", "name": "West-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}], "sameAs": ["https://www.facebook.com/DeseureArneNuyttensLies/", "https://www.instagram.com/schilderwerken_sdad/", "https://www.linkedin.com/company/sdad-arne-deseure/"]}</script>
@@ -1560,7 +1570,7 @@ html.menu-lock { overflow: hidden; }
 
 <section class="section"><div class="wrap">
   <div class="head-row rv"><div><span class="eyebrow">Eigen werk</span><h2>Recente realisaties</h2></div><a class="arrow-link" href="#offerte">Vraag uw offerte</a></div>
-  <div class="lp-gallery"><figure class="rv" style="--i:0"><img data-img="53" alt="Gevel geschilderd in Kortrijk" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Gevel geschilderd</b> · Kortrijk</figcaption></figure><figure class="rv" style="--i:1"><img data-img="15" alt="Leefruimte in Nieuwpoort" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Leefruimte</b> · Nieuwpoort</figcaption></figure><figure class="rv" style="--i:2"><img data-img="7" alt="Kasteel, binnen en buiten in Izegem" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Kasteel, binnen en buiten</b> · Izegem</figcaption></figure><figure class="rv" style="--i:0"><img data-img="54" alt="Horeca-interieur in Gent" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Horeca-interieur</b> · Gent</figcaption></figure><figure class="rv" style="--i:1"><img data-img="9" alt="Villa, gevel in Knokke" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Villa, gevel</b> · Knokke</figcaption></figure><figure class="rv" style="--i:2"><img data-img="55" alt="Restaurant in Merelbeke" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Restaurant</b> · Merelbeke</figcaption></figure></div>
+  <div class="lp-gallery gallery"><button type="button" class="rv" style="--i:0" data-full-img="53"><img data-img="53" alt="Gevel geschilderd in Kortrijk" width="600" height="450" loading="lazy" decoding="async"><span class="lp-cap"><b>Gevel geschilderd</b><span class="lp-sep"> · </span>Kortrijk</span></button><button type="button" class="rv" style="--i:1" data-full-img="15"><img data-img="15" alt="Leefruimte in Nieuwpoort" width="600" height="450" loading="lazy" decoding="async"><span class="lp-cap"><b>Leefruimte</b><span class="lp-sep"> · </span>Nieuwpoort</span></button><button type="button" class="rv" style="--i:2" data-full-img="7"><img data-img="7" alt="Kasteel, binnen en buiten in Izegem" width="600" height="450" loading="lazy" decoding="async"><span class="lp-cap"><b>Kasteel, binnen en buiten</b><span class="lp-sep"> · </span>Izegem</span></button><button type="button" class="rv" style="--i:0" data-full-img="54"><img data-img="54" alt="Horeca-interieur in Gent" width="600" height="450" loading="lazy" decoding="async"><span class="lp-cap"><b>Horeca-interieur</b><span class="lp-sep"> · </span>Gent</span></button><button type="button" class="rv" style="--i:1" data-full-img="9"><img data-img="9" alt="Villa, gevel in Knokke" width="600" height="450" loading="lazy" decoding="async"><span class="lp-cap"><b>Villa, gevel</b><span class="lp-sep"> · </span>Knokke</span></button><button type="button" class="rv" style="--i:2" data-full-img="55"><img data-img="55" alt="Restaurant in Merelbeke" width="600" height="450" loading="lazy" decoding="async"><span class="lp-cap"><b>Restaurant</b><span class="lp-sep"> · </span>Merelbeke</span></button></div>
 </div></section>
 
 <section class="section"><div class="wrap split">

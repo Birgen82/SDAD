@@ -1209,7 +1209,7 @@ def offerte_page():
         ("1893_kortrijk_afgewerkt.webp", "Buitenschilderwerken", "Gevel schilderen of kaleien, ramen en deuren. 10 jaar garantie op gevelschilderwerk*."),
         ("2442_techniek_12.webp", "Decoratieve technieken", "Kalk, betonlook of een accentmuur met karakter."),
         ("1644_app_kortrijk_4.webp", "Gordijnen en lamellen", "Advies, opmeting en plaatsing op maat.")]))
-    shots = "".join(f'<figure class="rv" style="--i:{n % 3}">{pg.img(i, f"{t} in {pl}", w=600, h=450)}<figcaption><b>{t}</b> · {pl}</figcaption></figure>' for n, (i, t, pl) in enumerate(OFFER_SHOTS))
+    shots = "".join(f'<button type="button" class="rv" style="--i:{n % 3}" data-full="{pg.r}assets/img/{i}">{pg.img(i, f"{t} in {pl}", w=600, h=450)}<span class="lp-cap"><b>{t}</b><span class="lp-sep"> · </span>{pl}</span></button>' for n, (i, t, pl) in enumerate(OFFER_SHOTS))
     ticks = "".join(f'<li>{b}</li>' for b in ["Ervaren vakmensen", "Tijdige en heldere offertes", "Nakomen van afspraken &amp; planning", "Netheid op de werf"])
     steps = "".join(f'<li class="rv" style="--i:{n}"><span class="lp-step">{n + 1}</span><h3>{t}</h3><p>{d}</p></li>' for n, (t, d) in enumerate([
         ("Aanvraag", "U vult het formulier in of belt ons."), ("Plaatsbezoek", "We komen vrijblijvend langs en geven advies."),
@@ -1248,7 +1248,7 @@ def offerte_page():
 
 <section class="section"><div class="wrap">
   <div class="head-row rv"><div><span class="eyebrow">Eigen werk</span><h2>Recente realisaties</h2></div><a class="arrow-link" href="#offerte">Vraag uw offerte</a></div>
-  <div class="lp-gallery">{shots}</div>
+  <div class="lp-gallery gallery">{shots}</div>
 </div></section>
 
 <section class="section"><div class="wrap split">
