@@ -148,6 +148,14 @@ SCHEMA = json.dumps({
 }, ensure_ascii=False)
 
 
+def asset_version():
+    import hashlib
+    h = hashlib.md5()
+    for f in ("assets/css/style.css", "assets/css/v2.css", "assets/js/main.js"):
+        h.update((ROOT / f).read_bytes())
+    return h.hexdigest()[:8]
+
+
 def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
     return f"""<!doctype html>
 <html lang="nl-BE">
@@ -175,8 +183,8 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..80,700..900&family=Nunito+Sans:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="{pg.r}assets/css/style.css">
-<link rel="stylesheet" href="{pg.r}assets/css/v2.css">
+<link rel="stylesheet" href="{pg.r}assets/css/style.css?v={VER}">
+<link rel="stylesheet" href="{pg.r}assets/css/v2.css?v={VER}">
 <script type="application/ld+json">{SCHEMA}</script>
 </head>
 <body>
@@ -185,7 +193,7 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 {body}
 </main>
 {footer(pg)}
-<script src="{pg.r}assets/js/main.js" defer></script>
+<script src="{pg.r}assets/js/main.js?v={VER}" defer></script>
 </body>
 </html>
 """
@@ -1117,5 +1125,6 @@ def legal_pages():
 
 
 if __name__ == "__main__":
+    VER = asset_version()
     for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages, legal_pages):
         f()

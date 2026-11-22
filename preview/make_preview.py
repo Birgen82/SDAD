@@ -55,7 +55,8 @@ for pg in PAGES:
 css = (ROOT / "assets/css/style.css").read_text() + "\n" + (ROOT / "assets/css/v2.css").read_text()
 css = re.sub(r"url\(\.\./img/([^)]+)\)", lambda m: "url(data:image/" + ("svg+xml" if m.group(1).endswith(".svg") else "png") + ";base64," + base64.b64encode((ROOT / "assets/img" / m.group(1)).read_bytes()).decode() + ")", css)
 head = re.sub(r'<link rel="icon"[^>]*>', "", head)
-head = head.replace('<link rel="stylesheet" href="assets/css/v2.css">', "")
+head = re.sub(r'<link rel="stylesheet" href="assets/css/v2.css[^"]*">', "", head)
+head = re.sub(r'(<link rel="stylesheet" href="assets/css/style.css)[^"]*(">)', r"\1\2", head)
 head = head.replace('<link rel="stylesheet" href="assets/css/style.css">', "<style>" + css + ".pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>")
 head = head.replace("<body>", '<body><div class="pv-note">Voorbeeld van de nieuwe SDAD-site · foto\'s verkleind</div>')
 router = """<script>
@@ -70,6 +71,7 @@ document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return
  if(a.dataset.frag){e.preventDefault();location.hash=a.getAttribute('href');setTimeout(()=>{const el=document.getElementById(a.dataset.frag);if(el)el.scrollIntoView();},60);}});
 addEventListener('hashchange',show);show();
 </script>""" % json.dumps(list(imgs.values()))
+foot = re.sub(r'<script src="assets/js/main.js[^"]*" defer></script>', '<script src="assets/js/main.js" defer></script>', foot)
 foot = foot.replace('<script src="assets/js/main.js" defer></script>', router + "<script>" + (ROOT / "assets/js/main.js").read_text() + "</script>")
 out = ROOT / "preview/sdad-site-preview.html"
 out.write_text(head + '<main id="main">' + "".join(mains) + "</main>" + foot)
