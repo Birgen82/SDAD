@@ -66,14 +66,32 @@ class Page:
                 f'{" loading=\"lazy\" decoding=\"async\"" if lazy else ""}{f" class={cls!r}" if cls else ""}>')
 
 
+def thumb(name, size=520):
+    """Kleine versie van een foto (voor menu en collages), wordt eenmalig aangemaakt."""
+    out = ROOT / "assets/img" / f"t_{name}"
+    if not out.exists():
+        from PIL import Image
+        im = Image.open(ROOT / "assets/img" / name); im.thumbnail((size, size)); im.save(out, "WEBP", quality=70, method=6)
+    return f"t_{name}"
+
+
+SERVICE_GROUP = {"diensten/schilderwerken/binnen/": "Schilderwerken", "diensten/schilderwerken/buiten/": "Schilderwerken",
+                 "diensten/schilderwerken/decoratieve-technieken/": "Schilderwerken",
+                 "diensten/interieurafwerking/gordijnen/": "Interieurafwerking", "diensten/interieurafwerking/lamellen/": "Interieurafwerking"}
+SERVICE_SHORT = {"diensten/schilderwerken/binnen/": "Binnen", "diensten/schilderwerken/buiten/": "Buiten",
+                 "diensten/schilderwerken/decoratieve-technieken/": "Decoratieve technieken",
+                 "diensten/interieurafwerking/gordijnen/": "Gordijnen", "diensten/interieurafwerking/lamellen/": "Lamellen"}
+
+
 def nav(pg):
     cur = pg.path
     dd_cur = " is-current" if cur.startswith("diensten/") else ""
-    cols = "".join(
-        f'<div><strong>{g}</strong>' + "".join(
-            f'<a href="{pg.u(p)}"{" aria-current=page" if p == cur else ""}>{n}</a>' for n, p in items) + "</div>"
-        for g, items in DIENSTEN)
-    links = "".join(f'<a href="{pg.u(p)}"{" aria-current=page" if p == cur else ""}>{n}</a>' for n, p in MENU)
+    cards = "".join(
+        f'<a class="mm-card" href="{pg.u(h)}"{" aria-current=page" if h == cur else ""}>'
+        f'<span class="mm-img">{pg.img(thumb(i), "", w=260, h=195)}</span>'
+        f'<span class="mm-txt"><small>{SERVICE_GROUP[h]}</small>{SERVICE_SHORT[h]}</span></a>'
+        for h, i, t, x in SERVICES)
+    links = "".join(f'<a class="nav-link" href="{pg.u(p)}"{" aria-current=page" if p == cur else ""}>{n}</a>' for n, p in MENU)
     return f"""<a class="skip" href="#main">Naar inhoud</a>
 <div class="topbar"><div class="wrap">
   <span>Prinsdomlaan 50, 8870 Izegem</span>
@@ -84,9 +102,11 @@ def nav(pg):
   <a class="logo" href="{pg.u()}" aria-label="SDAD – naar de startpagina">{pg.img("logo_dark.png", "SDAD – Schilderkracht tot de vierde macht", lazy=False, w=42, h=58)}</a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   <nav class="nav" id="nav" aria-label="Hoofdmenu">
-    <div class="dd{dd_cur}"><button aria-expanded="false">Diensten</button><div class="dd-panel">{cols}</div></div>
-    {links}
+    <div class="dd{dd_cur}"><button aria-expanded="false">Diensten</button><div class="dd-panel">
+      <p class="mm-title">Onze diensten</p><div class="mm-grid">{cards}</div></div></div>
+    <div class="nav-links">{links}</div>
     <a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a>
+    <div class="mm-contact"><a href="tel:{PHONES[0][2]}">Bel {PHONES[0][1]}</a><a href="mailto:{MAIL}">{MAIL}</a></div>
   </nav>
 </div></header>"""
 
@@ -321,6 +341,9 @@ def home():
     pg = Page("")
     tiles = "".join(f"""<a class="tile rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="num">0{n + 1}</span><span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>"""
                     for n, (h, i, t, x) in enumerate(SERVICES))
+    cpicks = [("gevel-villa-te-knokke", "cg1"), ("babu-gent", "cg2"), ("rood-leefruimte-te-marke-stop-rood", "cg3")]
+    collage = "".join(f'<a class="cg {c}" href="{pg.u(f"realisaties/{r["slug"]}/")}">{pg.img(r["img"], r["title"], lazy=False)}<span class="chip">{escape(r["title"])}</span></a>'
+                      for sl, c in cpicks for r in REAL if r["slug"] == sl)
     picks = ["babu-gent", "buitenschilderwerken-kasteel-blauwhuis-te-izegem", "gevel-villa-te-knokke", "rood-leefruimte-te-marke-stop-rood",
              "villa-te-zwijnaarde", "tastoe-roeselare", "schilderen-gevel-te-kortrijk", "boetiek-gastronomiek-culix-te-merelbeke"]
     shots = "".join(
@@ -345,10 +368,17 @@ def home():
       <li><b data-count="10">10</b>jaar garantie op gevelschilderwerk* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
     </ul>
   </div>
-  <div class="hx__visual">
-    <div class="blob">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
+  <div class="hx__visual collage">
+    {collage}
   </div>
 </div><span class="scroll-cue" aria-hidden="true"></span></section>
+
+<section class="section rail-wrap"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Recent werk</span><h2>Ons werk spreekt <em class="stroke">voor zich</em></h2></div>
+    <div class="rail-nav"><a class="arrow-link" href="{pg.u('realisaties/')}" style="align-self:center;margin-right:10px">Alle realisaties</a><button type="button" data-dir="-1" aria-label="Vorige">←</button><button type="button" data-dir="1" aria-label="Volgende">→</button></div></div>
+</div>
+<div><div class="rail" tabindex="0" aria-label="Realisaties, horizontaal scrollen">{shots}</div></div>
+</section>
 
 <section class="section"><div class="wrap">
   <div class="intro-row rv"><div><span class="eyebrow">Onze diensten</span><h2>Wat we voor u <em class="stroke">doen</em></h2></div>
@@ -377,12 +407,7 @@ def home():
 </div></section>
 {werkwijze(pg)}
 
-<section class="section rail-wrap"><div class="wrap">
-  <div class="head-row rv"><div><span class="eyebrow">Portfolio</span><h2>Recente realisaties</h2></div>
-    <div class="rail-nav"><a class="arrow-link" href="{pg.u('realisaties/')}" style="align-self:center;margin-right:10px">Alle realisaties</a><button type="button" data-dir="-1" aria-label="Vorige">←</button><button type="button" data-dir="1" aria-label="Volgende">→</button></div></div>
-</div>
-<div><div class="rail" tabindex="0" aria-label="Realisaties, horizontaal scrollen">{shots}</div></div>
-</section>
+
 
 {werkgebied(pg)}
 {cta(pg)}"""
@@ -608,6 +633,13 @@ def service(path, title, desc, crumb_group, hero_title, hero_html, hero_img, sec
             ([("technieken", "Technieken")] if 'id="technieken"' in main else []) + \
             [("sfeerbeelden", "Sfeerbeelden"), ("vragen", "Vragen"), ("andere", "Andere diensten")]
     body += subnav(links)
+    cat = {"diensten/schilderwerken/binnen/": "binnen", "diensten/schilderwerken/buiten/": "buiten"}.get(path)
+    pool = [r["img"] for r in REAL if cat and cat in r["cats"] and r["img"] != hero_img] or gal[1:]
+    k = [0]
+    def add_fig(m):
+        im = pool[k[0] % len(pool)]; k[0] += 1
+        return m.group(0) + f'<figure class="ed__fig">{pg.img(im, name)}</figure>'
+    main = re.sub(r'<div class="ed__head">.*?</h2>', add_fig, main, flags=re.S)
     body += f'<div id="aanpak" class="anchor-wrap">{main}</div>'
     body += gallery_bento(pg, gal_title, gal, gal_link, name)
     body += faq2(pg, faq_title, qa)
@@ -908,7 +940,8 @@ def blog():
 # ---------- Contact ----------
 def contact():
     pg = Page("contact/")
-    people = "".join(f'<div class="contact-card"><h3>{n}</h3><p><a href="tel:{t}">{d}</a></p></div>' for n, d, t in PHONES)
+    portraits = {"Lies Nuyttens": "2436_profielfoto_lies.webp", "Arne Deseure": "1423_arne_bewerkt.webp"}
+    people = "".join(f'<div class="contact-card person-card">{pg.img(thumb(portraits[n], 300), n, w=120, h=120)}<div><h3>{n}</h3><p><a href="tel:{t}">{d}</a></p></div></div>' for n, d, t in PHONES)
     body = page_hero(pg, [("Contact", None)], "Contact", "Contacteer ons",
                      '<p class="lead">Schilderwerken, gordijnen of lamellen in het vooruitzicht? Neem contact op. Wij helpen u graag verder en reageren snel op uw vraag. We werken in heel Oost- en West-Vlaanderen.</p>') + f"""
 <section class="section"><div class="wrap split" style="align-items:start">
