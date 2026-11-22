@@ -1215,8 +1215,6 @@ OFFER_SHOTS = [("1893_kortrijk_afgewerkt.webp", "Gevel geschilderd", "Kortrijk")
 CURTAIN_REVIEWS = [  # letterlijk van Trustpilot; reviews die gordijnen/raamdecoratie noemen + algemene
     ("Franky H.", "juni 2023", 5, "… onze gordijnen zijn een streling voor het oog. We waren ook zeer tevreden, alles werd tot in de puntjes verzorgd en proper afgewerkt …"),
     ("Karel D.", "november 2023", 5, "Ons nieuw opgeleverd appartement werd zeer vakkundig geschilderd en top perfect afgewerkt. Ook de raamdecoratie werd prima verzorgd."),
-    ("Sofie C.", "oktober 2025", 5, "Zeer correcte en vlotte communicatie! Alles wordt duidelijk afgesproken en nadien ook zo uitgevoerd."),
-    ("Roger V.", "september 2026", 5, "In enkele woorden: TOP resultaat. En niet te vergeten: na de werken is alles netjes achtergelaten."),
 ]
 CURTAIN_SHOTS = [("c_1644_0166.webp", "Vouwgordijnen", None), ("1647_lamel_combo_gordijn_3.webp", "Overgordijn met houten lamellen", None),
                  ("1644_rolgordijnen_2.webp", "Rolgordijn, lichtdoorlatend", None), ("1647_0105.webp", "Aluminium lamellen", None),
@@ -1311,9 +1309,9 @@ def offerte_gordijnen_page():
 </section>
 
 <section class="section" id="reviews"><div class="wrap">
-  <div class="head-row rv"><div><span class="eyebrow">Wat klanten zeggen</span><h2><span class="tp-big">{TP_SCORE}</span> op 5 op Trustpilot</h2>
-    <p class="rv-sub">Gemiddelde van {TP_COUNT} reviews. <a href="{TRUSTPILOT}" target="_blank" rel="noopener">Lees alle reviews</a></p></div><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div>
-  <div class="rv-grid">{cards}</div>
+  <div class="head-row rv"><div><span class="eyebrow">Reviews over raamdecoratie</span><h2><span class="tp-big">{TP_SCORE}</span> op 5 op Trustpilot</h2>
+    <p class="rv-sub">Gemiddelde van alle {TP_COUNT} reviews over SDAD. <a href="{TRUSTPILOT}" target="_blank" rel="noopener">Lees alle reviews</a></p></div><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div>
+  <div class="rv-grid rv-grid--2">{cards}</div>
 </div></section>
 
 <section class="section section--soft"><div class="wrap">

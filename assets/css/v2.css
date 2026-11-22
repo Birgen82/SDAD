@@ -979,3 +979,5 @@ html.menu-lock { overflow: hidden; }
   .rv-card { scroll-snap-align: start; }
   .lp-cap { font-size: .8rem; }
 }
+.rv-grid--2 { grid-template-columns: repeat(2, minmax(0, 420px)); }
+@media (max-width: 600px) { .rv-grid--2 { grid-auto-flow: row; grid-template-columns: 1fr; overflow: visible; margin: 0; padding: 0; } }
