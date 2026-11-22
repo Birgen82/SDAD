@@ -1270,7 +1270,7 @@ def offerte_gordijnen_page():
         ("c_1647_vb_tr_014_diaz_2_-_kopie_1_0.webp", "Elektrische bediening", "Manueel of elektrisch, ideaal voor grote of hoge ramen.")]))
     shots = "".join(f'<button type="button" class="rv" style="--i:{n % 3}" data-full="{pg.r}assets/img/{i}">{pg.img(i, t, w=600, h=450)}<span class="lp-cap"><b>{t}</b>{f"<span class=lp-sep> · </span>{pl}" if pl else ""}</span></button>' for n, (i, t, pl) in enumerate(CURTAIN_SHOTS))
     cards = "".join(f'''<figure class="rv-card rv" style="--i:{n}"><div class="rv-stars" aria-label="{st} op 5 sterren">{"★" * st}</div>
-      <blockquote>“{t}”</blockquote><figcaption><b>{nm}</b> · {d}</figcaption></figure>''' for n, (nm, d, st, t) in enumerate(CURTAIN_REVIEWS))
+      <blockquote>“{t}”</blockquote><figcaption><b>{nm}</b> · via Trustpilot</figcaption></figure>''' for n, (nm, d, st, t) in enumerate(CURTAIN_REVIEWS))
     wishes = "".join(f'<li class="rv" style="--i:{n % 4}"><h3>{w}</h3><p>{d}</p><span class="wish__tip">Ons advies: {t}</span></li>' for n, (w, d, t) in enumerate([
         ("Verduisteren", "Rust in de slaapkamer of kinderkamer, ook overdag.", "verduisterende rol- of overgordijnen"),
         ("Privacy", "Geen inkijk, wel daglicht.", "lichtdoorlatende stoffen, inbetweens of lamellen"),
