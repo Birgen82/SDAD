@@ -27,3 +27,9 @@ Herbouw van sdad.be met dezelfde inhoud en huisstijl (rood #da291c, antraciet #4
 - Staat op `/offerte-gordijnen/` (functie `offerte_gordijnen_page()`), afgeleide stijl `theme-soft`: zelfde logo, letters en rode knoppen, maar zachtere linnentinten en geen zwarte blokken.
 - Formulier: soort raamdecoratie, aantal ramen, bediening, klanttype, contact.
 - VOORLOPIG: sfeerbeelden komen van de gordijnen/lamellen-pagina's van sdad.be; SDAD moet bevestigen welke eigen werk zijn. Reviews: 2 die gordijnen/raamdecoratie noemen + 2 algemene (CURTAIN_REVIEWS).
+
+## Livegang van de offertedomeinen
+- `offerteschilderwerken.be` → pagina `/offerte/`, `offertegordijnen.be` → pagina `/offerte-gordijnen/` (zie `LANDING_DOMAINS` in `build.py`).
+- Zet `DEMO = False` en draai `python3 build.py`. Er verschijnt dan per domein een zelfstandige map in `dist/` (index.html in de root + enkel de nodige bestanden). Die map zet je op de hosting van dat domein.
+- In live-modus verwijzen privacybeleid en kruislinks naar sdad.be en het andere offertedomein; canonical en deellinks wijzen naar het eigen domein.
+- Formulieren verzenden in de demo via het e-mailprogramma; koppel ze bij livegang aan een formulierdienst of het bestaande Webflow/HubSpot-formulier.

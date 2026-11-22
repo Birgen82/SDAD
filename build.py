@@ -15,6 +15,17 @@ SITE = "https://sdad.be"
 DEMO = True
 # Basisadres voor deel-links (WhatsApp, Facebook, LinkedIn…): de demo op GitHub Pages of de echte site.
 BASE = "https://birgen82.github.io/SDAD/" if DEMO else SITE + "/"
+# Landingspagina's met een eigen domein (bij livegang)
+LANDING_DOMAINS = {"offerte/": "https://www.offerteschilderwerken.be/", "offerte-gordijnen/": "https://www.offertegordijnen.be/"}
+
+
+def site_link(pg, path):
+    """Link vanuit een landingspagina naar de hoofdsite: relatief in de demo, absoluut naar sdad.be bij livegang."""
+    if DEMO:
+        return pg.u(path)
+    if path in LANDING_DOMAINS:
+        return LANDING_DOMAINS[path]
+    return SITE + "/" + path
 TRUSTPILOT = "https://nl-be.trustpilot.com/review/sdad.be"
 REVIEWS = [  # letterlijk overgenomen van Trustpilot (nl-be.trustpilot.com/review/sdad.be)
     ("Roger V.", "september 2026", 5, "In enkele woorden: TOP resultaat. En niet te vergeten: na de werken is alles netjes achtergelaten."),
@@ -174,11 +185,11 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp", landin
 <script>document.documentElement.classList.add("js")</script>
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(desc)}">
-<link rel="canonical" href="{BASE}{pg.path}">
+<link rel="canonical" href="{LANDING_DOMAINS[pg.path] if (not DEMO and pg.path in LANDING_DOMAINS) else BASE + pg.path}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(desc)}">
-<meta property="og:url" content="{BASE}{pg.path}">
+<meta property="og:url" content="{LANDING_DOMAINS[pg.path] if (not DEMO and pg.path in LANDING_DOMAINS) else BASE + pg.path}">
 <meta property="og:site_name" content="SDAD">
 <meta property="og:locale" content="nl_BE">
 <meta property="og:image" content="{BASE}assets/img/og-sdad.jpg">
@@ -1147,7 +1158,7 @@ def landing_footer(pg):
     <div><h4>SDAD bv</h4><p>Schilderkracht tot de vierde macht<br>Prinsdomlaan 50, 8870 Izegem<br><a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="mailto:{MAIL}">{MAIL}</a></p></div>
   </div>
   <div class="subfooter"><span>© SDAD BV, BV Schilder &amp; Decoratiebedrijf Arne Deseure, BE 0823.935.816, Prinsdomlaan 50, 8870 Izegem</span>
-    <a href="{pg.u('cookie-en-privacybeleid/')}">Privacybeleid</a></div>
+    <a href="{site_link(pg, 'cookie-en-privacybeleid/')}">Privacybeleid</a></div>
 </div></footer>
 <div class="mobile-bar"><a href="tel:{PHONES[0][2]}">Bel ons</a><a href="#offerte">Gratis offerte</a></div>"""
 
@@ -1190,7 +1201,7 @@ def offerte_wizard(pg):
       </div></fieldset>
     <p class="wiz__err" aria-live="polite"></p>
     <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
-    <p class="lp-legal">Gratis en zonder verplichtingen. We reageren snel. Uw gegevens gebruiken we alleen voor uw aanvraag (<a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a>).</p>
+    <p class="lp-legal">Gratis en zonder verplichtingen. We reageren snel. Uw gegevens gebruiken we alleen voor uw aanvraag (<a href="{site_link(pg, 'cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a>).</p>
   </div>
   <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>We nemen snel contact met u op.</p></div>
 </form></div>"""
@@ -1240,7 +1251,7 @@ def curtain_wizard(pg):
       </div></fieldset>
     <p class="wiz__err" aria-live="polite"></p>
     <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
-    <p class="lp-legal">Gratis en zonder verplichtingen. Uw gegevens gebruiken we alleen voor uw aanvraag (<a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a>).</p>
+    <p class="lp-legal">Gratis en zonder verplichtingen. Uw gegevens gebruiken we alleen voor uw aanvraag (<a href="{site_link(pg, 'cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a>).</p>
   </div>
   <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>We nemen snel contact met u op.</p></div>
 </form></div>"""
@@ -1265,7 +1276,7 @@ def offerte_gordijnen_page():
           ("Zijn elektrische gordijnen en lamellen mogelijk?", "Ja. Afhankelijk van het gekozen systeem kunnen gordijnen en lamellen manueel of elektrisch bediend worden."),
           ("Plaatsen jullie ook?", "Ja. Naast advies en opmeting verzorgen wij ook de professionele plaatsing."),
           ("Kan ik gordijnen combineren met lamellen?", "Ja. Zo combineert u het praktische karakter van lamellen met de zachtheid en gezelligheid van gordijnen."),
-          ("Kunnen jullie ook schilderen?", f"Ja. SDAD is in de eerste plaats een schildersbedrijf. Muren, kleuren en raamdecoratie stemmen we graag samen op elkaar af. <a href=\"{pg.u('offerte/')}\">Offerte voor schilderwerken</a>")]
+          ("Kunnen jullie ook schilderen?", f"Ja. SDAD is in de eerste plaats een schildersbedrijf. Muren, kleuren en raamdecoratie stemmen we graag samen op elkaar af. <a href=\"{site_link(pg, 'offerte/')}\">Offerte voor schilderwerken</a>")]
     faqs = "".join(f"<details><summary>{q}</summary><div class=\"answer\">{a}</div></details>" for q, a in qa)
     body = f"""<section class="lp-hero">
   <div class="lp-hero__bg" aria-hidden="true">{pg.img("1644_app_kortrijk_4.webp", "", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
@@ -1421,7 +1432,27 @@ def legal_pages():
         write(pg, layout(pg, title, f"{h1} van SDAD bv, Prinsdomlaan 50, 8870 Izegem.", body))
 
 
+def export_landings():
+    """Maakt per landingsdomein een zelfstandige map in dist/ (index.html in de root + enkel de nodige bestanden)."""
+    import shutil
+    for path, url in LANDING_DOMAINS.items():
+        out = ROOT / "dist" / url.split("//")[1].strip("/").replace("www.", "")
+        if out.exists():
+            shutil.rmtree(out)
+        out.mkdir(parents=True)
+        html = (ROOT / path / "index.html").read_text(encoding="utf8").replace('"../', '"')
+        (out / "index.html").write_text(html, encoding="utf8")
+        for d in ("assets/css", "assets/js", "assets/fonts"):
+            shutil.copytree(ROOT / d, out / d)
+        for ref in set(re.findall(r'"(assets/(?:img|video)/[^"?]+)', html)) | {"assets/img/list_icon.png", "assets/img/brush.svg"}:
+            (out / ref).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / ref, out / ref)
+        print("✓ dist/" + out.name)
+
+
 if __name__ == "__main__":
     VER = asset_version()
     for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages, legal_pages, offerte_page, offerte_gordijnen_page):
         f()
+    if not DEMO:
+        export_landings()
