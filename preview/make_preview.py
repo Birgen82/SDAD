@@ -52,9 +52,10 @@ for pg in PAGES:
     title = re.search(r"<title>(.*?)</title>", h).group(1)
     body = fix(pg, h.split('<main id="main">')[1].split("</main>")[0])
     mains.append(f'<div class="pv-page" data-page="{pg}" data-title="{title}" hidden>{body}</div>')
-css = (ROOT / "assets/css/style.css").read_text()
+css = (ROOT / "assets/css/style.css").read_text() + "\n" + (ROOT / "assets/css/v2.css").read_text()
 css = re.sub(r"url\(\.\./img/([^)]+)\)", lambda m: "url(data:image/png;base64," + base64.b64encode((ROOT / "assets/img" / m.group(1)).read_bytes()).decode() + ")", css)
 head = re.sub(r'<link rel="icon"[^>]*>', "", head)
+head = head.replace('<link rel="stylesheet" href="assets/css/v2.css">', "")
 head = head.replace('<link rel="stylesheet" href="assets/css/style.css">', "<style>" + css + ".pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>")
 head = head.replace("<body>", '<body><div class="pv-note">Voorbeeld van de nieuwe SDAD-site · foto\'s verkleind</div>')
 router = """<script>
@@ -62,7 +63,7 @@ const IMG=%s;
 document.querySelectorAll('[data-full-img]').forEach(b=>b.dataset.full=IMG[b.dataset.fullImg]);
 function load(root){root.querySelectorAll('img[data-img]').forEach(i=>{if(!i.src){i.src=IMG[i.dataset.img];}});}
 load(document.querySelector('header'));load(document.querySelector('footer'));
-function show(){const h=location.hash.replace(/^#\\//,'').split('#')[0];const t=document.querySelector('.pv-page[data-page="'+h+'"]')||document.querySelector('.pv-page[data-page=""]');
+function show(){if(location.hash&&!location.hash.startsWith('#/')&&document.querySelector('.pv-page:not([hidden])'))return;const h=location.hash.replace(/^#\\//,'').split('#')[0];const t=document.querySelector('.pv-page[data-page="'+h+'"]')||document.querySelector('.pv-page[data-page=""]');
 document.querySelectorAll('.pv-page').forEach(p=>p.hidden=p!==t);load(t);document.title=t.dataset.title;document.body.classList.remove('menu-open');window.scrollTo(0,0);}
 document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;
  if(a.dataset.off){e.preventDefault();alert('Deze pagina zit niet in het voorbeeldbestand.');return;}

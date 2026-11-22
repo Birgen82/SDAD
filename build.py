@@ -130,6 +130,7 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js")</script>
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(desc)}">
 <link rel="canonical" href="{SITE}/{pg.path}">
@@ -142,8 +143,9 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 <link rel="icon" href="{pg.r}assets/img/list_icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Nunito+Sans:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="{pg.r}assets/css/style.css">
+<link rel="stylesheet" href="{pg.r}assets/css/v2.css">
 <script type="application/ld+json">{SCHEMA}</script>
 </head>
 <body>
@@ -182,12 +184,12 @@ def werkwijze(pg):
         ("Voorbereiding en uitvoering", "Eerst een correcte voorbereiding van de ondergrond, daarna een vakkundige uitvoering. Met duidelijke communicatie en netheid op de werf."),
         ("Oplevering", "Een afwerking tot in de kleinste details en een zorgeloze samenwerking tot de oplevering. We doen wat we zeggen en zeggen wat we doen."),
     ]
-    items = "".join(f"<li><span class=\"step-nr\">{i}</span><h3>{t}</h3><p>{d}</p></li>" for i, (t, d) in enumerate(steps, 1))
-    return f"""<section class="section section--dark" id="werkwijze"><div class="wrap">
-  <span class="eyebrow">Onze werkwijze</span><h2>Zo pakken we uw project aan</h2>
-  <p class="lead narrow">Een mooi resultaat begint lang voor de eerste verflaag. Van het eerste gesprek tot de oplevering weet u steeds waar u aan toe bent.</p>
-  <ol class="steps">{items}</ol>
-  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plan stap 1: uw plaatsbezoek</a></div>
+    items = "".join(f'<li data-n="{i}"><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(steps, 1))
+    return f"""<section class="section section--dark" id="werkwijze"><div class="wrap flow">
+  <div class="flow__head"><span class="eyebrow">Onze werkwijze</span><h2>Zo pakken we uw project <em class="stroke">aan</em></h2>
+  <p class="lead">Een mooi resultaat begint lang voor de eerste verflaag. Van het eerste gesprek tot de oplevering weet u steeds waar u aan toe bent.</p>
+  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plan stap 1: uw plaatsbezoek</a></div></div>
+  <ol class="flow__steps">{items}</ol>
 </div></section>"""
 
 
@@ -299,65 +301,186 @@ SERVICES = [
 
 
 # ---------- Home ----------
+def places():
+    """Plaatsen uit de realisaties (voor werkgebied en lopende band)."""
+    seen, out = set(), []
+    for r in REAL:
+        m = re.search(r"(?:\bte\s+|@)([a-zë]+)", r["title"], re.I)
+        place = m.group(1).capitalize() if m else None
+        if not place and not r["title"].startswith("Residentie") and re.search(r"\s([A-Z][a-z]+)$", r["title"]):
+            place = r["title"].split()[-1]
+        if place and place not in seen:
+            seen.add(place); out.append((place, r))
+    return out
+
+
+COLORS = [("Kalkwit", "#EEEAE2"), ("Linnen", "#E2D8C6"), ("Zandsteen", "#CDB998"), ("Saliegroen", "#A3AE97"),
+          ("Olijf", "#6F7356"), ("Terracotta", "#B8674A"), ("Okergeel", "#C9963E"), ("Oudroze", "#C99A92"),
+          ("Duifgrijs", "#A7A6A1"), ("Nachtblauw", "#26364A"), ("Antraciet", "#3E4245"), ("SDAD-rood", "#DA291C")]
+
+ROOM_SVG = """<svg viewBox="0 0 800 520" role="img" aria-label="Woonkamer waarvan u de muurkleur kunt kiezen">
+  <defs>
+    <linearGradient id="shade" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".08"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfeef5"/><stop offset="1" stop-color="#b9d3df"/></linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect class="wall" x="0" y="0" width="360" height="400" fill="#EEEAE2"/>
+  <rect class="wall accent" x="360" y="0" width="440" height="400" fill="#EEEAE2"/>
+  <rect x="0" y="0" width="800" height="400" fill="url(#shade)"/>
+  <polygon points="120,330 330,330 420,400 40,400" fill="url(#light)"/>
+  <rect x="0" y="0" width="800" height="14" fill="#fff" opacity=".7"/>
+  <g><rect x="96" y="70" width="208" height="250" rx="3" fill="#fbfaf7"/><rect x="108" y="82" width="88" height="226" fill="url(#glass)"/><rect x="204" y="82" width="88" height="226" fill="url(#glass)"/>
+    <path d="M118 290 L150 200 L170 240 L186 210 L196 230 L196 308 L108 308 Z" fill="#9fb9a6" opacity=".6"/></g>
+  <path d="M70 52 Q76 200 64 400 L104 400 Q96 220 100 52 Z" fill="#e7e0d3"/><path d="M80 60 Q84 220 78 398" stroke="#d6ccbb" stroke-width="3" fill="none"/>
+  <path d="M296 52 Q304 220 296 400 L334 400 Q326 200 330 52 Z" fill="#e7e0d3"/><path d="M314 60 Q318 220 312 398" stroke="#d6ccbb" stroke-width="3" fill="none"/>
+  <rect x="58" y="44" width="290" height="8" rx="4" fill="#3e4245"/>
+  <rect x="470" y="104" width="190" height="130" fill="#fbfaf7"/><rect x="482" y="116" width="166" height="106" fill="#f1ece4"/>
+  <circle cx="540" cy="170" r="30" fill="#DA291C" opacity=".85"/><rect x="560" y="140" width="66" height="66" fill="#3e4245" opacity=".85"/>
+  <rect x="0" y="392" width="800" height="10" fill="#f7f5f1"/>
+  <rect x="0" y="400" width="800" height="120" fill="#c59f78"/>
+  <g stroke="#b28a63" stroke-width="2"><line x1="0" y1="430" x2="800" y2="430"/><line x1="0" y1="462" x2="800" y2="462"/><line x1="0" y1="494" x2="800" y2="494"/><line x1="140" y1="400" x2="140" y2="430"/><line x1="420" y1="430" x2="420" y2="462"/><line x1="260" y1="462" x2="260" y2="494"/><line x1="610" y1="400" x2="610" y2="430"/><line x1="700" y1="462" x2="700" y2="494"/></g>
+  <ellipse cx="560" cy="470" rx="230" ry="26" fill="#000" opacity=".12"/>
+  <g><rect x="400" y="300" width="330" height="96" rx="18" fill="#3b3f44"/><rect x="388" y="262" width="354" height="70" rx="22" fill="#45494f"/>
+    <rect x="420" y="276" width="140" height="52" rx="14" fill="#52575e"/><rect x="570" y="276" width="140" height="52" rx="14" fill="#52575e"/>
+    <rect x="384" y="300" width="36" height="96" rx="14" fill="#4b4f55"/><rect x="710" y="300" width="36" height="96" rx="14" fill="#4b4f55"/>
+    <rect x="436" y="250" width="58" height="46" rx="10" fill="#DA291C" transform="rotate(-8 465 273)"/><rect x="640" y="252" width="56" height="44" rx="10" fill="#e7e0d3" transform="rotate(7 668 274)"/>
+    <rect x="410" y="396" width="10" height="16" fill="#2c2f33"/><rect x="712" y="396" width="10" height="16" fill="#2c2f33"/></g>
+  <g><rect x="338" y="344" width="44" height="52" rx="6" fill="#d8cfc1"/>
+    <path d="M360 344 C340 300 322 290 316 262 C340 274 352 296 360 330 C362 290 372 262 392 246 C392 282 378 306 362 344 Z" fill="#5f7a5c"/>
+    <path d="M360 344 C366 312 382 300 404 296 C396 318 380 332 362 344 Z" fill="#6f8a69"/></g>
+  <g><line x1="772" y1="150" x2="772" y2="412" stroke="#2c2f33" stroke-width="5"/><path d="M742 150 L802 150 L790 106 L754 106 Z" fill="#f3ead9"/><ellipse cx="772" cy="414" rx="24" ry="6" fill="#2c2f33"/></g>
+</svg>"""
+
+
 def home():
     pg = Page("")
-    services = "".join(card(pg, pg.u(h), i, t, x) for h, i, t, x in SERVICES)
-    benefits = "".join(f'<div>{pg.img("list_icon.png", "", w=13, h=15)}{b}</div>' for b in [
+    tiles = "".join(f"""<a class="tile rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="num">0{n + 1}</span><span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>"""
+                    for n, (h, i, t, x) in enumerate(SERVICES))
+    plc = places()
+    band = "".join(f"<span>{name}</span>" for name, _ in plc)
+    picks = ["babu-gent", "buitenschilderwerken-kasteel-blauwhuis-te-izegem", "gevel-villa-te-knokke", "rood-leefruimte-te-marke-stop-rood",
+             "villa-te-zwijnaarde", "tastoe-roeselare", "schilderen-gevel-te-kortrijk", "boetiek-gastronomiek-culix-te-merelbeke"]
+    shots = "".join(
+        f"""<a class="shot" href="{pg.u(f"realisaties/{r['slug']}/")}">{pg.img(r["img"], r["title"])}<span class="chip">{" · ".join(LABELS[c] for c in r["cats"]) or ("Project" if r["type"] == "project" else "Particulier")}</span><h3>{escape(r["title"])}</h3></a>"""
+        for s_ in picks for r in REAL if r["slug"] == s_)
+    four = [("Stielkennis", "voor een vakkundige uitvoering."), ("Service", "voor een zorgeloze samenwerking."),
+            ("Snelheid", "voor een vlotte en duidelijke planning."), ("Stijl", "voor een afwerking tot in de kleinste details.")]
+    four_li = "".join(f'<li{" class=on" if n == 0 else ""}><button type="button"><span class="s-word">{w}</span><span class="s-desc">{d[0].upper() + d[1:]}</span></button></li>' for n, (w, d) in enumerate(four))
+    swatches = "".join(f'<li><button type="button" style="background:{c}" data-color="{c}" data-name="{n}" aria-label="{n}" aria-pressed="{str(i == 0).lower()}"></button></li>' for i, (n, c) in enumerate(COLORS))
+    ticks = "".join(f'<li class="rv" style="--i:{i % 4}">{b}</li>' for i, b in enumerate([
         "Ervaren vakmensen", "Persoonlijke aanpak", "Meedenkend advies", "Nakomen van afspraken &amp; planning",
-        "Capaciteit en flexibiliteit", "Tijdige en heldere offertes", "Duidelijke communicatie", "Netheid op de werf"])
-    recent = [r for s in ["babu-gent", "buitenschilderwerken-kasteel-blauwhuis-te-izegem", "gevel-villa-te-knokke"] for r in REAL if r["slug"] == s]
-    recent_cards = "".join(card(pg, pg.u(f"realisaties/{r['slug']}/"), r["img"], r["title"], more="Bekijk realisatie") for r in recent)
+        "Capaciteit en flexibiliteit", "Tijdige en heldere offertes", "Duidelijke communicatie", "Netheid op de werf"]))
     body = f"""
-<section class="hero"><div class="wrap">
+<section class="hx"><div class="wrap hx__grid">
   <div>
     <span class="eyebrow">Schilderwerken &amp; interieurafwerking · {REGIO}</span>
-    <h1>Een mooi resultaat begint lang voor de eerste verflaag.</h1>
+    <h1><span class="line"><span style="--i:0">Een mooi resultaat</span></span><span class="line"><span style="--i:1">begint lang voor de</span></span><span class="line"><span style="--i:2"><em class="stroke">eerste verflaag.</em></span></span></h1>
     <p class="lead">Wij begeleiden u van kleuradvies tot een perfect afgewerkt eindresultaat. Met persoonlijk advies, duidelijke communicatie en een ervaren team zorgen we voor een zorgeloos traject van begin tot einde.</p>
-    <p class="power-title">Wij bezorgen Schilderkracht tot de vierde macht</p>
-    <ul class="power">
-      <li><b>Stielkennis</b>voor een vakkundige uitvoering.</li>
-      <li><b>Service</b>voor een zorgeloze samenwerking.</li>
-      <li><b>Snelheid</b>voor een vlotte en duidelijke planning.</li>
-      <li><b>Stijl</b>voor een afwerking tot in de kleinste details.</li>
+    <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a><a class="btn btn--ghost" href="#offerte">Offerte aanvragen</a></div>
+    <ul class="hx__stats">
+      <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring in het schildersvak</li>
+      <li><b data-count="10">10</b>jaar garantie op gevelschilderwerk* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
+      <li><b data-count="{len(plc)}">{len(plc)}</b>gemeenten in onze realisaties, in {REGIO}</li>
     </ul>
-    <p style="margin-top:22px">Zo creëren we ruimtes waar mensen graag wonen, werken en leven.</p>
-    <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a><a class="btn btn--ghost" href="{pg.u('contact/')}">Offerte aanvragen</a></div>
   </div>
-  <div class="hero__img">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD", lazy=False)}</div>
-</div></section>
-{trust_strip(pg)}
+  <div class="hx__visual">
+    <div class="blob">{pg.img("1045_home_header.webp", "Kunstzinnig portret beschilderd in de kleuren van SDAD", lazy=False)}</div>
+    {pg.img("red_deco.png", "", cls="d1", w=220, h=240).replace("<img", '<img data-parallax="-0.08"')}
+    {pg.img("grey_deco.png", "", cls="d2", w=220, h=240).replace("<img", '<img data-parallax="0.12"')}
+  </div>
+</div><span class="scroll-cue" aria-hidden="true"></span></section>
+
+<div class="marquee" aria-label="Plaatsen waar we werkten"><div class="marquee__track">{band}{band.replace("<span>", '<span aria-hidden="true">')}</div></div>
 
 <section class="section"><div class="wrap">
-  <div class="head-row"><div><span class="eyebrow">Onze diensten</span><h2>Wat we voor u doen</h2></div></div>
-  <div class="grid services">{services}</div>
+  <div class="intro-row rv"><div><span class="eyebrow">Onze diensten</span><h2>Wat we voor u <em class="stroke">doen</em></h2></div>
+  <p>Binnen- en buitenschilderwerken, decoratieve technieken en interieurafwerking met gordijnen en lamellen. Van kleuradvies tot oplevering.</p></div>
+  <div class="bento">{tiles}</div>
+</div></section>
+
+<section class="section four"><div class="wrap four__grid">
+  <div class="rv"><span class="four__big" aria-hidden="true">S<sup>4</sup></span>
+    <h2>Schilderkracht tot de vierde macht</h2><p>Zo creëren we ruimtes waar mensen graag wonen, werken en leven.</p></div>
+  <ul class="s-list rv" style="--i:1">{four_li}</ul>
+</div></section>
+
+<section class="section" id="kleurtool"><div class="wrap tool">
+  <div class="room rv">{ROOM_SVG}</div>
+  <div class="rv" style="--i:1">
+    <span class="eyebrow">Probeer het zelf</span><h2>Welke kleur past bij <em class="stroke">uw interieur</em>?</h2>
+    <p>De juiste kleur bepaalt mee de sfeer van een ruimte. Kies een kleur en zie het verschil.</p>
+    <div class="seg" role="group" aria-label="Wat schilderen"><button type="button" data-mode="all" aria-pressed="true">Hele muur</button><button type="button" data-mode="accent" aria-pressed="false">Accentmuur</button></div>
+    <p class="swatch-name" aria-live="polite">Kalkwit</p><p class="swatch-hex">#EEEAE2</p>
+    <ul class="swatches">{swatches}</ul>
+    <p class="note">Indicatief: kleuren op een scherm wijken af van echte verf. Elke kleur heeft een andere uitstraling afhankelijk van de ruimte en de lichtinval. Daarom bekijken we kleuren samen met u ter plaatse.</p>
+    <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Kleuradvies bij u thuis</a></div>
+  </div>
 </div></section>
 
 <section class="section section--soft"><div class="wrap split">
-  <div>
+  <div class="rv">
     <span class="eyebrow">Over SDAD</span><h2>Advies &amp; vakmanschap</h2>
     <p>Bij <a href="{pg.u('over-sdad/')}">SDAD</a> begeleiden we particulieren en bedrijven bij <a href="{pg.u('diensten/schilderwerken/binnen/')}">binnen</a>- en <a href="{pg.u('diensten/schilderwerken/buiten/')}">buitenschilderwerken</a>, <a href="{pg.u('diensten/schilderwerken/decoratieve-technieken/')}">decoratieve technieken</a> en interieurafwerking (<a href="{pg.u('diensten/interieurafwerking/gordijnen/')}">gordijnen</a> en <a href="{pg.u('diensten/interieurafwerking/lamellen/')}">lamellen</a>). Van kleuradvies tot oplevering zorgen we voor een resultaat waarin kwaliteit, uitstraling en vakmanschap samenkomen.</p>
     <p>Met meer dan 25 jaar ervaring en een team van gespecialiseerde schilders beschikken we over de kennis en expertise om elk project professioneel uit te voeren. Of het nu gaat om een woning, kantoor, praktijkruimte, horecazaak of residentieel project, we denken mee over de juiste keuzes en zorgen voor een afwerking die jarenlang blijft overtuigen.</p>
     <p>Wat ons onderscheidt, is onze persoonlijke aanpak. We luisteren naar uw wensen, adviseren waar nodig en communiceren helder gedurende het volledige traject. Zo weet u steeds waar u aan toe bent en kan u rekenen op een zorgeloze samenwerking van eerste gesprek tot oplevering.</p>
     <p>De basis van dat vertrouwen is eenvoudig: <strong>we doen wat we zeggen en zeggen wat we doen.</strong></p>
-    <div class="btns"><a class="btn" href="{pg.u('over-sdad/')}">Meer over ons</a><a class="btn btn--ghost" href="{pg.u('contact/')}">Contacteer ons</a></div>
+    <div class="btns"><a class="btn" href="{pg.u('over-sdad/')}">Meer over ons</a></div>
   </div>
-  <div>{pg.img("1_kleurbepaling_linkedin.webp", "Kleurbepaling met kleurstalen bij SDAD")}</div>
-</div>{pg.img("red_deco.png", "", cls="deco deco--br", w=220, h=240)}</section>
+  <div class="rv" style="--i:1">{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens van SDAD")}</div>
+</div></section>
 {werkwijze(pg)}
 
-<section class="section"><div class="wrap">
-  <span class="eyebrow">Waarom SDAD</span><h2>Daarom kiezen klanten voor SDAD</h2>
-  <div class="benefits">{benefits}</div>
-</div></section>
+<section class="section rail-wrap"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Portfolio</span><h2>Recente realisaties</h2></div>
+    <div class="rail-nav"><a class="arrow-link" href="{pg.u('realisaties/')}" style="align-self:center;margin-right:10px">Alle realisaties</a><button type="button" data-dir="-1" aria-label="Vorige">←</button><button type="button" data-dir="1" aria-label="Volgende">→</button></div></div>
+</div>
+<div><div class="rail" tabindex="0" aria-label="Realisaties, horizontaal scrollen">{shots}</div></div>
+</section>
 
 <section class="section section--soft"><div class="wrap">
-  <div class="head-row"><div><span class="eyebrow">Portfolio</span><h2>Recente realisaties</h2></div><a class="arrow-link" href="{pg.u('realisaties/')}">Alle realisaties</a></div>
-  <div class="grid grid--3">{recent_cards}</div>
+  <span class="eyebrow">Waarom SDAD</span><h2 class="rv">Daarom kiezen klanten voor SDAD</h2>
+  <ul class="ticks" style="margin-top:32px">{ticks}</ul>
+</div></section>
+
+<section class="section" id="offerte" style="scroll-margin-top:80px"><div class="wrap split" style="align-items:start">
+  <div class="wiz-aside rv"><span class="eyebrow">Offerte aanvragen</span><h2>Uw project in <em class="stroke">4 stappen</em></h2>
+    <p>Vertel ons kort wat u wilt laten doen. We reageren snel en plannen graag een vrijblijvend plaatsbezoek.</p>
+    <ul><li>Vrijblijvend plaatsbezoek</li><li>Persoonlijk advies over kleuren en afwerking</li><li>Een duidelijke offerte en planning</li></ul>
+    <p style="margin-top:22px">Liever meteen een afspraak? <a href="{BOOKING}" target="_blank" rel="noopener">Plan zelf uw plaatsbezoek</a>.</p></div>
+  {wizard()}
 </div></section>
 {werkgebied(pg)}
 {cta(pg)}"""
     write(pg, layout(pg, "Schilderwerken SDAD | binnen, buiten en interieurafwerking",
                      "Bij schilderwerken SDAD uit Izegem kunt u terecht voor professionele binnen en buiten schilderwerken, decoratieve afwerkingen en raamdecoratie in Oost- en West-Vlaanderen.", body))
+
+
+def wizard():
+    def opts(name, items, kind="radio"):
+        return '<div class="opts">' + "".join(f'<label><input type="{kind}" name="{name}" value="{v}"><span>{v}</span></label>' for v in items) + "</div>"
+    return f"""<div class="wiz rv" style="--i:1"><form onsubmit="return false" novalidate>
+  <div class="wiz__body">
+    <div class="wiz__bar"><span></span></div>
+    <fieldset class="wiz__step"><legend>Wat mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
+      {opts("dienst", ["Binnenschilderwerken", "Buitenschilderwerken", "Decoratieve technieken", "Gordijnen", "Lamellen"], "checkbox")}</fieldset>
+    <fieldset class="wiz__step"><legend>Over welk pand gaat het?</legend><p class="hint">Kies wat het best past.</p>
+      {opts("pand", ["Woning", "Appartement", "Nieuwbouw", "Kantoor of praktijk", "Handelszaak of horeca", "Residentieel project"])}</fieldset>
+    <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
+      {opts("timing", ["Zo snel mogelijk", "Binnen 3 maanden", "Later dit jaar", "Nog geen idee"])}</fieldset>
+    <fieldset class="wiz__step"><legend>Hoe bereiken we u?</legend><p class="hint">We reageren snel op uw aanvraag.</p>
+      <div class="form-grid">
+        <div><label for="w-n">Naam *</label><input id="w-n" name="naam" required autocomplete="name"></div>
+        <div><label for="w-g">Gemeente *</label><input id="w-g" name="gemeente" required autocomplete="address-level2"></div>
+        <div><label for="w-t">Telefoon *</label><input id="w-t" name="telefoon" type="tel" required autocomplete="tel"></div>
+        <div><label for="w-e">E-mail *</label><input id="w-e" name="email" type="email" required autocomplete="email"></div>
+        <div class="full"><label for="w-b">Nog iets dat we moeten weten?</label><textarea id="w-b" name="bericht" rows="3"></textarea></div>
+        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
+      </div></fieldset>
+    <p class="wiz__err" aria-live="polite"></p>
+    <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
+  </div>
+  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>Uw e-mailprogramma opent met uw aanvraag. Verstuur ze daar, dan nemen we snel contact op.</p></div>
+</form></div>"""
 
 
 # ---------- Over SDAD ----------
