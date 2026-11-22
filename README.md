@@ -16,6 +16,7 @@ Herbouw van sdad.be met dezelfde inhoud en huisstijl (rood #da291c, antraciet #4
 
 ## Offertepagina (voorstel voor offerteschilderwerken.be)
 - Staat op `/offerte/` (functie `offerte_page()` in `build.py`), zelfde huisstijl als de site.
+- Doel volgens LocaliQ (VS, 2024-2025): schilders halen op Google Ads gemiddeld ca. 10,8% conversie (formulier + oproepen).
 - Opgebouwd volgens onderzoek naar conversie: formulier bovenaan in 3 stappen (werk, timing, contact; adres beperkt tot postcode), geen menu of uitgaande links, statische hoofdfoto, eigen realisaties met plaats, 4 stappen, korte FAQ, terugbelformulier.
 - Nog aan te leveren door SDAD: 3 echte reviews met naam en gemeente, voor/na-foto's.
 - Het formulier In deze demo opent het bij verzenden het e-mailprogramma; voor livegang koppelen aan het bestaande Webflow/HubSpot-formulier.

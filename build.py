@@ -1157,7 +1157,7 @@ def offerte_wizard(pg):
     <p class="lp-wiz__title">Gratis offerte in 3 stappen <span>Vrijblijvend</span></p>
     <div class="wiz__bar"><span></span></div>
     <fieldset class="wiz__step"><legend>Welk werk mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
-      {opts("Werken", ["Binnenschilderwerken", "Buitenschilderwerken", "Decoratieve technieken", "Ramen, deuren of trap", "Gordijnen, lamellen of raamfolie"], "checkbox", "Kies minstens één soort werk.")}</fieldset>
+      {opts("Werken", ["Binnenschilderwerken", "Buitenschilderwerken", "Decoratieve technieken", "Ramen, deuren of trap", "Gordijnen, lamellen of raamfolie", "Nog niet zeker, ik wil advies"], "checkbox", "Kies minstens één optie.")}</fieldset>
     <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
       {opts("Timing", ["Zo snel mogelijk", "Binnen 3 maanden", "Later dit jaar", "Nog geen idee"], "radio", "Kies een periode.")}
       <p class="hint" style="margin-top:18px">Voor wie is het?</p>

@@ -22,7 +22,7 @@
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts/fonts.css?v=0ea0c2b5">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=40c2f637">
 <style>/* SDAD – huisstijl: rood #da291c, antraciet #4b4f54, zwart #00080a, Avenir Next */
 :root {
   --red: #da291c;
@@ -1457,7 +1457,7 @@ html.menu-lock { overflow: hidden; }
     <p class="lp-wiz__title">Gratis offerte in 3 stappen <span>Vrijblijvend</span></p>
     <div class="wiz__bar"><span></span></div>
     <fieldset class="wiz__step"><legend>Welk werk mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
-      <div class="opts" data-need="Kies minstens één soort werk."><label><input type="checkbox" name="Werken" value="Binnenschilderwerken"><span>Binnenschilderwerken</span></label><label><input type="checkbox" name="Werken" value="Buitenschilderwerken"><span>Buitenschilderwerken</span></label><label><input type="checkbox" name="Werken" value="Decoratieve technieken"><span>Decoratieve technieken</span></label><label><input type="checkbox" name="Werken" value="Ramen, deuren of trap"><span>Ramen, deuren of trap</span></label><label><input type="checkbox" name="Werken" value="Gordijnen, lamellen of raamfolie"><span>Gordijnen, lamellen of raamfolie</span></label></div></fieldset>
+      <div class="opts" data-need="Kies minstens één optie."><label><input type="checkbox" name="Werken" value="Binnenschilderwerken"><span>Binnenschilderwerken</span></label><label><input type="checkbox" name="Werken" value="Buitenschilderwerken"><span>Buitenschilderwerken</span></label><label><input type="checkbox" name="Werken" value="Decoratieve technieken"><span>Decoratieve technieken</span></label><label><input type="checkbox" name="Werken" value="Ramen, deuren of trap"><span>Ramen, deuren of trap</span></label><label><input type="checkbox" name="Werken" value="Gordijnen, lamellen of raamfolie"><span>Gordijnen, lamellen of raamfolie</span></label><label><input type="checkbox" name="Werken" value="Nog niet zeker, ik wil advies"><span>Nog niet zeker, ik wil advies</span></label></div></fieldset>
     <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
       <div class="opts" data-need="Kies een periode."><label><input type="radio" name="Timing" value="Zo snel mogelijk"><span>Zo snel mogelijk</span></label><label><input type="radio" name="Timing" value="Binnen 3 maanden"><span>Binnen 3 maanden</span></label><label><input type="radio" name="Timing" value="Later dit jaar"><span>Later dit jaar</span></label><label><input type="radio" name="Timing" value="Nog geen idee"><span>Nog geen idee</span></label></div>
       <p class="hint" style="margin-top:18px">Voor wie is het?</p>
@@ -3273,6 +3273,27 @@ document.querySelectorAll('.hx__video').forEach(v => {
   btn?.addEventListener('click', () => { if (v.paused) { v.play(); set(false); } else { v.pause(); set(true); } });
   v.addEventListener('pause', () => set(true)); v.addEventListener('play', () => set(false));
   const p = v.play && v.play(); if (p && p.catch) p.catch(() => set(true));
+});
+
+// Offerteformulier: ingevulde gegevens bewaren tijdens het bezoek (bij terugkeren of herladen)
+document.querySelectorAll('.lp-wiz form').forEach(form => {
+  const KEY = 'sdad-offerte';
+  const save = () => { try {
+    const data = {}; form.querySelectorAll('input, textarea').forEach(el => {
+      if (el.name === 'website') return;
+      if (el.type === 'checkbox' || el.type === 'radio') { if (el.checked) (data[el.name] ||= []).push(el.value); }
+      else data[el.name] = el.value;
+    }); sessionStorage.setItem(KEY, JSON.stringify(data));
+  } catch (e) {} };
+  try {
+    const data = JSON.parse(sessionStorage.getItem(KEY) || '{}');
+    form.querySelectorAll('input, textarea').forEach(el => {
+      const v = data[el.name]; if (v === undefined) return;
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = Array.isArray(v) && v.includes(el.value); else el.value = v;
+    });
+    form.dispatchEvent(new Event('change'));
+  } catch (e) {}
+  form.addEventListener('input', save); form.addEventListener('change', save);
 });
 </script>
 </body>

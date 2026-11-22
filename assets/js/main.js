@@ -330,3 +330,24 @@ document.querySelectorAll('.hx__video').forEach(v => {
   v.addEventListener('pause', () => set(true)); v.addEventListener('play', () => set(false));
   const p = v.play && v.play(); if (p && p.catch) p.catch(() => set(true));
 });
+
+// Offerteformulier: ingevulde gegevens bewaren tijdens het bezoek (bij terugkeren of herladen)
+document.querySelectorAll('.lp-wiz form').forEach(form => {
+  const KEY = 'sdad-offerte';
+  const save = () => { try {
+    const data = {}; form.querySelectorAll('input, textarea').forEach(el => {
+      if (el.name === 'website') return;
+      if (el.type === 'checkbox' || el.type === 'radio') { if (el.checked) (data[el.name] ||= []).push(el.value); }
+      else data[el.name] = el.value;
+    }); sessionStorage.setItem(KEY, JSON.stringify(data));
+  } catch (e) {} };
+  try {
+    const data = JSON.parse(sessionStorage.getItem(KEY) || '{}');
+    form.querySelectorAll('input, textarea').forEach(el => {
+      const v = data[el.name]; if (v === undefined) return;
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = Array.isArray(v) && v.includes(el.value); else el.value = v;
+    });
+    form.dispatchEvent(new Event('change'));
+  } catch (e) {}
+  form.addEventListener('input', save); form.addEventListener('change', save);
+});
