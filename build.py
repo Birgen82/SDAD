@@ -345,10 +345,20 @@ def places():
     return out
 
 
+SLIDES = [("buitenschilderwerken-kasteel-blauwhuis-te-izegem", "1918_blauwhuis_buiten_1.webp", "Kasteel Blauwhuis, Izegem"),
+          ("schilderen-gevel-te-kortrijk", "1893_kortrijk_afgewerkt.webp", "Gevel te Kortrijk"),
+          ("rood-residentie-porto-fino-te-wenduine-stop-rood", "2020_wenduine_4.webp", "Residentie Porto Fino, Wenduine"),
+          ("gevel-villa-te-knokke", "2044_knokke_na_1_3.webp", "Villa te Knokke"),
+          ("frituur-de-platse-lendelede", "1965_frituur_15.webp", "Frituur De Platse, Lendelede")]
+
+
 def home():
     pg = Page("")
     tiles = "".join(f"""<a class="tile rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="num">0{n + 1}</span><span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>"""
                     for n, (h, i, t, x) in enumerate(SERVICES))
+    slides = "".join(f'<div class="hx__slide{" on" if n == 0 else ""}" data-href="{pg.u(f"realisaties/{sl}/")}" data-label="{lab}">{pg.img(im, "", lazy=False).replace("<img", "<img fetchpriority=\"high\"" if n == 0 else "<img decoding=\"async\"")}</div>'
+                     for n, (sl, im, lab) in enumerate(SLIDES))
+    dots = "".join(f'<i{" class=on" if n == 0 else ""}></i>' for n in range(len(SLIDES)))
     cpicks = [("schilderen-gevel-te-kortrijk", "cg1", "1893_kortrijk_afgewerkt.webp"), ("rood-residentie-porto-fino-te-wenduine-stop-rood", "cg2", "2020_wenduine_4.webp"),
               ("babu-gent", "cg3", "2311_babu_na_1.webp")]
     collage = "".join(f'<a class="cg {c}" href="{pg.u(f"realisaties/{r["slug"]}/")}">{pg.img(im, r["title"], lazy=False)}<span class="chip">{escape(r["title"])}</span></a>'
@@ -365,22 +375,23 @@ def home():
         "Ervaren vakmensen", "Persoonlijke aanpak", "Meedenkend advies", "Nakomen van afspraken &amp; planning",
         "Capaciteit en flexibiliteit", "Tijdige en heldere offertes", "Duidelijke communicatie", "Netheid op de werf"]))
     body = f"""
-<section class="hx"><div class="wrap hx__grid">
-  <div>
+<section class="hx hx--full">
+  <div class="hx__slides" aria-hidden="true">{slides}</div>
+  <div class="wrap hx__inner">
+    <div class="hx__content">
     <span class="eyebrow">Schilderwerken &amp; interieurafwerking · {REGIO}</span>
     <h1><span class="line"><span style="--i:0">Een mooi resultaat</span></span><span class="line"><span style="--i:1">begint lang voor de</span></span><span class="line"><span style="--i:2"><em class="stroke">eerste verflaag.</em></span></span></h1>
-    <p class="lead">Wij begeleiden u van kleuradvies tot een perfect afgewerkt eindresultaat. Met persoonlijk advies, duidelijke communicatie en een ervaren team zorgen we voor een zorgeloos traject van begin tot einde.</p>
+    <p class="lead">Van kleuradvies tot een perfect afgewerkt eindresultaat, met persoonlijk advies en een ervaren team.</p>
     <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-    <p class="hx__note">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag? <a href="{pg.u('contact/')}">Contacteer ons</a>.</p>
+    <p class="hx__note">Daarna ontvangt u een duidelijke offerte en planning. Liever eerst een vraag? <a href="{pg.u('contact/')}">Contacteer ons</a>.</p>
     <ul class="hx__stats">
-      <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring in het schildersvak</li>
-      <li><b data-count="10">10</b>jaar garantie op gevelschilderwerk* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
+      <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring</li>
+      <li><b data-count="10">10</b>jaar garantie op gevels* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
     </ul>
+    </div>
+    <a class="hx__caption" href="{pg.u(f"realisaties/{SLIDES[0][0]}/")}"><span class="hx__dots">{dots}</span><span class="hx__label">{SLIDES[0][2]}</span></a>
   </div>
-  <div class="hx__visual collage">
-    {collage}
-  </div>
-</div><span class="scroll-cue" aria-hidden="true"></span></section>
+</section>
 
 <section class="section rail-wrap"><div class="wrap">
   <div class="head-row rv"><div><span class="eyebrow">Recent werk</span><h2>Ons werk spreekt <em class="stroke">voor zich</em></h2></div>

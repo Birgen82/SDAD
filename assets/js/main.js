@@ -291,3 +291,19 @@ if (prog && artBody) {
   };
   addEventListener('scroll', upd, { passive: true }); upd();
 }
+
+// Hero-slideshow
+document.querySelectorAll('.hx__slides').forEach(box => {
+  const slides = [...box.children]; if (slides.length < 2) return;
+  const cap = document.querySelector('.hx__caption'), label = cap?.querySelector('.hx__label'), dots = cap ? [...cap.querySelectorAll('.hx__dots i')] : [];
+  let i = 0;
+  const go = n => {
+    slides[i].classList.remove('on'); dots[i]?.classList.remove('on');
+    i = n % slides.length;
+    slides[i].classList.add('on'); dots[i]?.classList.add('on');
+    if (cap) { cap.href = slides[i].dataset.href; label.textContent = slides[i].dataset.label; }
+  };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let t = setInterval(() => go(i + 1), 5500);
+  document.addEventListener('visibilitychange', () => { clearInterval(t); if (!document.hidden) t = setInterval(() => go(i + 1), 5500); });
+});
