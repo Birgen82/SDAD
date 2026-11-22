@@ -24,7 +24,7 @@
 <body>
 <a class="skip" href="#main">Naar inhoud</a>
 <div class="topbar"><div class="wrap">
-  <span>Prinsdomlaan 50, 8870 Izegem · actief in Oost- en West-Vlaanderen</span>
+  <span>Prinsdomlaan 50, 8870 Izegem</span>
   <a href="tel:+32473520920">0473 52 09 20</a>
   <a href="mailto:info@sdad.be">info@sdad.be</a>
 </div></div>
@@ -46,30 +46,38 @@
     <div class="contact-card"><h3>SDAD bv</h3><p>Prinsdomlaan 50<br>8870 Izegem<br>BE0823.935.816</p><p style="margin-top:10px"><a href="https://www.google.com/maps/search/?api=1&query=Prinsdomlaan+50+8870+Izegem" target="_blank" rel="noopener" style="font-size:1rem">Route plannen →</a></p></div>
     <div class="contact-card"><h3>Lies Nuyttens</h3><p><a href="tel:+32473520920">0473 52 09 20</a></p></div><div class="contact-card"><h3>Arne Deseure</h3><p><a href="tel:+32478428195">0478 42 81 95</a></p></div>
     <div class="contact-card"><h3>E-mail</h3><p><a href="mailto:info@sdad.be">info@sdad.be</a></p></div>
-    <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in.</p><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
+    <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in. Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning.</p><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
   </div>
-  <form class="form" id="contact-form">
-    <h2 style="font-size:2rem">Stel ons een vraag</h2>
-    <div class="form-grid">
-      <div><label for="f-vn">Naam *</label><input id="f-vn" name="voornaam" required autocomplete="given-name"></div>
-      <div><label for="f-n">Familienaam *</label><input id="f-n" name="naam" required autocomplete="family-name"></div>
-      <div class="full"><label for="f-a">Straat + huisnr. *</label><input id="f-a" name="adres" required autocomplete="street-address"></div>
-      <div><label for="f-pc">Postcode *</label><input id="f-pc" name="postcode" required autocomplete="postal-code" inputmode="numeric"></div>
-      <div><label for="f-s">Stad *</label><input id="f-s" name="stad" required autocomplete="address-level2"></div>
-      <div><label for="f-t">Telefoon *</label><input id="f-t" name="telefoon" type="tel" required autocomplete="tel"></div>
-      <div><label for="f-e">E-mail *</label><input id="f-e" name="email" type="email" required autocomplete="email"></div>
-      <div class="hp" aria-hidden="true"><label for="f-w">Website</label><input id="f-w" name="website" tabindex="-1" autocomplete="off"></div>
-      <div class="full"><label for="f-m">Hoe kunnen we je helpen? *</label><textarea id="f-m" name="bericht" rows="5" required></textarea></div>
-      <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="../cookie-en-privacybeleid/" target="_blank">Cookie- en privacybeleid</a></span></label></div>
-    </div>
-    <button class="btn" type="submit" style="margin-top:20px">Verstuur bericht</button>
-    <p class="form-note" aria-live="polite">We reageren snel op uw vraag.</p>
-  </form>
+  <div><h2 style="font-size:clamp(1.8rem,3vw,2.4rem)">Stel uw vraag in 4 korte stappen</h2>
+  <div class="wiz rv" style="--i:1"><form onsubmit="return false" novalidate>
+  <div class="wiz__body">
+    <div class="wiz__bar"><span></span></div>
+    <fieldset class="wiz__step"><legend>Wat mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
+      <div class="opts"><label><input type="checkbox" name="dienst" value="Binnenschilderwerken"><span>Binnenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Buitenschilderwerken"><span>Buitenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Decoratieve technieken"><span>Decoratieve technieken</span></label><label><input type="checkbox" name="dienst" value="Gordijnen"><span>Gordijnen</span></label><label><input type="checkbox" name="dienst" value="Lamellen"><span>Lamellen</span></label></div></fieldset>
+    <fieldset class="wiz__step"><legend>Over welk pand gaat het?</legend><p class="hint">Kies wat het best past.</p>
+      <div class="opts"><label><input type="radio" name="pand" value="Woning"><span>Woning</span></label><label><input type="radio" name="pand" value="Appartement"><span>Appartement</span></label><label><input type="radio" name="pand" value="Nieuwbouw"><span>Nieuwbouw</span></label><label><input type="radio" name="pand" value="Kantoor of praktijk"><span>Kantoor of praktijk</span></label><label><input type="radio" name="pand" value="Handelszaak of horeca"><span>Handelszaak of horeca</span></label><label><input type="radio" name="pand" value="Residentieel project"><span>Residentieel project</span></label></div></fieldset>
+    <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
+      <div class="opts"><label><input type="radio" name="timing" value="Zo snel mogelijk"><span>Zo snel mogelijk</span></label><label><input type="radio" name="timing" value="Binnen 3 maanden"><span>Binnen 3 maanden</span></label><label><input type="radio" name="timing" value="Later dit jaar"><span>Later dit jaar</span></label><label><input type="radio" name="timing" value="Nog geen idee"><span>Nog geen idee</span></label></div></fieldset>
+    <fieldset class="wiz__step"><legend>Hoe bereiken we u?</legend><p class="hint">We reageren snel op uw aanvraag.</p>
+      <div class="form-grid">
+        <div><label for="w-n">Naam *</label><input id="w-n" name="naam" required autocomplete="name"></div>
+        <div><label for="w-g">Gemeente *</label><input id="w-g" name="gemeente" required autocomplete="address-level2"></div>
+        <div><label for="w-t">Telefoon *</label><input id="w-t" name="telefoon" type="tel" required autocomplete="tel"></div>
+        <div><label for="w-e">E-mail *</label><input id="w-e" name="email" type="email" required autocomplete="email"></div>
+        <div class="full"><label for="w-b">Nog iets dat we moeten weten?</label><textarea id="w-b" name="bericht" rows="3"></textarea></div>
+        <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="../cookie-en-privacybeleid/" target="_blank">Cookie- en privacybeleid</a></span></label></div>
+        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
+      </div></fieldset>
+    <p class="wiz__err" aria-live="polite"></p>
+    <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
+  </div>
+  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>Uw e-mailprogramma opent met uw aanvraag. Verstuur ze daar, dan nemen we snel contact op.</p></div>
+</form></div></div>
 </div></section>
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="../contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="../contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </main>
 <footer class="footer"><div class="wrap">

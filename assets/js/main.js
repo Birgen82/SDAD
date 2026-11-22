@@ -106,7 +106,10 @@ document.querySelectorAll('main .section .wrap > *:not(.rv), main .grid > *, mai
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
 }), { rootMargin: '0px 0px -8% 0px' }) : null;
-document.querySelectorAll('.rv, .hx, .stroke').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+// Bij een sprong naar een anker of zonder ondersteuning: alles meteen tonen
+const showAll = () => document.querySelectorAll('.rv, .hx, .stroke').forEach(el => el.classList.add('in'));
+if (!io || location.hash) showAll(); else document.querySelectorAll('.rv, .hx, .stroke').forEach(el => io.observe(el));
+addEventListener('hashchange', showAll);
 
 // Header: compacter en verbergen bij naar beneden scrollen
 const header = document.querySelector('.header');
@@ -140,16 +143,6 @@ const decos = document.querySelectorAll('[data-parallax]');
 if (decos.length && !reduce) {
   addEventListener('scroll', () => decos.forEach(d => d.style.transform = `translateY(${scrollY * d.dataset.parallax}px) rotate(${scrollY * d.dataset.parallax * .15}deg)`), { passive: true });
 }
-
-// Vier S: actief woord
-document.querySelectorAll('.s-list').forEach(list => {
-  const items = [...list.children];
-  const set = li => items.forEach(x => x.classList.toggle('on', x === li));
-  items.forEach(li => {
-    const b = li.querySelector('button');
-    b.addEventListener('mouseenter', () => set(li)); b.addEventListener('focus', () => set(li)); b.addEventListener('click', () => set(li));
-  });
-});
 
 // Werkwijze: stappen lichten op tijdens scrollen
 document.querySelectorAll('.flow__steps').forEach(ol => {

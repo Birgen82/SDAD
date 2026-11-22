@@ -441,7 +441,7 @@ h3 { font-stretch: 80%; }
 @media (max-width: 980px) { .nav > a::after { display: none; } .header.is-hidden { transform: none; } .nav { background: var(--plaster); } }
 
 /* Verschijnen bij scrollen */
-.js .rv { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
+.js .rv { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
 .js .rv.in { opacity: 1; transform: none; }
 
 /* Verfstreek onder kernwoorden */
@@ -481,14 +481,6 @@ h3 { font-stretch: 80%; }
 .scroll-cue::after { content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: #fff; animation: cue 1.8s infinite; }
 @keyframes cue { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
 
-/* ---------- Lopende band ---------- */
-.marquee { background: var(--red); color: #fff; overflow: hidden; padding: 18px 0; white-space: nowrap; user-select: none; }
-.marquee__track { display: inline-flex; gap: 40px; animation: marquee 40s linear infinite; padding-left: 40px; }
-.marquee span { font: 800 clamp(1.3rem, 2.4vw, 1.9rem)/1 var(--head); font-stretch: 72%; text-transform: uppercase; letter-spacing: .02em; display: inline-flex; align-items: center; gap: 40px; }
-.marquee span::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.55); }
-.marquee:hover .marquee__track { animation-play-state: paused; }
-@keyframes marquee { to { transform: translateX(-50%); } }
-
 /* ---------- Bento diensten ---------- */
 .intro-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: clamp(28px, 4vw, 52px); }
 .intro-row h2 { margin: 0; }
@@ -505,12 +497,10 @@ h3 { font-stretch: 80%; }
 .tile:hover img { transform: scale(1.07); }
 .tile:hover::before { background: linear-gradient(180deg, rgba(218,41,28,.15) 0%, rgba(0,8,10,.85)); }
 .tile h3 { color: #fff; font-size: clamp(1.6rem, 2.4vw, 2.3rem); margin: 0 0 6px; }
-.tile p { margin: 0; font-size: .95rem; max-width: 420px; color: #e6e7e8; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s var(--ease), opacity .4s; }
-.tile:hover p, .tile:focus-visible p { max-height: 120px; opacity: 1; }
+.tile p { margin: 0; font-size: .95rem; max-width: 420px; color: #e6e7e8; }
 .tile .go { position: absolute; top: 18px; right: 18px; width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; font-size: 1.2rem; transform: rotate(-45deg); transition: transform .35s var(--ease), background .3s, color .3s; }
 .tile:hover .go { transform: rotate(0); background: var(--red); color: #fff; }
 .tile .num { position: absolute; top: 20px; left: 24px; font: 700 .8rem/1 var(--body); letter-spacing: .14em; opacity: .85; }
-@media (hover: none) { .tile p { max-height: none; opacity: 1; } }
 
 /* ---------- Vier S ---------- */
 .four { background: var(--ink); color: #c9cbcd; }
@@ -520,16 +510,14 @@ h3 { font-stretch: 80%; }
 .four h2 { color: #fff; }
 .s-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid #263035; }
 .s-list li { border-bottom: 1px solid #263035; }
-.s-list button { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: flex; align-items: baseline; gap: 18px; padding: 20px 0; }
-.s-list button:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
-.s-list .s-word { font: 800 clamp(1.9rem, 4vw, 3.2rem)/1 var(--head); font-stretch: 72%; color: #5d666b; transition: color .3s; }
+.s-list li { display: flex; align-items: baseline; gap: 18px; padding: 20px 0; }
+.s-list .s-word { font: 800 clamp(1.9rem, 4vw, 3.2rem)/1 var(--head); font-stretch: 72%; color: #fff; }
 .s-list .s-word::first-letter { color: var(--red); }
-.s-list .s-desc { margin-left: auto; text-align: right; max-width: 260px; font-size: .95rem; opacity: 0; transform: translateX(10px); transition: .35s var(--ease); }
-.s-list li.on .s-word { color: #fff; }
-.s-list li.on .s-desc { opacity: 1; transform: none; }
+.s-list .s-desc { margin-left: auto; text-align: right; max-width: 280px; font-size: .97rem; color: #b9bec1; }
+.four .ticks li { background: #11191c; color: #fff; }
 @media (max-width: 700px) {
-  .s-list button { flex-direction: column; gap: 6px; }
-  .s-list .s-desc { margin: 0; text-align: left; max-width: none; opacity: 1; transform: none; color: #9aa1a5; }
+  .s-list li { flex-direction: column; gap: 6px; padding: 16px 0; }
+  .s-list .s-desc { margin: 0; text-align: left; max-width: none; }
 }
 
 /* ---------- Werkwijze: oplichten tijdens scrollen ---------- */
@@ -575,7 +563,7 @@ h3 { font-stretch: 80%; }
 @keyframes stepIn { from { opacity: 0; transform: translateX(18px); } }
 .wiz legend { font: 800 clamp(1.6rem, 3vw, 2.3rem)/1.1 var(--head); font-stretch: 72%; color: var(--ink); margin-bottom: 4px; padding: 0; }
 .wiz .hint { color: var(--muted); font-size: .92rem; margin: 0 0 20px; }
-.opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+.opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
 .opts label { position: relative; display: block; cursor: pointer; }
 .opts input { position: absolute; opacity: 0; pointer-events: none; }
 .opts span { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 14px; font-weight: 700; color: var(--ink); transition: border-color .2s, background .2s, transform .2s; }
@@ -602,7 +590,7 @@ h3 { font-stretch: 80%; }
 /* Responsief */
 @media (max-width: 980px) {
   .hx__grid { grid-template-columns: 1fr; min-height: 0; }
-  .hx__visual { max-width: 420px; width: 80%; margin: 0 auto; order: -1; }
+  .hx__visual { max-width: 300px; width: 70%; margin: 0 auto; }
   .scroll-cue { display: none; }
   .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 220px; }
   .tile:nth-child(n) { grid-column: auto; grid-row: auto; }
@@ -621,7 +609,7 @@ h3 { font-stretch: 80%; }
 @media (prefers-reduced-motion: reduce) {
   .rv { opacity: 1; transform: none; }
   .hx h1 .line > span { transform: none; }
-  .marquee__track, .hx__visual .blob { animation: none; }
+  .hx__visual .blob { animation: none; }
   .stroke::after { transform: scaleX(1) skewX(-12deg); }
 }
 
@@ -629,6 +617,14 @@ h3 { font-stretch: 80%; }
 .page-hero h1 { font-size: clamp(2.4rem, 4.8vw, 4.4rem); overflow-wrap: normal; hyphens: auto; -webkit-hyphens: auto; }
 h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 .hx h1 { hyphens: manual; }
+
+/* Eén hoofdactie met uitleg */
+.hx__note { font-size: .92rem; color: #b9bec1; margin: 14px 0 0; max-width: 520px; }
+.hx__note a { color: #fff; }
+.cta-sub { margin-top: 18px !important; font-size: .95rem !important; opacity: .92; }
+.cta-sub a { color: #fff; font-weight: 700; }
+.wiz .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .92rem; }
+.wiz .form-grid .check input { width: 18px; height: 18px; padding: 0; margin-top: 3px; flex-shrink: 0; accent-color: var(--red); }
 .pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HousePainter", "name": "SDAD bv", "slogan": "Schilderkracht tot de vierde macht", "url": "https://sdad.be/", "email": "info@sdad.be", "telephone": "+32473520920", "vatID": "BE0823.935.816", "image": "https://sdad.be/site/assets/files/1/kleurbepaling_linkedin.jpeg", "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870", "addressLocality": "Izegem", "addressCountry": "BE"}, "areaServed": [{"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "West-Vlaanderen"}], "sameAs": ["https://www.facebook.com/DeseureArneNuyttensLies/", "https://www.instagram.com/schilderwerken_sdad/", "https://www.linkedin.com/company/sdad-arne-deseure/"]}</script>
@@ -636,7 +632,7 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 <body><div class="pv-note">Voorbeeld van de nieuwe SDAD-site · foto's verkleind</div>
 <a class="skip" href="#main">Naar inhoud</a>
 <div class="topbar"><div class="wrap">
-  <span>Prinsdomlaan 50, 8870 Izegem · actief in Oost- en West-Vlaanderen</span>
+  <span>Prinsdomlaan 50, 8870 Izegem</span>
   <a href="tel:+32473520920">0473 52 09 20</a>
   <a href="mailto:info@sdad.be">info@sdad.be</a>
 </div></div>
@@ -656,11 +652,11 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
     <span class="eyebrow">Schilderwerken &amp; interieurafwerking · Oost- en West-Vlaanderen</span>
     <h1><span class="line"><span style="--i:0">Een mooi resultaat</span></span><span class="line"><span style="--i:1">begint lang voor de</span></span><span class="line"><span style="--i:2"><em class="stroke">eerste verflaag.</em></span></span></h1>
     <p class="lead">Wij begeleiden u van kleuradvies tot een perfect afgewerkt eindresultaat. Met persoonlijk advies, duidelijke communicatie en een ervaren team zorgen we voor een zorgeloos traject van begin tot einde.</p>
-    <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a><a class="btn btn--ghost" href="#offerte">Offerte aanvragen</a></div>
+    <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+    <p class="hx__note">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag? <a href="#/contact/">Contacteer ons</a>.</p>
     <ul class="hx__stats">
       <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring in het schildersvak</li>
       <li><b data-count="10">10</b>jaar garantie op gevelschilderwerk* <a href="#/diensten/schilderwerken/buiten/" data-frag="garantie">voorwaarden</a></li>
-      <li><b data-count="18">18</b>gemeenten in onze realisaties, in Oost- en West-Vlaanderen</li>
     </ul>
   </div>
   <div class="hx__visual">
@@ -670,19 +666,19 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
   </div>
 </div><span class="scroll-cue" aria-hidden="true"></span></section>
 
-<div class="marquee" aria-label="Plaatsen waar we werkten"><div class="marquee__track"><span>Knokke</span><span>Kuurne</span><span>Izegem</span><span>Marke</span><span>Kortrijk</span><span>Deerlijk</span><span>Meulebeke</span><span>Aalbeke</span><span>Zwijnaarde</span><span>Gent</span><span>Poperinge</span><span>Koolskamp</span><span>Merelbeke</span><span>Roeselare</span><span>Lendelede</span><span>Wenduine</span><span>Oudenaarde</span><span>Moorslede</span><span aria-hidden="true">Knokke</span><span aria-hidden="true">Kuurne</span><span aria-hidden="true">Izegem</span><span aria-hidden="true">Marke</span><span aria-hidden="true">Kortrijk</span><span aria-hidden="true">Deerlijk</span><span aria-hidden="true">Meulebeke</span><span aria-hidden="true">Aalbeke</span><span aria-hidden="true">Zwijnaarde</span><span aria-hidden="true">Gent</span><span aria-hidden="true">Poperinge</span><span aria-hidden="true">Koolskamp</span><span aria-hidden="true">Merelbeke</span><span aria-hidden="true">Roeselare</span><span aria-hidden="true">Lendelede</span><span aria-hidden="true">Wenduine</span><span aria-hidden="true">Oudenaarde</span><span aria-hidden="true">Moorslede</span></div></div>
-
 <section class="section"><div class="wrap">
   <div class="intro-row rv"><div><span class="eyebrow">Onze diensten</span><h2>Wat we voor u <em class="stroke">doen</em></h2></div>
   <p>Binnen- en buitenschilderwerken, decoratieve technieken en interieurafwerking met gordijnen en lamellen. Van kleuradvies tot oplevering.</p></div>
   <div class="bento"><a class="tile rv" style="--i:0" href="#/diensten/schilderwerken/binnen/"><img data-img="5" alt="Binnenschilderwerken" width="800" height="800" loading="lazy" decoding="async"><span class="num">01</span><span class="go" aria-hidden="true">→</span><h3>Binnenschilderwerken</h3><p>Van kleuradvies tot perfecte afwerking, alles voor een interieur dat klopt.</p></a><a class="tile rv" style="--i:1" href="#/diensten/schilderwerken/buiten/"><img data-img="6" alt="Buitenschilderwerken" width="800" height="800" loading="lazy" decoding="async"><span class="num">02</span><span class="go" aria-hidden="true">→</span><h3>Buitenschilderwerken</h3><p>Bescherming, uitstraling en vakmanschap voor uw gevel en buitenschrijnwerk.</p></a><a class="tile rv" style="--i:2" href="#/diensten/schilderwerken/decoratieve-technieken/"><img data-img="7" alt="Decoratieve technieken" width="800" height="800" loading="lazy" decoding="async"><span class="num">03</span><span class="go" aria-hidden="true">→</span><h3>Decoratieve technieken</h3><p>Unieke afwerkingen met karakter, structuur en beleving.</p></a><a class="tile rv" style="--i:3" href="#/diensten/interieurafwerking/gordijnen/"><img data-img="8" alt="Gordijnen" width="800" height="800" loading="lazy" decoding="async"><span class="num">04</span><span class="go" aria-hidden="true">→</span><h3>Gordijnen</h3><p>Sfeer, privacy en afwerking perfect afgestemd op uw interieur.</p></a><a class="tile rv" style="--i:4" href="#/diensten/interieurafwerking/lamellen/"><img data-img="9" alt="Lamellen" width="800" height="800" loading="lazy" decoding="async"><span class="num">05</span><span class="go" aria-hidden="true">→</span><h3>Lamellen</h3><p>Modern, functioneel en perfect afgestemd op uw ruimte.</p></a></div>
 </div></section>
 
-<section class="section four"><div class="wrap four__grid">
+<section class="section four" id="waarom"><div class="wrap four__grid">
   <div class="rv"><span class="four__big" aria-hidden="true">S<sup>4</sup></span>
     <h2>Schilderkracht tot de vierde macht</h2><p>Zo creëren we ruimtes waar mensen graag wonen, werken en leven.</p></div>
-  <ul class="s-list rv" style="--i:1"><li class=on><button type="button"><span class="s-word">Stielkennis</span><span class="s-desc">Voor een vakkundige uitvoering.</span></button></li><li><button type="button"><span class="s-word">Service</span><span class="s-desc">Voor een zorgeloze samenwerking.</span></button></li><li><button type="button"><span class="s-word">Snelheid</span><span class="s-desc">Voor een vlotte en duidelijke planning.</span></button></li><li><button type="button"><span class="s-word">Stijl</span><span class="s-desc">Voor een afwerking tot in de kleinste details.</span></button></li></ul>
-</div></section>
+  <ul class="s-list rv" style="--i:1"><li><span class="s-word">Stielkennis</span><span class="s-desc">Voor een vakkundige uitvoering.</span></li><li><span class="s-word">Service</span><span class="s-desc">Voor een zorgeloze samenwerking.</span></li><li><span class="s-word">Snelheid</span><span class="s-desc">Voor een vlotte en duidelijke planning.</span></li><li><span class="s-word">Stijl</span><span class="s-desc">Voor een afwerking tot in de kleinste details.</span></li></ul>
+</div>
+<div class="wrap" style="margin-top:clamp(40px,6vw,72px)"><h3 class="rv" style="color:#fff;font-size:1.6rem;margin-bottom:18px">Daarom kiezen klanten voor SDAD</h3>
+  <ul class="ticks"><li class="rv" style="--i:0">Ervaren vakmensen</li><li class="rv" style="--i:1">Persoonlijke aanpak</li><li class="rv" style="--i:2">Meedenkend advies</li><li class="rv" style="--i:3">Nakomen van afspraken &amp; planning</li><li class="rv" style="--i:0">Capaciteit en flexibiliteit</li><li class="rv" style="--i:1">Tijdige en heldere offertes</li><li class="rv" style="--i:2">Duidelijke communicatie</li><li class="rv" style="--i:3">Netheid op de werf</li></ul></div></section>
 
 <section class="section section--soft"><div class="wrap split">
   <div class="rv">
@@ -698,7 +694,7 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 <section class="section section--dark" id="werkwijze"><div class="wrap flow">
   <div class="flow__head"><span class="eyebrow">Onze werkwijze</span><h2>Zo pakken we uw project <em class="stroke">aan</em></h2>
   <p class="lead">Een mooi resultaat begint lang voor de eerste verflaag. Van het eerste gesprek tot de oplevering weet u steeds waar u aan toe bent.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plan stap 1: uw plaatsbezoek</a></div></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div></div>
   <ol class="flow__steps"><li data-n="1"><h3>Plaatsbezoek</h3><p>We komen vrijblijvend langs, luisteren naar uw wensen en bekijken samen de mogelijkheden en de staat van de ondergrond.</p></li><li data-n="2"><h3>Kleuradvies</h3><p>We denken mee over kleuren, materialen en afwerking, afgestemd op de ruimte, de lichtinval en uw stijl.</p></li><li data-n="3"><h3>Offerte en planning</h3><p>U ontvangt een duidelijke offerte en planning, zodat u precies weet wat u mag verwachten.</p></li><li data-n="4"><h3>Voorbereiding en uitvoering</h3><p>Eerst een correcte voorbereiding van de ondergrond, daarna een vakkundige uitvoering. Met duidelijke communicatie en netheid op de werf.</p></li><li data-n="5"><h3>Oplevering</h3><p>Een afwerking tot in de kleinste details en een zorgeloze samenwerking tot de oplevering. We doen wat we zeggen en zeggen wat we doen.</p></li></ol>
 </div></section>
 
@@ -709,50 +705,16 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 <div><div class="rail" tabindex="0" aria-label="Realisaties, horizontaal scrollen"><a class="shot" href="#/realisaties/babu-gent/"><img data-img="11" alt="Babu@Gent" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Binnen · Buiten</span><h3>Babu@Gent</h3></a><a class="shot" href="#/realisaties/buitenschilderwerken-kasteel-blauwhuis-te-izegem/"><img data-img="12" alt="Buiten- &amp; binnenschilderwerken kasteel Blauwhuis te Izegem" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Buiten</span><h3>Buiten- &amp; binnenschilderwerken kasteel Blauwhuis te Izegem</h3></a><a class="shot" href="#/realisaties/gevel-villa-te-knokke/"><img data-img="13" alt="Gevel villa te Knokke" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Buiten</span><h3>Gevel villa te Knokke</h3></a><a class="shot" href="#/realisaties/rood-leefruimte-te-marke-stop-rood/"><img data-img="14" alt="Leefruimte te Marke" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Binnen</span><h3>Leefruimte te Marke</h3></a><a class="shot" href="#/realisaties/villa-te-zwijnaarde/"><img data-img="15" alt="Villa van boven tot onder te Zwijnaarde" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Binnen</span><h3>Villa van boven tot onder te Zwijnaarde</h3></a><a class="shot" href="#/realisaties/tastoe-roeselare/"><img data-img="16" alt="Broodbar Tastoe te Roeselare" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Binnen</span><h3>Broodbar Tastoe te Roeselare</h3></a><a class="shot" href="#/realisaties/schilderen-gevel-te-kortrijk/"><img data-img="17" alt="Schilderen gevel te Kortrijk" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Buiten</span><h3>Schilderen gevel te Kortrijk</h3></a><a class="shot" href="#/realisaties/boetiek-gastronomiek-culix-te-merelbeke/"><img data-img="18" alt="Boetiek gastronomiek Culix te Merelbeke" width="800" height="800" loading="lazy" decoding="async"><span class="chip">Binnen</span><h3>Boetiek gastronomiek Culix te Merelbeke</h3></a></div></div>
 </section>
 
-<section class="section section--soft"><div class="wrap">
-  <span class="eyebrow">Waarom SDAD</span><h2 class="rv">Daarom kiezen klanten voor SDAD</h2>
-  <ul class="ticks" style="margin-top:32px"><li class="rv" style="--i:0">Ervaren vakmensen</li><li class="rv" style="--i:1">Persoonlijke aanpak</li><li class="rv" style="--i:2">Meedenkend advies</li><li class="rv" style="--i:3">Nakomen van afspraken &amp; planning</li><li class="rv" style="--i:0">Capaciteit en flexibiliteit</li><li class="rv" style="--i:1">Tijdige en heldere offertes</li><li class="rv" style="--i:2">Duidelijke communicatie</li><li class="rv" style="--i:3">Netheid op de werf</li></ul>
-</div></section>
-
-<section class="section" id="offerte" style="scroll-margin-top:80px"><div class="wrap split" style="align-items:start">
-  <div class="wiz-aside rv"><span class="eyebrow">Offerte aanvragen</span><h2>Uw project in <em class="stroke">4 stappen</em></h2>
-    <p>Vertel ons kort wat u wilt laten doen. We reageren snel en plannen graag een vrijblijvend plaatsbezoek.</p>
-    <ul><li>Vrijblijvend plaatsbezoek</li><li>Persoonlijk advies over kleuren en afwerking</li><li>Een duidelijke offerte en planning</li></ul>
-    <p style="margin-top:22px">Liever meteen een afspraak? <a href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plan zelf uw plaatsbezoek</a>.</p></div>
-  <div class="wiz rv" style="--i:1"><form onsubmit="return false" novalidate>
-  <div class="wiz__body">
-    <div class="wiz__bar"><span></span></div>
-    <fieldset class="wiz__step"><legend>Wat mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
-      <div class="opts"><label><input type="checkbox" name="dienst" value="Binnenschilderwerken"><span>Binnenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Buitenschilderwerken"><span>Buitenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Decoratieve technieken"><span>Decoratieve technieken</span></label><label><input type="checkbox" name="dienst" value="Gordijnen"><span>Gordijnen</span></label><label><input type="checkbox" name="dienst" value="Lamellen"><span>Lamellen</span></label></div></fieldset>
-    <fieldset class="wiz__step"><legend>Over welk pand gaat het?</legend><p class="hint">Kies wat het best past.</p>
-      <div class="opts"><label><input type="radio" name="pand" value="Woning"><span>Woning</span></label><label><input type="radio" name="pand" value="Appartement"><span>Appartement</span></label><label><input type="radio" name="pand" value="Nieuwbouw"><span>Nieuwbouw</span></label><label><input type="radio" name="pand" value="Kantoor of praktijk"><span>Kantoor of praktijk</span></label><label><input type="radio" name="pand" value="Handelszaak of horeca"><span>Handelszaak of horeca</span></label><label><input type="radio" name="pand" value="Residentieel project"><span>Residentieel project</span></label></div></fieldset>
-    <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
-      <div class="opts"><label><input type="radio" name="timing" value="Zo snel mogelijk"><span>Zo snel mogelijk</span></label><label><input type="radio" name="timing" value="Binnen 3 maanden"><span>Binnen 3 maanden</span></label><label><input type="radio" name="timing" value="Later dit jaar"><span>Later dit jaar</span></label><label><input type="radio" name="timing" value="Nog geen idee"><span>Nog geen idee</span></label></div></fieldset>
-    <fieldset class="wiz__step"><legend>Hoe bereiken we u?</legend><p class="hint">We reageren snel op uw aanvraag.</p>
-      <div class="form-grid">
-        <div><label for="w-n">Naam *</label><input id="w-n" name="naam" required autocomplete="name"></div>
-        <div><label for="w-g">Gemeente *</label><input id="w-g" name="gemeente" required autocomplete="address-level2"></div>
-        <div><label for="w-t">Telefoon *</label><input id="w-t" name="telefoon" type="tel" required autocomplete="tel"></div>
-        <div><label for="w-e">E-mail *</label><input id="w-e" name="email" type="email" required autocomplete="email"></div>
-        <div class="full"><label for="w-b">Nog iets dat we moeten weten?</label><textarea id="w-b" name="bericht" rows="3"></textarea></div>
-        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
-      </div></fieldset>
-    <p class="wiz__err" aria-live="polite"></p>
-    <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
-  </div>
-  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>Uw e-mailprogramma opent met uw aanvraag. Verstuur ze daar, dan nemen we snel contact op.</p></div>
-</form></div>
-</div></section>
 <section class="section" id="werkgebied" style="scroll-margin-top:90px"><div class="wrap split" style="align-items:start">
   <div><span class="eyebrow">Werkgebied</span><h2>Actief in heel Oost- en West-Vlaanderen</h2>
-  <p>Vanuit Izegem werken we voor particulieren en bedrijven in heel Oost- en West-Vlaanderen. We reageren snel op uw vraag en plannen graag een vrijblijvend plaatsbezoek bij u ter plaatse.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div></div>
+  <p>Vanuit Izegem werken we voor particulieren en bedrijven in heel Oost- en West-Vlaanderen. We reageren snel op uw vraag en komen graag bij u ter plaatse.</p>
+</div>
   <div><h3>Hier werkten we al</h3><ul class="tags place-tags"><li><a href="#/realisaties/gevel-villa-te-knokke/">Knokke</a></li><li><a href="#/realisaties/nieuwbouwappartement-te-kuurne/">Kuurne</a></li><li><a href="#/realisaties/make-over-voorgevel-te-izegem/">Izegem</a></li><li><a href="#/realisaties/rood-leefruimte-te-marke-stop-rood/">Marke</a></li><li><a href="#/realisaties/kaleien-van-achtergevel-te-kortrijk/">Kortrijk</a></li><li><a href="#/realisaties/woonkamer-te-deerlijk/">Deerlijk</a></li><li><a href="#/realisaties/villa-te-meulebeke/">Meulebeke</a></li><li><a href="#/realisaties/leefruimte-te-aalbeke/">Aalbeke</a></li><li><a href="#/realisaties/villa-te-zwijnaarde/">Zwijnaarde</a></li><li><a href="#/realisaties/babu-gent/">Gent</a></li><li><a href="#/realisaties/plak-en-schilderwerken-te-poperinge/">Poperinge</a></li><li><a href="#/realisaties/plakwerken-boerenhoeve-te-koolskamp/">Koolskamp</a></li><li><a href="#/realisaties/boetiek-gastronomiek-culix-te-merelbeke/">Merelbeke</a></li><li><a href="#/realisaties/residentie-kolleblomme-te-roeselare/">Roeselare</a></li><li><a href="#/realisaties/frituur-de-platse-lendelede/">Lendelede</a></li><li><a href="#/realisaties/rood-residentie-porto-fino-te-wenduine-stop-rood/">Wenduine</a></li><li><a href="#/realisaties/kaleiproject-te-oudenaarde/">Oudenaarde</a></li><li><a href="#/realisaties/residentie-jolies-te-moorslede/">Moorslede</a></li></ul></div>
 </div></section>
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="algemene-voorwaarden/" data-title="Algemene Voorwaarden BV SDAD" hidden>
 <section class="page-hero page-hero--plain"><div class="wrap">
@@ -846,8 +808,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div></div></section>
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="contact/" data-title="Contacteer ons voor schilderwerken, gordijnen of lamellen" hidden>
 <section class="page-hero page-hero--plain"><div class="wrap">
@@ -858,30 +820,38 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
     <div class="contact-card"><h3>SDAD bv</h3><p>Prinsdomlaan 50<br>8870 Izegem<br>BE0823.935.816</p><p style="margin-top:10px"><a href="https://www.google.com/maps/search/?api=1&query=Prinsdomlaan+50+8870+Izegem" target="_blank" rel="noopener" style="font-size:1rem">Route plannen →</a></p></div>
     <div class="contact-card"><h3>Lies Nuyttens</h3><p><a href="tel:+32473520920">0473 52 09 20</a></p></div><div class="contact-card"><h3>Arne Deseure</h3><p><a href="tel:+32478428195">0478 42 81 95</a></p></div>
     <div class="contact-card"><h3>E-mail</h3><p><a href="mailto:info@sdad.be">info@sdad.be</a></p></div>
-    <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in.</p><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
+    <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in. Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning.</p><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
   </div>
-  <form class="form" id="contact-form">
-    <h2 style="font-size:2rem">Stel ons een vraag</h2>
-    <div class="form-grid">
-      <div><label for="f-vn">Naam *</label><input id="f-vn" name="voornaam" required autocomplete="given-name"></div>
-      <div><label for="f-n">Familienaam *</label><input id="f-n" name="naam" required autocomplete="family-name"></div>
-      <div class="full"><label for="f-a">Straat + huisnr. *</label><input id="f-a" name="adres" required autocomplete="street-address"></div>
-      <div><label for="f-pc">Postcode *</label><input id="f-pc" name="postcode" required autocomplete="postal-code" inputmode="numeric"></div>
-      <div><label for="f-s">Stad *</label><input id="f-s" name="stad" required autocomplete="address-level2"></div>
-      <div><label for="f-t">Telefoon *</label><input id="f-t" name="telefoon" type="tel" required autocomplete="tel"></div>
-      <div><label for="f-e">E-mail *</label><input id="f-e" name="email" type="email" required autocomplete="email"></div>
-      <div class="hp" aria-hidden="true"><label for="f-w">Website</label><input id="f-w" name="website" tabindex="-1" autocomplete="off"></div>
-      <div class="full"><label for="f-m">Hoe kunnen we je helpen? *</label><textarea id="f-m" name="bericht" rows="5" required></textarea></div>
-      <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="#/cookie-en-privacybeleid/" target="_blank">Cookie- en privacybeleid</a></span></label></div>
-    </div>
-    <button class="btn" type="submit" style="margin-top:20px">Verstuur bericht</button>
-    <p class="form-note" aria-live="polite">We reageren snel op uw vraag.</p>
-  </form>
+  <div><h2 style="font-size:clamp(1.8rem,3vw,2.4rem)">Stel uw vraag in 4 korte stappen</h2>
+  <div class="wiz rv" style="--i:1"><form onsubmit="return false" novalidate>
+  <div class="wiz__body">
+    <div class="wiz__bar"><span></span></div>
+    <fieldset class="wiz__step"><legend>Wat mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
+      <div class="opts"><label><input type="checkbox" name="dienst" value="Binnenschilderwerken"><span>Binnenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Buitenschilderwerken"><span>Buitenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Decoratieve technieken"><span>Decoratieve technieken</span></label><label><input type="checkbox" name="dienst" value="Gordijnen"><span>Gordijnen</span></label><label><input type="checkbox" name="dienst" value="Lamellen"><span>Lamellen</span></label></div></fieldset>
+    <fieldset class="wiz__step"><legend>Over welk pand gaat het?</legend><p class="hint">Kies wat het best past.</p>
+      <div class="opts"><label><input type="radio" name="pand" value="Woning"><span>Woning</span></label><label><input type="radio" name="pand" value="Appartement"><span>Appartement</span></label><label><input type="radio" name="pand" value="Nieuwbouw"><span>Nieuwbouw</span></label><label><input type="radio" name="pand" value="Kantoor of praktijk"><span>Kantoor of praktijk</span></label><label><input type="radio" name="pand" value="Handelszaak of horeca"><span>Handelszaak of horeca</span></label><label><input type="radio" name="pand" value="Residentieel project"><span>Residentieel project</span></label></div></fieldset>
+    <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
+      <div class="opts"><label><input type="radio" name="timing" value="Zo snel mogelijk"><span>Zo snel mogelijk</span></label><label><input type="radio" name="timing" value="Binnen 3 maanden"><span>Binnen 3 maanden</span></label><label><input type="radio" name="timing" value="Later dit jaar"><span>Later dit jaar</span></label><label><input type="radio" name="timing" value="Nog geen idee"><span>Nog geen idee</span></label></div></fieldset>
+    <fieldset class="wiz__step"><legend>Hoe bereiken we u?</legend><p class="hint">We reageren snel op uw aanvraag.</p>
+      <div class="form-grid">
+        <div><label for="w-n">Naam *</label><input id="w-n" name="naam" required autocomplete="name"></div>
+        <div><label for="w-g">Gemeente *</label><input id="w-g" name="gemeente" required autocomplete="address-level2"></div>
+        <div><label for="w-t">Telefoon *</label><input id="w-t" name="telefoon" type="tel" required autocomplete="tel"></div>
+        <div><label for="w-e">E-mail *</label><input id="w-e" name="email" type="email" required autocomplete="email"></div>
+        <div class="full"><label for="w-b">Nog iets dat we moeten weten?</label><textarea id="w-b" name="bericht" rows="3"></textarea></div>
+        <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="#/cookie-en-privacybeleid/" target="_blank">Cookie- en privacybeleid</a></span></label></div>
+        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
+      </div></fieldset>
+    <p class="wiz__err" aria-live="polite"></p>
+    <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
+  </div>
+  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>Uw e-mailprogramma opent met uw aanvraag. Verstuur ze daar, dan nemen we snel contact op.</p></div>
+</form></div></div>
 </div></section>
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="cookie-en-privacybeleid/" data-title="cookie-en privacybeleid SDAD" hidden>
 <section class="page-hero page-hero--plain"><div class="wrap">
@@ -921,7 +891,7 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 <section class="section section--dark" id="werkwijze"><div class="wrap flow">
   <div class="flow__head"><span class="eyebrow">Onze werkwijze</span><h2>Zo pakken we uw project <em class="stroke">aan</em></h2>
   <p class="lead">Een mooi resultaat begint lang voor de eerste verflaag. Van het eerste gesprek tot de oplevering weet u steeds waar u aan toe bent.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plan stap 1: uw plaatsbezoek</a></div></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div></div>
   <ol class="flow__steps"><li data-n="1"><h3>Plaatsbezoek</h3><p>We komen vrijblijvend langs, luisteren naar uw wensen en bekijken samen de mogelijkheden en de staat van de ondergrond.</p></li><li data-n="2"><h3>Kleuradvies</h3><p>We denken mee over kleuren, materialen en afwerking, afgestemd op de ruimte, de lichtinval en uw stijl.</p></li><li data-n="3"><h3>Offerte en planning</h3><p>U ontvangt een duidelijke offerte en planning, zodat u precies weet wat u mag verwachten.</p></li><li data-n="4"><h3>Voorbereiding en uitvoering</h3><p>Eerst een correcte voorbereiding van de ondergrond, daarna een vakkundige uitvoering. Met duidelijke communicatie en netheid op de werf.</p></li><li data-n="5"><h3>Oplevering</h3><p>Een afwerking tot in de kleinste details en een zorgeloze samenwerking tot de oplevering. We doen wat we zeggen en zeggen wat we doen.</p></li></ol>
 </div></section>
 
@@ -944,8 +914,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </div></section>
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/" data-title="Realisaties schilderwerken SDAD Izegem" hidden>
 <section class="page-hero page-hero--plain"><div class="wrap">
@@ -1045,8 +1015,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </div></section>
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/3-tips-om-uw-trap-te-schilderen/" data-title="3 tips om jouw trap te schilderen | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1065,8 +1035,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/5-tips-om-afplaktape-te-gebruiken/" data-title="5 tips om afplaktape te gebruiken | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1085,8 +1055,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/aluminium-schrijnwerk-schilderen-kan-dat/" data-title="Aluminium schrijnwerk schilderen, kan dat? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1105,8 +1075,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/behangen-zo-begin-je-er-aan/" data-title="Behangen, zo begin je eraan! | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1125,8 +1095,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/binnen-en-buitendeuren-schilderen-in-5-stappen/" data-title="Binnen- en buitendeuren schilderen in 5 stappen | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1145,8 +1115,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/de-voordelen-van-vliesbehang-en-waarom-je-het-best-laat-hangen-bij-renovatiewerken/" data-title="Wat is vliesbehang? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1165,8 +1135,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/een-plafond-schilderen-in-8-stappen/" data-title="Een plafond schilderen in 8 stappen | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1185,8 +1155,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/een-vochtige-ruimte-schilderen-enkele-tips-en-tricks/" data-title="Een vochtige ruimte schilderen: enkele tips en tricks | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1205,8 +1175,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/gyproc-schilderen-een-stappenplan/" data-title="Gyproc schilderen, een stappenplan! | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1225,8 +1195,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/het-schilderen-van-een-houten-tuinhuis/" data-title="Houten tuinhuis schilderen | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1245,8 +1215,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/hoe-een-muur-verven-zonder-strepen/" data-title="Hoe een muur verven zonder strepen? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1265,8 +1235,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/hoe-kan-ik-mijn-muren-ontvetten-voor-het-schilderen/" data-title="Hoe kan ik mijn muren ontvetten voor het schilderen? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1285,8 +1255,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/interieurtip-magnetische-en-schrijfondergronden/" data-title="Interieurtip: magnetische verf en schrijfondergronden | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1305,8 +1275,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/jarenlang-genot-dankzij-de-troeven-van-kwaliteitsverf/" data-title="Wat is kwaliteitsverf? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1325,8 +1295,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/je-bakstenen-muur-schilderen-het-kan/" data-title="Je bakstenen muur schilderen? Het kan! | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1345,8 +1315,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/kan-ik-mijn-faiences-of-wandtegels-schilderen/" data-title="Kan ik mijn faiences of wandtegels schilderen? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1365,8 +1335,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/kan-je-pvc-schilderen/" data-title="Kan je pvc schilderen? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1385,8 +1355,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/keukens-en-keukenkasten-verven-doe-je-zo/" data-title="Keukens en keukenkasten verven doe je zo! | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1405,8 +1375,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/laat-je-woning-kaleien-door-een-professional/" data-title="Wat is kaleien? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1425,8 +1395,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/mdf-schilderen-hoe-doe-je-dat/" data-title="MDF schilderen: hoe doe je dat? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1445,8 +1415,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/naadloos-fotobehang-is-hip-en-trendy/" data-title="Naadloos fotobehang is hip en trendy | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1468,8 +1438,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/netjes-afkitten-voor-of-na-het-schilderen/" data-title="Waarom afkitten? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1488,8 +1458,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/oude-verf-verwijderen-hoe-doe-je-dat/" data-title="Oude verf verwijderen, hoe doe je dat? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1508,8 +1478,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/schilder-je-gevel-en-geef-je-huis-een-nieuwe-look/" data-title="Schilder je gevel en geef je huis een nieuwe look | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1528,8 +1498,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/trappenhal-schilderen-hoe-begin-je-eraan/" data-title="Trappenhal schilderen, hoe begin je eraan? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1548,8 +1518,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/wanneer-is-het-tijd-voor-een-nieuwe-lik-verf/" data-title="Wanneer moet je denken aan herschilderen? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1568,8 +1538,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/welke-kleur-kies-je-best/" data-title="Welke kleur voor verf kiezen? | Blog SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1588,8 +1558,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/babu-gent/" data-title="Babu@Gent | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1611,8 +1581,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/boetiek-gastronomiek-culix-te-merelbeke/" data-title="Boetiek gastronomiek Culix te Merelbeke | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1634,8 +1604,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/bowls-kortrijk/" data-title="Bowls Kortrijk | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1657,8 +1627,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/buitenschilderwerken-kasteel-blauwhuis-te-izegem/" data-title="Buiten- &amp; binnenschilderwerken kasteel Blauwhuis te Izegem | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1680,8 +1650,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/frituur-de-platse-lendelede/" data-title="Frituur De Platse Lendelede | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1703,8 +1673,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/gevel-villa-te-knokke/" data-title="Gevel villa te Knokke | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1726,8 +1696,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/gevel-villa-te-kortrijk/" data-title="Kaleien gevel van villa te Kortrijk | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1749,8 +1719,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/kaleien-van-achtergevel-te-kortrijk/" data-title="Kaleien van achtergevel te Kortrijk | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1772,8 +1742,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/kaleiproject-te-oudenaarde/" data-title="Kaleien van 3 woningen te Oudenaarde | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1795,8 +1765,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/leefruimte-te-aalbeke/" data-title="Leefruimte en keuken te Aalbeke | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1818,8 +1788,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/make-over-voorgevel-te-izegem/" data-title="Make-over voorgevel te Izegem | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1841,8 +1811,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/nieuwbouwappartement-te-kuurne/" data-title="Nieuwbouwappartement te Kuurne | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1864,8 +1834,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/plak-en-schilderwerken-te-poperinge/" data-title="Pleister en schilderwerken volledig appartementsgebouw te Poperinge | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1887,8 +1857,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/plakwerken-boerenhoeve-te-koolskamp/" data-title="Plamuurwerken boerenhoeve te Koolskamp | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1910,8 +1880,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-jolies-te-moorslede/" data-title="Residentie Jolies te Moorslede | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1933,8 +1903,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-kolleblomme-te-roeselare/" data-title="Residentie Kolleblomme te Roeselare in een kaleien jasje | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1956,8 +1926,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-sint-rafael-te-izegem/" data-title="Residentie Sint Rafaël - betonlazuur | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -1979,8 +1949,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-ter-vichte/" data-title="Residentie Ter Vichte | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2002,8 +1972,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/rood-leefruimte-te-marke-stop-rood/" data-title="Leefruimte te Marke | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2025,8 +1995,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/rood-residentie-porto-fino-te-wenduine-stop-rood/" data-title="Residentie Porto Fino te Wenduine | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2048,8 +2018,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/schilderen-gevel-te-kortrijk/" data-title="Schilderen gevel te Kortrijk | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2071,8 +2041,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/schilderen-gevel-te-marke/" data-title="Schilderen gevel bungalow te Marke | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2094,8 +2064,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/sportcomplex-rhizo-te-kortrijk/" data-title="Sportcomplex Rhizo te Kortrijk | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2117,8 +2087,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/tastoe-roeselare/" data-title="Broodbar Tastoe te Roeselare | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2140,8 +2110,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/villa-te-meulebeke/" data-title="Villa te Meulebeke | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2163,8 +2133,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/villa-te-zwijnaarde/" data-title="Villa van boven tot onder te Zwijnaarde | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2186,8 +2156,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/woonkamer-te-deerlijk/" data-title="Woonkamer te deerlijk | Realisaties SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2209,8 +2179,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
 </a></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/interieurafwerking/gordijnen/" data-title="Gordijnen op maat | gordijnen Izegem | SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2223,8 +2193,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
   <div class="faq"><details><summary>Geven jullie advies over stoffen en kleuren?</summary><div class="answer">Ja. Tijdens een plaatsbezoek bekijken we samen welke stoffen, kleuren en afwerkingen het best aansluiten bij uw interieur, lichtinval en wensen.</div></details><details><summary>Komen jullie zelf opmeten?</summary><div class="answer">Ja. Wij zorgen voor een professionele opmeting zodat uw gordijnen perfect aansluiten op de ruimte en de ramen.</div></details><details><summary>Zijn elektrische gordijnen mogelijk?</summary><div class="answer">Ja. Afhankelijk van het gekozen systeem kunnen gordijnen manueel of elektrisch bediend worden. We adviseren u graag over de mogelijkheden die het best aansluiten bij uw woning en gebruiksgemak.</div></details><details><summary>Plaatsen jullie de gordijnen ook?</summary><div class="answer">Ja. Naast advies en opmeting verzorgen wij ook de professionele plaatsing van uw gordijnen.</div></details><details><summary>Kunnen gordijnen gecombineerd worden met lamellen of andere raamdecoratie?</summary><div class="answer">Ja. Afhankelijk van de ruimte en de gewenste uitstraling kunnen gordijnen perfect gecombineerd worden met bijvoorbeeld <a href="#/diensten/interieurafwerking/lamellen/">lamellen</a> of andere vormen van raamdecoratie.</div></details></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/interieurafwerking/lamellen/" data-title="Lamellen op maat | Lamellen Izegem | SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2237,8 +2207,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
   <div class="faq"><details><summary>Welke lamellen passen het best bij mijn interieur?</summary><div class="answer">Dat hangt af van de ruimte, de gewenste uitstraling en de functie van de raamdecoratie. Houten lamellen zorgen voor een warme en natuurlijke uitstraling, terwijl aluminium of pvc lamellen eerder strak en modern ogen. Tijdens een plaatsbezoek adviseren we u graag over de mogelijkheden.</div></details><details><summary>Komen jullie zelf opmeten?</summary><div class="answer">Ja. Een correcte opmeting is essentieel voor een mooi eindresultaat. Daarom komen we steeds ter plaatse om de situatie te bekijken en de lamellen nauwkeurig op te meten.</div></details><details><summary>Kunnen lamellen elektrisch bediend worden?</summary><div class="answer">Ja. Afhankelijk van het gekozen systeem kunnen lamellen zowel manueel als elektrisch bediend worden. We bekijken graag welke oplossing het best aansluit bij uw woning, comfortwensen en gebruiksgemak.</div></details><details><summary>Zijn lamellen geschikt voor grote raampartijen of schuiframen?</summary><div class="answer">Absoluut. Lamellen zijn bijzonder geschikt voor grote ramen en hoge glaspartijen. Ze bieden een strakke uitstraling en laten toe om de lichtinval eenvoudig te regelen zonder het zicht volledig weg te nemen.</div></details><details><summary>Wat is het verschil tussen horizontale en verticale lamellen?</summary><div class="answer">Horizontale lamellen worden vaak toegepast bij ramen in woningen en zorgen voor een strakke, tijdloze uitstraling. Verticale lamellen zijn bijzonder geschikt voor grote glaspartijen en schuiframen en bieden veel flexibiliteit in lichtregeling en privacy.</div></details><details><summary>Kunnen lamellen gecombineerd worden met gordijnen?</summary><div class="answer">Ja. Lamellen kunnen perfect gecombineerd worden met <a href="#/diensten/interieurafwerking/gordijnen/">gordijnen</a> voor een warmere uitstraling en extra sfeer. Zo combineert u het praktische karakter van lamellen met de zachtheid en gezelligheid van gordijnen.</div></details><details><summary>Geven jullie ook advies over kleuren en materialen?</summary><div class="answer">Ja. Tijdens een plaatsbezoek bekijken we samen welke kleuren, materialen en afwerkingen het best aansluiten bij uw interieur, lichtinval en persoonlijke smaak. Zo bent u zeker van een oplossing die niet alleen mooi oogt, maar ook perfect past bij uw woning en manier van leven.</div></details></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/schilderwerken/binnen/" data-title="Binnenschilderwerken Izegem | SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2256,8 +2226,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
   <div class="faq"><details><summary>Voeren jullie ook plamuurwerken uit?</summary><div class="answer">Ja. Een mooi schilderresultaat begint bij een goede ondergrond. Daarom verzorgen wij indien nodig ook plamuurwerken om muren en plafonds strak, egaal en schilderklaar af te werken.</div></details><details><summary>Werken jullie ook met vliesbehang?</summary><div class="answer">Ja. Vliesbehang en renovatievlies vormen vaak de ideale basis voor nieuwbouw- en renovatieprojecten. Ze zorgen voor een strakke afwerking en helpen kleine oneffenheden in de ondergrond op te vangen. We adviseren u graag welke oplossing het best aansluit bij uw woning en wensen.</div></details><details><summary>Geven jullie ook kleuradvies?</summary><div class="answer">Ja. Een geslaagd interieur begint met de juiste keuzes. Daarom begeleiden we klanten die met ons samenwerken graag bij de keuze van kleuren, materialen en afwerkingen, zodat alles perfect op elkaar afgestemd is.</div></details><details><summary>Schilderen jullie ook deuren, ramen en binnenschrijnwerk?</summary><div class="answer">Absoluut. Naast muren en plafonds verzorgen we ook het schilderen van deuren, kozijnen, trappen en ander binnenschrijnwerk. Zo creëren we een mooi en harmonieus geheel doorheen uw interieur.</div></details><details><summary>Moeten mijn muren eerst geëgaliseerd worden?</summary><div class="answer">Niet altijd. Tijdens het plaatsbezoek beoordelen we de staat van de ondergrond. Indien nodig voeren we plamuur-, schuur- en egalisatiewerken uit zodat de uiteindelijke schilderafwerking perfect tot haar recht komt.</div></details><details><summary>Werken jullie zowel voor renovaties, nieuwbouw als bestaande woningen?</summary><div class="answer">Ja. Of het nu gaat om een nieuwbouwwoning, renovatieproject of bestaande woning: wij zorgen steeds voor een professionele voorbereiding, een vlotte uitvoering en een hoogwaardige afwerking.</div></details><details><summary>Hoe lang duren binnenschilderwerken?</summary><div class="answer">Dat hangt af van de omvang van het project en de nodige voorbereidingswerken. Na het plaatsbezoek ontvangt u een duidelijke offerte en planning, zodat u precies weet wat u mag verwachten.</div></details><details><summary>Werken jullie ook voor bedrijven?</summary><div class="answer">Ja. We voeren binnenschilderwerken uit voor particulieren, kantoren, handelszaken, praktijken, horeca en residentiële projecten. Daarbij hanteren we steeds dezelfde focus op kwaliteit, planning, communicatie en afwerking.</div></details></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/schilderwerken/buiten/" data-title="Buitenschilderwerken Izegem | SDAD" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2283,8 +2253,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
   <div class="faq"><details><summary>Wanneer is de beste periode om buitenschilderwerken uit te voeren?</summary><div class="answer">Buitenschilderwerken worden meestal uitgevoerd tussen het voorjaar en het najaar. De ideale omstandigheden hangen af van temperatuur, luchtvochtigheid en weersomstandigheden. Daarom bekijken we per project wat het meest geschikte moment is.</div></details><details><summary>Wat is het verschil tussen schilderen en kaleien?</summary><div class="answer"><p><strong>Bij schilderen</strong> wordt de bestaande structuur van de gevel behouden. Een verfsysteem beschermt de ondergrond en geeft de gevel een nieuwe kleur en frisse uitstraling, zonder het karakter van de steen of het oppervlak te wijzigen.</p><p><strong>Bij kaleien</strong> wordt er een minerale kalklaag aangebracht die de gevel een volledig andere uitstraling geeft. De ondergrond krijgt een meer natuurlijke, authentieke en landelijke look. Kalei zorgt voor meer diepte en karakter dan een klassieke schilderafwerking.</p><p>Welke techniek het meest geschikt is, hangt af van de uitstraling die u wenst, de staat van de gevel en de technische eigenschappen van de ondergrond. Tijdens een plaatsbezoek adviseren wij u graag over de beste oplossing voor uw woning.</p></div></details><details><summary>Hoe lang gaat het buitenschilderwerk van een gevel mee?</summary><div class="answer"><p>De levensduur van een buitenschilderwerk hangt af van verschillende factoren, zoals de staat van de ondergrond, de ligging van het gebouw, de weersbelasting en het gekozen verfsysteem.</p><p>Bij SDAD besteden we daarom veel aandacht aan een correcte voorbereiding van de ondergrond, technisch advies en het gebruik van hoogwaardige kwaliteitsproducten.</p><p><strong>Voor gevelschilderwerken</strong> kunnen wij, mits een geschikte ondergrond en een correct opgebouwd verfsysteem, opleveren met <strong>10 jaar garantie</strong>.</p><p><strong>Voor schilderwerken aan buitenschrijnwerk</strong> gelden andere omstandigheden. Houten ramen en deuren worden immers veel intensiever belast door zon, regen, temperatuurschommelingen en mechanische belasting. Daarom is de levensduur hiervan afhankelijk van verschillende factoren en kunnen deze werken niet met dezelfde garantievoorwaarden worden opgeleverd als gevelschilderwerken.</p></div></details><details><summary>Moet een gevel eerst gereinigd worden?</summary><div class="answer"><p>Ja. Een duurzame afwerking begint altijd met een correcte voorbereiding van de ondergrond.</p><p>Mos, algen, straatvuil en andere vervuiling worden eerst verwijderd zodat verf of kalei optimaal kan hechten. Zonder een grondig gereinigde ondergrond kan geen duurzaam verfsysteem worden opgebouwd.</p><p>Daarom bekijken we bij elk project vooraf welke reiniging en voorbereiding nodig zijn om een kwalitatief eindresultaat te garanderen.</p></div></details><details><summary>Schilderen jullie ook ramen en deuren?</summary><div class="answer"><p>Absoluut. Naast gevels verzorgen we ook het schilderen of oliën van houten buitenschrijnwerk zoals ramen, deuren, dakoversteken en andere houten elementen.</p><p>Ook PVC- en aluminiumschrijnwerk kunnen wij voorzien van een duurzame schilderafwerking, mits de ondergrond hiervoor geschikt is.</p></div></details><details><summary>Werken jullie ook op hoogte?</summary><div class="answer">Ja. Afhankelijk van het project werken we met ladders, rolstellingen, hoogtewerkers of vaste stellingen om een veilige en kwalitatieve uitvoering te garanderen.</div></details><details><summary>Geven jullie advies over kleuren en afwerking?</summary><div class="answer">Absoluut. We begeleiden klanten niet alleen bij de uitvoering, maar ook bij de keuze van kleuren, materialen en afwerking zodat het eindresultaat perfect aansluit bij de woning en omgeving.</div></details><details><summary>Kan ik een vrijblijvende offerte aanvragen?</summary><div class="answer">Ja. Tijdens een plaatsbezoek bekijken we de situatie ter plaatse en ontvangt u een duidelijke en vrijblijvende offerte op maat van uw project.</div></details></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/schilderwerken/decoratieve-technieken/" data-title="Decoratieve technieken | kalkverf en betonlook | SDAD Izegem" hidden>
 <section class="page-hero"><div class="wrap">
@@ -2313,8 +2283,8 @@ h1, h2, h3 { hyphens: auto; -webkit-hyphens: auto; }
   <div class="faq"><details><summary>Zijn decoratieve technieken geschikt voor elke ruimte?</summary><div class="answer">Ja. Afhankelijk van de gekozen techniek kunnen decoratieve afwerkingen toegepast worden in leefruimtes, slaapkamers, keukens, badkamers, kantoren en commerciële ruimtes. Samen bekijken we welke oplossing het best past bij de functie van de ruimte.</div></details><details><summary>Wat is het verschil tussen een decoratieve techniek en gewone schilderwerken?</summary><div class="answer">Decoratieve technieken creëren extra diepte, structuur en beleving. Waar klassieke schilderwerken vooral kleur brengen, zorgen decoratieve afwerkingen voor een unieke uitstraling met meer karakter en persoonlijkheid.</div></details><details><summary>Zijn decoratieve afwerkingen onderhoudsvriendelijk?</summary><div class="answer">Ja. De meeste decoratieve technieken zijn eenvoudig te onderhouden. Afhankelijk van de gekozen afwerking kunnen bijkomende beschermlagen voorzien worden voor extra duurzaamheid en gebruiksgemak.</div></details><details><summary>Kunnen decoratieve technieken ook in badkamers of keukens toegepast worden?</summary><div class="answer">Zeker. Technieken zoals Aqua Sensa zijn speciaal ontwikkeld voor ruimtes die intensief gebruikt worden en bieden een duurzame en onderhoudsvriendelijke oplossing.</div></details><details><summary>Is elke decoratieve afwerking uniek?</summary><div class="answer">Ja. Decoratieve technieken worden manueel aangebracht waardoor subtiele nuances, kleurschakeringen en structuren ontstaan. Dat maakt elke wand uniek.</div></details><details><summary>Hoe kiezen we de juiste techniek?</summary><div class="answer">Tijdens een <a href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">vrijblijvend plaatsbezoek</a> luisteren we naar uw wensen en bekijken we samen de ruimte, de gewenste uitstraling en het beschikbare budget. Op basis daarvan adviseren we welke techniek het best aansluit bij uw project.</div></details><details><summary>Zijn decoratieve technieken duurder dan klassieke schilderwerken?</summary><div class="answer">Dat hangt af van de gekozen techniek en de oppervlakte. Decoratieve afwerkingen vragen meer vakmanschap en worden vaak in meerdere lagen opgebouwd. Tijdens <a href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">het plaatsbezoek</a> ontvangt u steeds een duidelijke offerte op maat.</div></details></div>
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
-  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="#/contact/">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
 </div></div></section>
 </div></main>
 <footer class="footer"><div class="wrap">
@@ -2453,7 +2423,10 @@ document.querySelectorAll('main .section .wrap > *:not(.rv), main .grid > *, mai
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
 }), { rootMargin: '0px 0px -8% 0px' }) : null;
-document.querySelectorAll('.rv, .hx, .stroke').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+// Bij een sprong naar een anker of zonder ondersteuning: alles meteen tonen
+const showAll = () => document.querySelectorAll('.rv, .hx, .stroke').forEach(el => el.classList.add('in'));
+if (!io || location.hash) showAll(); else document.querySelectorAll('.rv, .hx, .stroke').forEach(el => io.observe(el));
+addEventListener('hashchange', showAll);
 
 // Header: compacter en verbergen bij naar beneden scrollen
 const header = document.querySelector('.header');
@@ -2487,16 +2460,6 @@ const decos = document.querySelectorAll('[data-parallax]');
 if (decos.length && !reduce) {
   addEventListener('scroll', () => decos.forEach(d => d.style.transform = `translateY(${scrollY * d.dataset.parallax}px) rotate(${scrollY * d.dataset.parallax * .15}deg)`), { passive: true });
 }
-
-// Vier S: actief woord
-document.querySelectorAll('.s-list').forEach(list => {
-  const items = [...list.children];
-  const set = li => items.forEach(x => x.classList.toggle('on', x === li));
-  items.forEach(li => {
-    const b = li.querySelector('button');
-    b.addEventListener('mouseenter', () => set(li)); b.addEventListener('focus', () => set(li)); b.addEventListener('click', () => set(li));
-  });
-});
 
 // Werkwijze: stappen lichten op tijdens scrollen
 document.querySelectorAll('.flow__steps').forEach(ol => {

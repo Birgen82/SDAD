@@ -74,7 +74,7 @@ def nav(pg):
     links = "".join(f'<a href="{pg.u(p)}"{" aria-current=page" if p == cur else ""}>{n}</a>' for n, p in MENU)
     return f"""<a class="skip" href="#main">Naar inhoud</a>
 <div class="topbar"><div class="wrap">
-  <span>Prinsdomlaan 50, 8870 Izegem · actief in {REGIO}</span>
+  <span>Prinsdomlaan 50, 8870 Izegem</span>
   <a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a>
   <a href="mailto:{MAIL}">{MAIL}</a>
 </div></div>
@@ -188,7 +188,7 @@ def werkwijze(pg):
     return f"""<section class="section section--dark" id="werkwijze"><div class="wrap flow">
   <div class="flow__head"><span class="eyebrow">Onze werkwijze</span><h2>Zo pakken we uw project <em class="stroke">aan</em></h2>
   <p class="lead">Een mooi resultaat begint lang voor de eerste verflaag. Van het eerste gesprek tot de oplevering weet u steeds waar u aan toe bent.</p>
-  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plan stap 1: uw plaatsbezoek</a></div></div>
+  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div></div>
   <ol class="flow__steps">{items}</ol>
 </div></section>"""
 
@@ -221,8 +221,8 @@ def werkgebied(pg):
             tags.append(f'<li><a href="{href}">{place}</a></li>')
     return f"""<section class="section" id="werkgebied" style="scroll-margin-top:90px"><div class="wrap split" style="align-items:start">
   <div><span class="eyebrow">Werkgebied</span><h2>Actief in heel {REGIO}</h2>
-  <p>Vanuit Izegem werken we voor particulieren en bedrijven in heel {REGIO}. We reageren snel op uw vraag en plannen graag een vrijblijvend plaatsbezoek bij u ter plaatse.</p>
-  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div></div>
+  <p>Vanuit Izegem werken we voor particulieren en bedrijven in heel {REGIO}. We reageren snel op uw vraag en komen graag bij u ter plaatse.</p>
+</div>
   <div><h3>Hier werkten we al</h3><ul class="tags place-tags">{"".join(tags)}</ul></div>
 </div></section>"""
 
@@ -231,8 +231,8 @@ def cta(pg, title="Een mooi resultaat begint met een goed gesprek.",
         text="Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking."):
     return f"""<section class="section"><div class="wrap"><div class="cta">
   <h2>{title}</h2><p>{text}</p>
-  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Vraag uw plaatsbezoek aan</a>
-  <a class="btn btn--ghost" href="{pg.u('contact/')}">Offerte aanvragen</a></div>
+  <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="{pg.u('contact/')}">Contacteer ons</a>.</p>
 </div></div></section>"""
 
 
@@ -318,8 +318,6 @@ def home():
     pg = Page("")
     tiles = "".join(f"""<a class="tile rv" style="--i:{n}" href="{pg.u(h)}">{pg.img(i, t)}<span class="num">0{n + 1}</span><span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>"""
                     for n, (h, i, t, x) in enumerate(SERVICES))
-    plc = places()
-    band = "".join(f"<span>{name}</span>" for name, _ in plc)
     picks = ["babu-gent", "buitenschilderwerken-kasteel-blauwhuis-te-izegem", "gevel-villa-te-knokke", "rood-leefruimte-te-marke-stop-rood",
              "villa-te-zwijnaarde", "tastoe-roeselare", "schilderen-gevel-te-kortrijk", "boetiek-gastronomiek-culix-te-merelbeke"]
     shots = "".join(
@@ -327,7 +325,7 @@ def home():
         for s_ in picks for r in REAL if r["slug"] == s_)
     four = [("Stielkennis", "voor een vakkundige uitvoering."), ("Service", "voor een zorgeloze samenwerking."),
             ("Snelheid", "voor een vlotte en duidelijke planning."), ("Stijl", "voor een afwerking tot in de kleinste details.")]
-    four_li = "".join(f'<li{" class=on" if n == 0 else ""}><button type="button"><span class="s-word">{w}</span><span class="s-desc">{d[0].upper() + d[1:]}</span></button></li>' for n, (w, d) in enumerate(four))
+    four_li = "".join(f'<li><span class="s-word">{w}</span><span class="s-desc">{d[0].upper() + d[1:]}</span></li>' for w, d in four)
     ticks = "".join(f'<li class="rv" style="--i:{i % 4}">{b}</li>' for i, b in enumerate([
         "Ervaren vakmensen", "Persoonlijke aanpak", "Meedenkend advies", "Nakomen van afspraken &amp; planning",
         "Capaciteit en flexibiliteit", "Tijdige en heldere offertes", "Duidelijke communicatie", "Netheid op de werf"]))
@@ -337,11 +335,11 @@ def home():
     <span class="eyebrow">Schilderwerken &amp; interieurafwerking · {REGIO}</span>
     <h1><span class="line"><span style="--i:0">Een mooi resultaat</span></span><span class="line"><span style="--i:1">begint lang voor de</span></span><span class="line"><span style="--i:2"><em class="stroke">eerste verflaag.</em></span></span></h1>
     <p class="lead">Wij begeleiden u van kleuradvies tot een perfect afgewerkt eindresultaat. Met persoonlijk advies, duidelijke communicatie en een ervaren team zorgen we voor een zorgeloos traject van begin tot einde.</p>
-    <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a><a class="btn btn--ghost" href="#offerte">Offerte aanvragen</a></div>
+    <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+    <p class="hx__note">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag? <a href="{pg.u('contact/')}">Contacteer ons</a>.</p>
     <ul class="hx__stats">
       <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring in het schildersvak</li>
       <li><b data-count="10">10</b>jaar garantie op gevelschilderwerk* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
-      <li><b data-count="{len(plc)}">{len(plc)}</b>gemeenten in onze realisaties, in {REGIO}</li>
     </ul>
   </div>
   <div class="hx__visual">
@@ -351,19 +349,19 @@ def home():
   </div>
 </div><span class="scroll-cue" aria-hidden="true"></span></section>
 
-<div class="marquee" aria-label="Plaatsen waar we werkten"><div class="marquee__track">{band}{band.replace("<span>", '<span aria-hidden="true">')}</div></div>
-
 <section class="section"><div class="wrap">
   <div class="intro-row rv"><div><span class="eyebrow">Onze diensten</span><h2>Wat we voor u <em class="stroke">doen</em></h2></div>
   <p>Binnen- en buitenschilderwerken, decoratieve technieken en interieurafwerking met gordijnen en lamellen. Van kleuradvies tot oplevering.</p></div>
   <div class="bento">{tiles}</div>
 </div></section>
 
-<section class="section four"><div class="wrap four__grid">
+<section class="section four" id="waarom"><div class="wrap four__grid">
   <div class="rv"><span class="four__big" aria-hidden="true">S<sup>4</sup></span>
     <h2>Schilderkracht tot de vierde macht</h2><p>Zo creëren we ruimtes waar mensen graag wonen, werken en leven.</p></div>
   <ul class="s-list rv" style="--i:1">{four_li}</ul>
-</div></section>
+</div>
+<div class="wrap" style="margin-top:clamp(40px,6vw,72px)"><h3 class="rv" style="color:#fff;font-size:1.6rem;margin-bottom:18px">Daarom kiezen klanten voor SDAD</h3>
+  <ul class="ticks">{ticks}</ul></div></section>
 
 <section class="section section--soft"><div class="wrap split">
   <div class="rv">
@@ -385,18 +383,6 @@ def home():
 <div><div class="rail" tabindex="0" aria-label="Realisaties, horizontaal scrollen">{shots}</div></div>
 </section>
 
-<section class="section section--soft"><div class="wrap">
-  <span class="eyebrow">Waarom SDAD</span><h2 class="rv">Daarom kiezen klanten voor SDAD</h2>
-  <ul class="ticks" style="margin-top:32px">{ticks}</ul>
-</div></section>
-
-<section class="section" id="offerte" style="scroll-margin-top:80px"><div class="wrap split" style="align-items:start">
-  <div class="wiz-aside rv"><span class="eyebrow">Offerte aanvragen</span><h2>Uw project in <em class="stroke">4 stappen</em></h2>
-    <p>Vertel ons kort wat u wilt laten doen. We reageren snel en plannen graag een vrijblijvend plaatsbezoek.</p>
-    <ul><li>Vrijblijvend plaatsbezoek</li><li>Persoonlijk advies over kleuren en afwerking</li><li>Een duidelijke offerte en planning</li></ul>
-    <p style="margin-top:22px">Liever meteen een afspraak? <a href="{BOOKING}" target="_blank" rel="noopener">Plan zelf uw plaatsbezoek</a>.</p></div>
-  {wizard()}
-</div></section>
 {werkgebied(pg)}
 {cta(pg)}"""
     write(pg, layout(pg, "Schilderwerken SDAD | binnen, buiten en interieurafwerking",
@@ -422,6 +408,7 @@ def wizard():
         <div><label for="w-t">Telefoon *</label><input id="w-t" name="telefoon" type="tel" required autocomplete="tel"></div>
         <div><label for="w-e">E-mail *</label><input id="w-e" name="email" type="email" required autocomplete="email"></div>
         <div class="full"><label for="w-b">Nog iets dat we moeten weten?</label><textarea id="w-b" name="bericht" rows="3"></textarea></div>
+        <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="../cookie-en-privacybeleid/" target="_blank">Cookie- en privacybeleid</a></span></label></div>
         <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
       </div></fieldset>
     <p class="wiz__err" aria-live="polite"></p>
@@ -783,25 +770,10 @@ def contact():
     <div class="contact-card"><h3>SDAD bv</h3><p>Prinsdomlaan 50<br>8870 Izegem<br>BE0823.935.816</p><p style="margin-top:10px"><a href="{MAPS}" target="_blank" rel="noopener" style="font-size:1rem">Route plannen →</a></p></div>
     {people}
     <div class="contact-card"><h3>E-mail</h3><p><a href="mailto:{MAIL}">{MAIL}</a></p></div>
-    <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in.</p><a class="btn" href="{BOOKING}" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
+    <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in. Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning.</p><a class="btn" href="{BOOKING}" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
   </div>
-  <form class="form" id="contact-form">
-    <h2 style="font-size:2rem">Stel ons een vraag</h2>
-    <div class="form-grid">
-      <div><label for="f-vn">Naam *</label><input id="f-vn" name="voornaam" required autocomplete="given-name"></div>
-      <div><label for="f-n">Familienaam *</label><input id="f-n" name="naam" required autocomplete="family-name"></div>
-      <div class="full"><label for="f-a">Straat + huisnr. *</label><input id="f-a" name="adres" required autocomplete="street-address"></div>
-      <div><label for="f-pc">Postcode *</label><input id="f-pc" name="postcode" required autocomplete="postal-code" inputmode="numeric"></div>
-      <div><label for="f-s">Stad *</label><input id="f-s" name="stad" required autocomplete="address-level2"></div>
-      <div><label for="f-t">Telefoon *</label><input id="f-t" name="telefoon" type="tel" required autocomplete="tel"></div>
-      <div><label for="f-e">E-mail *</label><input id="f-e" name="email" type="email" required autocomplete="email"></div>
-      <div class="hp" aria-hidden="true"><label for="f-w">Website</label><input id="f-w" name="website" tabindex="-1" autocomplete="off"></div>
-      <div class="full"><label for="f-m">Hoe kunnen we je helpen? *</label><textarea id="f-m" name="bericht" rows="5" required></textarea></div>
-      <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">Cookie- en privacybeleid</a></span></label></div>
-    </div>
-    <button class="btn" type="submit" style="margin-top:20px">Verstuur bericht</button>
-    <p class="form-note" aria-live="polite">We reageren snel op uw vraag.</p>
-  </form>
+  <div><h2 style="font-size:clamp(1.8rem,3vw,2.4rem)">Stel uw vraag in 4 korte stappen</h2>
+  {wizard()}</div>
 </div></section>
 {cta(pg)}"""
     write(pg, layout(pg, "Contacteer ons voor schilderwerken, gordijnen of lamellen",
