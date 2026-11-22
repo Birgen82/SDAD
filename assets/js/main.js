@@ -116,8 +116,10 @@ addEventListener('hashchange', showAll);
 // Header: compacter en verbergen bij naar beneden scrollen
 const header = document.querySelector('.header');
 let lastY = scrollY;
+const desktop = matchMedia('(min-width: 981px)');
 addEventListener('scroll', () => {
   const y = scrollY;
+  if (!desktop.matches) { if (header) header.classList.remove('is-hidden', 'is-scrolled'); lastY = y; return; }
   if (header && !document.body.classList.contains('menu-open')) {
     header.classList.toggle('is-scrolled', y > 30);
     header.classList.toggle('is-hidden', y > 400 && y > lastY + 4);
@@ -221,7 +223,7 @@ document.querySelectorAll('.subnav').forEach(nav => {
     targets.forEach(t => { if (t.getBoundingClientRect().top < 200) cur = t; });
     links.forEach(a => {
       const on = cur && a.getAttribute('href') === '#' + cur.id;
-      if (on && !a.classList.contains('on')) a.scrollIntoView({ block: 'nearest', inline: 'center' });
+      if (on && !a.classList.contains('on')) { const box = a.parentElement; box.scrollLeft = a.offsetLeft - (box.clientWidth - a.offsetWidth) / 2; }
       a.classList.toggle('on', on);
     });
   };

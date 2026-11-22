@@ -412,8 +412,6 @@ ul { padding-left: 1.2em; }
   --ease: cubic-bezier(.2, .7, .1, 1);
   --radius-lg: 18px;
 }
-@view-transition { navigation: auto; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
 
 body { background: var(--plaster); }
 h1, h2, h3, h4 { font-family: var(--head); font-stretch: 72%; font-weight: 800; letter-spacing: -.01em; line-height: 1; }
@@ -992,6 +990,17 @@ body.hdr-hidden .fbar { top: 0; }
 body.menu-open { overflow: visible; }
 html.menu-lock { overflow: hidden; }
 @media (max-width: 980px) { .dd-panel { background: transparent; } }
+
+/* ---------- Robuuste gsm-weergave (feedback echte toestellen) ---------- */
+@media (max-width: 980px) {
+  .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+  body { padding-top: 67px; }
+  .header .wrap { min-height: 67px; height: 67px; }
+  .nav { display: none; visibility: visible; transform: none; transition: none; position: fixed; top: 67px; left: 0; right: 0; bottom: 0; height: auto; }
+  .menu-open .nav { display: flex; }
+  .subnav, body.hdr-hidden .subnav, .fbar, body.hdr-hidden .fbar { top: 67px; transition: none; }
+  .anchor-wrap [id], #sfeerbeelden, #vragen, #andere, #aanpak, #garantie, #werkgebied, #technieken { scroll-margin-top: 140px; }
+}
 .pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HousePainter", "name": "SDAD bv", "slogan": "Schilderkracht tot de vierde macht", "url": "https://sdad.be/", "email": "info@sdad.be", "telephone": "+32473520920", "vatID": "BE0823.935.816", "image": "https://sdad.be/site/assets/files/1/kleurbepaling_linkedin.jpeg", "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870", "addressLocality": "Izegem", "addressCountry": "BE"}, "areaServed": [{"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "West-Vlaanderen"}], "sameAs": ["https://www.facebook.com/DeseureArneNuyttensLies/", "https://www.instagram.com/schilderwerken_sdad/", "https://www.linkedin.com/company/sdad-arne-deseure/"]}</script>
@@ -2701,8 +2710,10 @@ addEventListener('hashchange', showAll);
 // Header: compacter en verbergen bij naar beneden scrollen
 const header = document.querySelector('.header');
 let lastY = scrollY;
+const desktop = matchMedia('(min-width: 981px)');
 addEventListener('scroll', () => {
   const y = scrollY;
+  if (!desktop.matches) { if (header) header.classList.remove('is-hidden', 'is-scrolled'); lastY = y; return; }
   if (header && !document.body.classList.contains('menu-open')) {
     header.classList.toggle('is-scrolled', y > 30);
     header.classList.toggle('is-hidden', y > 400 && y > lastY + 4);
@@ -2806,7 +2817,7 @@ document.querySelectorAll('.subnav').forEach(nav => {
     targets.forEach(t => { if (t.getBoundingClientRect().top < 200) cur = t; });
     links.forEach(a => {
       const on = cur && a.getAttribute('href') === '#' + cur.id;
-      if (on && !a.classList.contains('on')) a.scrollIntoView({ block: 'nearest', inline: 'center' });
+      if (on && !a.classList.contains('on')) { const box = a.parentElement; box.scrollLeft = a.offsetLeft - (box.clientWidth - a.offsetWidth) / 2; }
       a.classList.toggle('on', on);
     });
   };
