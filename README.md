@@ -11,10 +11,12 @@ Herbouw van sdad.be met dezelfde inhoud en huisstijl (rood #da291c, antraciet #4
 - Zet `DEMO = False` in `build.py` en draai `python3 build.py`. Dan verdwijnt `noindex` en wijzen deel-links, canonical en deelafbeelding naar sdad.be in plaats van de GitHub-demo.
 - Offerteaanvragen gaan naar https://www.offerteschilderwerken.be/#Offerteaanvraag (constante `OFFERTE` in `build.py`). Controleer dat dit adres klopt.
 - Het cookie- en privacybeleid noemt nog cookies van Google en Facebook; deze site plaatst die niet. Laat de tekst juridisch nakijken en bijwerken (ook het oude adres van de privacycommissie).
-- Lettertype: Avenir Next (Typekit-licentie van de huidige site) valt terug op Nunito Sans; koppel de Typekit-kit voor exacte huisstijl.
+- Lettertypes (Archivo, Nunito Sans) staan lokaal in `assets/fonts/` (SIL Open Font License): geen verbinding met Google nodig.
 - Google Tag Manager en Meta-pixel zijn bewust weggelaten; terugplaatsen kan alleen met cookietoestemming.
 
 ## Offertepagina (voorstel voor offerteschilderwerken.be)
 - Staat op `/offerte/` (functie `offerte_page()` in `build.py`), zelfde huisstijl als de site.
-- Het formulier vraagt dezelfde gegevens als het huidige Webflow-formulier, maar in 4 stappen. In deze demo opent het bij verzenden het e-mailprogramma; voor livegang koppelen aan het bestaande Webflow/HubSpot-formulier.
+- Opgebouwd volgens onderzoek naar conversie: formulier bovenaan in 3 stappen (werk, timing, contact; adres beperkt tot postcode), geen menu of uitgaande links, statische hoofdfoto, eigen realisaties met plaats, 4 stappen, korte FAQ, terugbelformulier.
+- Nog aan te leveren door SDAD: 3 echte reviews met naam en gemeente, voor/na-foto's.
+- Het formulier In deze demo opent het bij verzenden het e-mailprogramma; voor livegang koppelen aan het bestaande Webflow/HubSpot-formulier.
 - Afspraken: offerteschilderwerken.be gebruikt YouCanBook-domein `schilderwerkensdad`, sdad.be `afspraaksdad`. Laat SDAD kiezen welke de juiste is.

@@ -182,9 +182,8 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp", landin
 <meta name="theme-color" content="#00080a">
 {'<meta name="robots" content="noindex, nofollow">' if DEMO else ""}
 <link rel="icon" href="{pg.r}assets/img/list_icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..80,700..900&family=Nunito+Sans:wght@400;600;700&display=swap">
+<link rel="preload" href="{pg.r}assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{pg.r}assets/fonts/fonts.css?v={VER}">
 <link rel="stylesheet" href="{pg.r}assets/css/style.css?v={VER}">
 <link rel="stylesheet" href="{pg.r}assets/css/v2.css?v={VER}">
 <script type="application/ld+json">{SCHEMA}</script>
@@ -1128,129 +1127,132 @@ def blog_pages():
 def landing_nav(pg):
     return f"""<a class="skip" href="#main">Naar inhoud</a>
 <header class="header lp-header"><div class="wrap">
-  <a class="logo" href="{pg.u()}" aria-label="SDAD – naar sdad.be">{pg.img("logo_dark.png", "SDAD – Schilderkracht tot de vierde macht", lazy=False, w=42, h=58)}</a>
-  <div class="lp-actions"><a class="lp-tel" href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a><a class="btn no-arrow" href="#offerte">Offerte aanvragen</a></div>
+  <span class="logo">{pg.img("logo_dark.png", "SDAD – Schilderkracht tot de vierde macht", lazy=False, w=42, h=58)}</span>
+  <div class="lp-actions"><a class="lp-tel" href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a><a class="btn no-arrow" href="#offerte">Gratis offerte</a></div>
 </div></header>"""
 
 
 def landing_footer(pg):
-    socials = "".join(f'<a href="{u}" target="_blank" rel="noopener" aria-label="{n}">{ICONS[n]}</a>' for n, u in SOCIAL.items())
     return f"""<footer class="footer lp-footer"><div class="wrap">
   <div class="lp-foot">
     <div>{pg.img("logo.png", "SDAD", cls="footer-logo", w=66, h=92)}</div>
-    <div><h4>SDAD</h4><p>Schilderkracht tot de vierde macht<br>Prinsdomlaan 50, 8870 Izegem<br><a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="mailto:{MAIL}">{MAIL}</a></p></div>
-    <div><h4>Meer over SDAD</h4><p><a href="{pg.u()}">Naar de website</a><br><a href="{pg.u('realisaties/')}">Realisaties</a><br><a href="{pg.u('over-sdad/')}">Over SDAD</a></p><div class="socials">{socials}</div></div>
+    <div><h4>SDAD bv</h4><p>Schilderkracht tot de vierde macht<br>Prinsdomlaan 50, 8870 Izegem<br><a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="mailto:{MAIL}">{MAIL}</a></p></div>
   </div>
   <div class="subfooter"><span>© SDAD BV, BV Schilder &amp; Decoratiebedrijf Arne Deseure, BE 0823.935.816, Prinsdomlaan 50, 8870 Izegem</span>
     <a href="{pg.u('cookie-en-privacybeleid/')}">Privacybeleid</a></div>
 </div></footer>
-<div class="mobile-bar"><a href="tel:{PHONES[0][2]}">Bel ons</a><a href="#offerte">Offerte</a></div>"""
+<div class="mobile-bar"><a href="tel:{PHONES[0][2]}">Bel ons</a><a href="#offerte">Gratis offerte</a></div>"""
 
 
 def offerte_wizard(pg):
     def opts(name, items, kind="radio", need=None):
         n = f' data-need="{need}"' if need else ""
         return f'<div class="opts"{n}>' + "".join(f'<label><input type="{kind}" name="{name}" value="{v}"><span>{v}</span></label>' for v in items) + "</div>"
-    def field(label, name, typ="text", req=True, full=False, ac="", ph=""):
-        return (f'<div{" class=full" if full else ""}><label for="o-{name}">{label}{" *" if req else ""}</label>'
-                f'<input id="o-{name}" name="{name}" type="{typ}"{" required" if req else ""}{f" autocomplete={ac!r}" if ac else ""}{f" placeholder={ph!r}" if ph else ""}></div>')
-    return f"""<div class="wiz lp-wiz" data-subject="Offerteaanvraag via offerteschilderwerken.be" data-submit="Offerte aanvragen"><form onsubmit="return false" novalidate>
+    def field(label, name, typ="text", req=True, full=False, ac="", mode="", hint=""):
+        h = f'<small class="fhint">{hint}</small>' if hint else ""
+        return (f'<div{" class=full" if full else ""}><label for="o-{name}">{label}{" *" if req else " <span class=opt>(optioneel)</span>"}</label>'
+                f'<input id="o-{name}" name="{name}" type="{typ}"{" required" if req else ""}{f" autocomplete={ac!r}" if ac else ""}{f" inputmode={mode!r}" if mode else ""}>{h}</div>')
+    return f"""<div class="wiz lp-wiz" data-subject="Offerteaanvraag via offerteschilderwerken.be" data-submit="Vraag mijn gratis offerte aan"><form onsubmit="return false" novalidate>
   <div class="wiz__body">
-    <p class="lp-wiz__title">Vrijblijvende offerte <span>Gratis &amp; zonder verplichtingen</span></p>
+    <p class="lp-wiz__title">Gratis offerte in 3 stappen <span>Vrijblijvend</span></p>
     <div class="wiz__bar"><span></span></div>
-    <fieldset class="wiz__step"><legend>Wat mogen we voor u doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
-      {opts("Werken", ["Binnenschilderwerken", "Buitenschilderwerken", "Decoratieve technieken", "Ramen, deuren of trap", "Gordijnen, lamellen of raamfolie"], "checkbox", "Kies minstens één dienst.")}</fieldset>
-    <fieldset class="wiz__step"><legend>Over uw project</legend><p class="hint">Bent u een particulier of een professionele klant?</p>
+    <fieldset class="wiz__step"><legend>Welk werk mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
+      {opts("Werken", ["Binnenschilderwerken", "Buitenschilderwerken", "Decoratieve technieken", "Ramen, deuren of trap", "Gordijnen, lamellen of raamfolie"], "checkbox", "Kies minstens één soort werk.")}</fieldset>
+    <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
+      {opts("Timing", ["Zo snel mogelijk", "Binnen 3 maanden", "Later dit jaar", "Nog geen idee"], "radio", "Kies een periode.")}
+      <p class="hint" style="margin-top:18px">Voor wie is het?</p>
       {opts("Klanttype", ["Particulier", "Professioneel"], "radio", "Kies particulier of professioneel.")}
-      <div class="form-grid" style="margin-top:14px">
-        <div class="full" data-show-if="Klanttype=Professioneel" hidden><div class="form-grid">{field("Bedrijfsnaam", "Bedrijfsnaam", req=False, ac="organization")}{field("Btw-nummer", "Btw-nummer", req=False)}</div></div>
-        {field("Wanneer wilt u de werken laten uitvoeren?", "Gewenste periode", full=True, ph="bv. voorjaar 2027")}
-        <div class="full"><label class="check"><input type="checkbox" name="Zo snel mogelijk" value="ja"> <span>Zo snel mogelijk</span></label></div>
-      </div></fieldset>
-    <fieldset class="wiz__step"><legend>Hoe bereiken we u?</legend><p class="hint">We nemen zo snel mogelijk contact met u op.</p>
-      <div class="form-grid">{field("Voornaam", "Voornaam", ac="given-name")}{field("Achternaam", "Achternaam", ac="family-name")}{field("Telefoon", "Telefoon", "tel", ac="tel")}{field("E-mail", "E-mail", "email", ac="email")}</div></fieldset>
-    <fieldset class="wiz__step"><legend>Waar en wat?</legend><p class="hint">Het adres van de werken en een korte beschrijving.</p>
-      <div class="form-grid">{field("Straat", "Straat", ac="address-line1")}{field("Huisnummer + bus", "Huisnummer")}{field("Postcode", "Postcode", ac="postal-code")}{field("Stad", "Stad", ac="address-level2")}
-        <div class="full"><label for="o-besch">Beschrijving *</label><textarea id="o-besch" name="Beschrijving" rows="4" required placeholder="Beschrijf uw project zo gedetailleerd mogelijk…"></textarea></div>
-        <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a></span></label></div>
+      <div data-show-if="Klanttype=Professioneel" hidden style="margin-top:12px"><div class="form-grid">{field("Bedrijfsnaam", "Bedrijfsnaam", req=False, ac="organization")}{field("Btw-nummer", "Btw-nummer", req=False)}</div></div>
+    </fieldset>
+    <fieldset class="wiz__step"><legend>Waar kunnen we u bereiken?</legend><p class="hint">We nemen snel contact op om een vrijblijvend plaatsbezoek af te spreken.</p>
+      <div class="form-grid lp-grid">{field("Naam", "Naam", full=True, ac="name")}{field("Telefoon", "Telefoon", "tel", full=True, ac="tel", hint="Om het plaatsbezoek af te spreken.")}{field("E-mail", "E-mail", "email", full=True, ac="email")}{field("Postcode van de werken", "Postcode", full=True, ac="postal-code", mode="numeric")}
+        <div class="full"><label for="o-besch">Korte beschrijving <span class="opt">(optioneel)</span></label><textarea id="o-besch" name="Beschrijving" rows="3" placeholder="bv. living en hal schilderen, ca. 60 m²"></textarea></div>
         <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
       </div></fieldset>
     <p class="wiz__err" aria-live="polite"></p>
     <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
+    <p class="lp-legal">Gratis en zonder verplichtingen. We reageren snel. Uw gegevens gebruiken we alleen voor uw aanvraag (<a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a>).</p>
   </div>
-  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>We nemen zo snel mogelijk contact met u op.</p></div>
+  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>We nemen snel contact met u op.</p></div>
 </form></div>"""
+
+
+OFFER_SHOTS = [("1893_kortrijk_afgewerkt.webp", "Gevel geschilderd", "Kortrijk"), ("1627_nieuwpoort_living.webp", "Leefruimte", "Nieuwpoort"),
+               ("1913_blauwhuis_voorzijde_afgewerkt.webp", "Kasteel, binnen en buiten", "Izegem"), ("2306_babu_na_3.webp", "Horeca-interieur", "Gent"),
+               ("2044_knokke_na_1_3.webp", "Villa, gevel", "Knokke"), ("1835_oblix_1.webp", "Restaurant", "Merelbeke")]
 
 
 def offerte_page():
     pg = Page("offerte/")
     trust = f'<a class="tp" href="{TRUSTPILOT}" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>4,7</b> op 5 op Trustpilot</span></a>'
-    tiles = "".join(f'<a class="tile rv" style="--i:{n}" href="#offerte">{pg.img(i, t)}<span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>' for n, (i, t, x) in enumerate([
-        ("1627_nieuwpoort_living.webp", "Binnenschilderwerken", "Met oog voor detail, gratis kleuradvies en een perfecte afwerking."),
-        ("2502_aqua_sensa_1.webp", "Decoratieve technieken", "Geef muren meer pit met unieke decoratieve technieken."),
-        ("1893_kortrijk_afgewerkt.webp", "Buitenschilderwerken", "Het schilderen van uw gevel met verf of kalei, ramen en deuren.")]))
-    ticks = "".join(f'<li class="rv" style="--i:{i % 4}">{b}</li>' for i, b in enumerate([
-        "Ervaren vakmensen", "Capaciteit en flexibiliteit", "Persoonlijke aanpak", "Tijdige en heldere offertes",
-        "Meedenkend advies", "Duidelijke communicatie", "Nakomen van afspraken &amp; planning", "Netheid op de werf"]))
-    picks = ["buitenschilderwerken-kasteel-blauwhuis-te-izegem", "boetiek-gastronomiek-culix-te-merelbeke", "gevel-villa-te-knokke", "babu-gent",
-             "tastoe-roeselare", "schilderen-gevel-te-kortrijk", "villa-te-zwijnaarde", "frituur-de-platse-lendelede"]
-    shots = "".join(shot(pg, r) for sl in picks for r in REAL if r["slug"] == sl)
+    services = "".join(f'<li class="rv" style="--i:{n}">{pg.img(thumb(i, 640), t, w=320, h=240)}<div><h3>{t}</h3><p>{x}</p></div></li>' for n, (i, t, x) in enumerate([
+        ("1627_nieuwpoort_living.webp", "Binnenschilderwerken", "Muren, plafonds, deuren en trappen. Met gratis kleuradvies en een strakke afwerking."),
+        ("1893_kortrijk_afgewerkt.webp", "Buitenschilderwerken", "Gevel schilderen of kaleien, ramen en deuren. 10 jaar garantie op gevelschilderwerk*."),
+        ("2442_techniek_12.webp", "Decoratieve technieken", "Kalk, betonlook of een accentmuur met karakter."),
+        ("1644_app_kortrijk_4.webp", "Gordijnen en lamellen", "Advies, opmeting en plaatsing op maat.")]))
+    shots = "".join(f'<figure class="rv" style="--i:{n % 3}">{pg.img(i, f"{t} in {pl}", w=600, h=450)}<figcaption><b>{t}</b> · {pl}</figcaption></figure>' for n, (i, t, pl) in enumerate(OFFER_SHOTS))
+    ticks = "".join(f'<li>{b}</li>' for b in ["Ervaren vakmensen", "Tijdige en heldere offertes", "Nakomen van afspraken &amp; planning", "Netheid op de werf"])
+    steps = "".join(f'<li class="rv" style="--i:{n}"><span class="lp-step">{n + 1}</span><h3>{t}</h3><p>{d}</p></li>' for n, (t, d) in enumerate([
+        ("Aanvraag", "U vult het formulier in of belt ons."), ("Plaatsbezoek", "We komen vrijblijvend langs en geven advies."),
+        ("Offerte", "U krijgt een duidelijke offerte en planning."), ("Uitvoering", "Vakkundig, netjes en volgens afspraak.")]))
+    qa = [("Wat kost een offerte?", "Niets. De offerte en het plaatsbezoek zijn gratis en vrijblijvend."),
+          ("Waar werken jullie?", f"Vanuit Izegem in heel {REGIO}."),
+          ("Geldt het verlaagde btw-tarief van 6%?", "Bij renovatie van een woning ouder dan 10 jaar kan het verlaagde tarief van 6% gelden. We bekijken dit bij de offerte."),
+          ("Wat met garantie?", f"Voor gevelschilderwerken kunnen we, {GARANTIE_VOORWAARDE}, opleveren met 10 jaar garantie. Voor buitenschrijnwerk gelden andere voorwaarden."),
+          ("Laten jullie de woning netjes achter?", "Ja. Netheid op de werf is een van onze vaste afspraken.")]
+    faqs = "".join(f"<details><summary>{q}</summary><div class=\"answer\">{a}</div></details>" for q, a in qa)
     body = f"""<section class="lp-hero">
-  <div class="lp-hero__bg" aria-hidden="true"><video autoplay muted loop playsinline preload="auto" poster="{pg.r}assets/video/hero-poster.webp">
-    <source src="{pg.r}assets/video/hero-m.mp4" type="video/mp4" media="(max-width: 700px)"><source src="{pg.r}assets/video/hero.mp4" type="video/mp4"></video></div>
+  <div class="lp-hero__bg" aria-hidden="true">{pg.img("1893_kortrijk_afgewerkt.webp", "", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
   <div class="wrap lp-hero__grid">
     <div class="lp-hero__text">
       {trust}
-      <h1>Uw betrouwbare, kwalitatieve &amp; betaalbare partner voor <em class="stroke">schilderwerken</em></h1>
-      <p class="lead">U kunt rekenen op een hoge afwerking in combinatie met een vlotte service, binnen de gewenste opleveringstermijn.</p>
-      <ul class="lp-usp"><li>Gratis &amp; vrijblijvende offerte</li><li>Gratis kleuradvies</li><li>Meer dan 25 jaar vakmanschap</li></ul>
-      <p class="lp-alt">Liever meteen een afspraak? <a href="{BOOKING}" target="_blank" rel="noopener">Plan zelf een plaatsbezoek</a></p>
+      <h1>Schilderwerken in West- en Oost-Vlaanderen, afgewerkt tot in de <em class="stroke">kleinste details</em></h1>
+      <p class="lead">Binnen- en buitenschilderwerken door het team van Arne en Lies uit Izegem. Met persoonlijk advies en een vlotte planning.</p>
+      <ul class="lp-usp"><li>Gratis plaatsbezoek en offerte</li><li>Meer dan 25 jaar vakmanschap</li><li>10 jaar garantie op gevelschilderwerk*</li></ul>
+      <p class="lp-alt">Liever bellen? <a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="{BOOKING}" target="_blank" rel="noopener">Zelf een plaatsbezoek inplannen</a></p>
     </div>
     <div id="offerte" class="lp-hero__form">{offerte_wizard(pg)}</div>
   </div>
 </section>
 
 <section class="section"><div class="wrap">
-  <div class="intro-row rv"><div><span class="eyebrow">Onze diensten</span><h2>Schilderwerken met een hoge <em class="stroke">afwerkingsgraad</em></h2></div>
-  <p>Voor uw living, keuken, slaapkamer, gevel… Ook ramen, deuren en trappen werken we af in een kleur die past in het totaalplaatje. Gordijnen, raamfolie en lamellen kunnen we eveneens voorzien.</p></div>
-  <div class="lp-tiles">{tiles}</div>
+  <div class="rv"><span class="eyebrow">Wat we doen</span><h2>Schilderwerken met een hoge afwerkingsgraad</h2></div>
+  <ul class="lp-services">{services}</ul>
 </div></section>
 
-<section class="section four"><div class="wrap split">
-  <div class="rv"><span class="eyebrow">Elke klant is uniek</span><h2>Woningen, appartementen, winkels en kantoren</h2>
-    <p>Elke klant wil dat zijn woning of bedrijfspand eruit springt. Net daar houden wij van. Uitdagende projecten zien we even graag komen als de alledaagse schilderwerken. Aarzel dus niet om speciale verzoeken voor te leggen.</p>
-    <p>Houdt u van strak en modern, of liever huiselijk en warm? SDAD past zich aan uw stijl en voorkeuren aan.</p>
-    <div class="btns"><a class="btn" href="#offerte">Offerte aanvragen</a></div></div>
-  <div class="rv" style="--i:1"><h3 style="color:#fff;font-size:1.6rem;margin-bottom:16px">Daarom kiezen klanten voor SDAD</h3><ul class="ticks lp-ticks">{ticks}</ul></div>
-</div></section>
-
-<section class="section rail-wrap"><div class="wrap">
-  <div class="head-row rv"><div><span class="eyebrow">Realisaties</span><h2>Raak geïnspireerd</h2></div>
-  <div class="rail-nav"><a class="arrow-link" href="{pg.u('realisaties/')}" style="align-self:center;margin-right:10px">Alle realisaties</a><button type="button" data-dir="-1" aria-label="Vorige">←</button><button type="button" data-dir="1" aria-label="Volgende">→</button></div></div>
-</div><div><div class="rail" tabindex="0" aria-label="Realisaties, horizontaal scrollen">{shots}</div></div></section>
-
-<section class="section section--soft"><div class="wrap split">
-  <div class="rv">{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens")}</div>
-  <div class="rv" style="--i:1"><span class="eyebrow">Zaakvoerders</span><h2>Drijvende kracht achter SDAD</h2>
-    <p>Achter SDAD staan ondernemers Arne en Lies. Samen met hun team bouwen zij dagelijks verder aan een bedrijf waarin vakmanschap, kwaliteit en persoonlijke opvolging centraal staan.</p>
-    <p>Al meer dan 25 jaar leeft Arne Deseure voor het schildersvak. Lies begeleidt klanten van eerste contact tot oplevering. Elk geslaagd project wordt mogelijk gemaakt door een team van gemotiveerde vakmensen.</p>
-    <a class="arrow-link" href="{pg.u('over-sdad/')}">Meer over SDAD</a></div>
+<section class="section section--soft"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Eigen werk</span><h2>Recente realisaties</h2></div><a class="arrow-link" href="#offerte">Vraag uw offerte</a></div>
+  <div class="lp-gallery">{shots}</div>
 </div></section>
 
 <section class="section"><div class="wrap split">
-  <div class="rv"><span class="eyebrow">Samen met Verthe Interieurs</span><h2>Samen naar een interieur dat klopt</h2>
-    <p>Een geslaagd interieur is meer dan een mooie afwerking. Daarom bundelen we onze expertise met <a href="https://www.verthe-interieurs.be/" target="_blank" rel="noopener">Verthe Interieurs</a> uit Harelbeke: SDAD zorgt voor hoogwaardig schilderwerk, Verthe voor een doordachte totaalaanpak van interieur en maatwerk.</p></div>
-  <div class="rv" style="--i:1">{video(pg, "2434_thumbnail_video_sdad_verthe.webp", "https://www.youtube.com/watch?v=zO2ZFUFUiMw", "Bekijk de film: SDAD × Verthe Interieurs", "Film over de samenwerking tussen SDAD en Verthe Interieurs")}</div>
+  <div class="rv">{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens van SDAD")}</div>
+  <div class="rv" style="--i:1"><span class="eyebrow">Wie komt er langs?</span><h2>Arne en Lies, met hun team</h2>
+    <p>Arne Deseure leeft al meer dan 25 jaar voor het schildersvak en bewaakt de kwaliteit op de werf. Lies begeleidt u van het eerste contact tot de oplevering.</p>
+    <ul class="checks">{ticks}</ul>
+    <div class="lp-review-slot">{trust}<p>Lees wat klanten over ons schrijven op Trustpilot.</p></div>
+    <div class="btns"><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div></div>
 </div></section>
 
-<section class="section"><div class="wrap"><div class="cta lp-cta">
-  <h2>Een project in het vooruitzicht?</h2><p>Vraag een vrijblijvende offerte aan, of laat uw nummer achter en we bellen u terug.</p>
-  <div class="btns"><a class="btn" href="#offerte">Offerte aanvragen</a></div>
+<section class="section section--dark"><div class="wrap">
+  <div class="rv"><span class="eyebrow">Zo werkt het</span><h2>In 4 stappen naar een mooi resultaat</h2></div>
+  <ol class="lp-steps">{steps}</ol>
+</div></section>
+
+<section class="section"><div class="wrap faq2">
+  <div class="faq2__aside rv"><span class="eyebrow">Vragen</span><h2>Goed om te weten</h2>
+    <div class="ask"><p><strong>Andere vraag?</strong><br>Lies helpt u graag verder.</p><a class="ask__tel" href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a></div></div>
+  <div class="faq rv" style="--i:1">{faqs}</div>
+</div></section>
+
+<section class="section" style="padding-top:0"><div class="wrap"><div class="cta lp-cta">
+  <h2>Klaar voor een mooi resultaat?</h2><p>Vraag uw gratis offerte aan, of laat uw nummer achter en we bellen u terug.</p>
+  <div class="btns"><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div>
   <form class="callback" novalidate><label for="cb-tel" class="sr-only">Telefoonnummer</label><input id="cb-tel" type="tel" required autocomplete="tel" placeholder="Uw telefoonnummer"><button class="btn btn--ghost no-arrow" type="submit">Bel mij terug</button>
   <p class="callback__ok" hidden>Bedankt! We bellen u zo snel mogelijk terug.</p></form>
 </div></div></section>"""
-    write(pg, layout(pg, "Offerte schilderwerken | SDAD Izegem",
-                     "Vraag gratis en vrijblijvend een offerte aan voor binnen- en buitenschilderwerken, decoratieve technieken en raamdecoratie bij SDAD uit Izegem.", body, landing=True))
+    write(pg, layout(pg, "Offerte schilderwerken West- en Oost-Vlaanderen | SDAD",
+                     "Gratis offerte voor binnen- en buitenschilderwerken in West- en Oost-Vlaanderen. Schildersbedrijf SDAD uit Izegem: 4,7 op 5 op Trustpilot, 25+ jaar vakmanschap.", body, landing=True))
 
 
 # ---------- Juridische pagina's ----------

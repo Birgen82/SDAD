@@ -1,0 +1,6 @@
+/* Lettertypes lokaal (geen verbinding met Google: sneller en privacyvriendelijk). SIL Open Font License, zie LICENSE-OFL.txt */
+@font-face { font-family: "Archivo"; font-style: normal; font-display: swap; font-weight: 100 900; font-stretch: 62% 125%;
+  src: url(archivo-wdth.woff2) format("woff2-variations"), url(archivo-wdth.woff2) format("woff2"); }
+@font-face { font-family: "Nunito Sans"; font-style: normal; font-display: swap; font-weight: 400; src: url(nunito-sans-400.woff2) format("woff2"); }
+@font-face { font-family: "Nunito Sans"; font-style: normal; font-display: swap; font-weight: 600; src: url(nunito-sans-600.woff2) format("woff2"); }
+@font-face { font-family: "Nunito Sans"; font-style: normal; font-display: swap; font-weight: 700; src: url(nunito-sans-700.woff2) format("woff2"); }
