@@ -11,6 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 SITE = "https://sdad.be"
+# Demo-modus: houdt zoekmachines weg van de voorbeeldsite. Zet op False bij livegang op sdad.be.
+DEMO = True
 BOOKING = "https://afspraaksdad.youcanbook.me/"
 MAIL = "info@sdad.be"
 PHONES = [("Lies Nuyttens", "0473 52 09 20", "+32473520920"), ("Arne Deseure", "0478 42 81 95", "+32478428195")]
@@ -140,6 +142,7 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 <meta property="og:url" content="{SITE}/{pg.path}">
 <meta property="og:image" content="{SITE}/site/assets/files/1/kleurbepaling_linkedin.1200x628.jpeg">
 <meta name="theme-color" content="#00080a">
+{'<meta name="robots" content="noindex, nofollow">' if DEMO else ""}
 <link rel="icon" href="{pg.r}assets/img/list_icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
