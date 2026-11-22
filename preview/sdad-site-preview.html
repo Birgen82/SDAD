@@ -1181,6 +1181,10 @@ html.menu-lock { overflow: hidden; }
   .hx__vctl span { display: none; }
 }
 @media (max-width: 980px) and (min-width: 549px) { .hx__vctl { top: -294px; } }
+.offer-card { background: #fff; border-radius: 24px; padding: clamp(24px, 4vw, 44px); box-shadow: 0 30px 60px rgba(0,8,10,.08); }
+.offer-card h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); }
+.offer-card .btn--ghost { color: var(--ink); border-color: rgba(0,8,10,.35); }
+.offer-note { font-size: .88rem; color: var(--muted); margin: 16px 0 0; }
 .pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HousePainter", "name": "SDAD bv", "slogan": "Schilderkracht tot de vierde macht", "url": "https://sdad.be/", "email": "info@sdad.be", "telephone": "+32473520920", "vatID": "BE0823.935.816", "image": "https://sdad.be/site/assets/files/1/kleurbepaling_linkedin.jpeg", "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870", "addressLocality": "Izegem", "addressCountry": "BE"}, "areaServed": [{"@type": "AdministrativeArea", "name": "West-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}], "sameAs": ["https://www.facebook.com/DeseureArneNuyttensLies/", "https://www.instagram.com/schilderwerken_sdad/", "https://www.linkedin.com/company/sdad-arne-deseure/"]}</script>
@@ -1215,7 +1219,7 @@ html.menu-lock { overflow: hidden; }
     <h1><span class="line"><span style="--i:0">Een mooi resultaat</span></span><span class="line"><span style="--i:1">begint lang voor de</span></span><span class="line"><span style="--i:2"><em class="stroke">eerste verflaag.</em></span></span></h1>
     <p class="lead">Van kleuradvies tot een perfect afgewerkt eindresultaat, met persoonlijk advies en een ervaren team.</p>
     <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-    <p class="hx__note">Daarna ontvangt u een duidelijke offerte en planning. Liever eerst een vraag? <a href="#/contact/">Contacteer ons</a>.</p>
+    <p class="hx__note">Daarna ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
     <ul class="hx__stats">
       <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring</li>
       <li><b data-count="10">10</b>jaar garantie op gevels* <a href="#/diensten/schilderwerken/buiten/" data-frag="garantie">voorwaarden</a></li>
@@ -1275,7 +1279,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="algemene-voorwaarden/" data-title="Algemene Voorwaarden BV SDAD" hidden>
 <section class="page-hero page-hero--plain"><div class="wrap">
@@ -1299,7 +1303,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="contact/" data-title="Contacteer ons voor schilderwerken, gordijnen of lamellen" hidden>
 <section class="page-hero page-hero--plain"><div class="wrap">
@@ -1312,36 +1316,20 @@ html.menu-lock { overflow: hidden; }
     <div class="contact-card"><h3>E-mail</h3><p><a href="mailto:info@sdad.be">info@sdad.be</a></p></div>
     <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in. Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning.</p><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
   </div>
-  <div><h2 style="font-size:clamp(1.8rem,3vw,2.4rem)">Stel uw vraag in 4 korte stappen</h2>
-  <div class="wiz rv" style="--i:1"><form onsubmit="return false" novalidate>
-  <div class="wiz__body">
-    <div class="wiz__bar"><span></span></div>
-    <fieldset class="wiz__step"><legend>Wat mogen we doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
-      <div class="opts"><label><input type="checkbox" name="dienst" value="Binnenschilderwerken"><span>Binnenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Buitenschilderwerken"><span>Buitenschilderwerken</span></label><label><input type="checkbox" name="dienst" value="Decoratieve technieken"><span>Decoratieve technieken</span></label><label><input type="checkbox" name="dienst" value="Gordijnen"><span>Gordijnen</span></label><label><input type="checkbox" name="dienst" value="Lamellen"><span>Lamellen</span></label></div></fieldset>
-    <fieldset class="wiz__step"><legend>Over welk pand gaat het?</legend><p class="hint">Kies wat het best past.</p>
-      <div class="opts"><label><input type="radio" name="pand" value="Woning"><span>Woning</span></label><label><input type="radio" name="pand" value="Appartement"><span>Appartement</span></label><label><input type="radio" name="pand" value="Nieuwbouw"><span>Nieuwbouw</span></label><label><input type="radio" name="pand" value="Kantoor of praktijk"><span>Kantoor of praktijk</span></label><label><input type="radio" name="pand" value="Handelszaak of horeca"><span>Handelszaak of horeca</span></label><label><input type="radio" name="pand" value="Residentieel project"><span>Residentieel project</span></label></div></fieldset>
-    <fieldset class="wiz__step"><legend>Wanneer wilt u starten?</legend><p class="hint">Een indicatie volstaat.</p>
-      <div class="opts"><label><input type="radio" name="timing" value="Zo snel mogelijk"><span>Zo snel mogelijk</span></label><label><input type="radio" name="timing" value="Binnen 3 maanden"><span>Binnen 3 maanden</span></label><label><input type="radio" name="timing" value="Later dit jaar"><span>Later dit jaar</span></label><label><input type="radio" name="timing" value="Nog geen idee"><span>Nog geen idee</span></label></div></fieldset>
-    <fieldset class="wiz__step"><legend>Hoe bereiken we u?</legend><p class="hint">We reageren snel op uw aanvraag.</p>
-      <div class="form-grid">
-        <div><label for="w-n">Naam *</label><input id="w-n" name="naam" required autocomplete="name"></div>
-        <div><label for="w-g">Gemeente *</label><input id="w-g" name="gemeente" required autocomplete="address-level2"></div>
-        <div><label for="w-t">Telefoon *</label><input id="w-t" name="telefoon" type="tel" required autocomplete="tel"></div>
-        <div><label for="w-e">E-mail *</label><input id="w-e" name="email" type="email" required autocomplete="email"></div>
-        <div class="full"><label for="w-b">Nog iets dat we moeten weten?</label><textarea id="w-b" name="bericht" rows="3"></textarea></div>
-        <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="#/cookie-en-privacybeleid/" target="_blank">Cookie- en privacybeleid</a></span></label></div>
-        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
-      </div></fieldset>
-    <p class="wiz__err" aria-live="polite"></p>
-    <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
+  <div class="offer-card">
+    <span class="eyebrow">Offerte aanvragen</span>
+    <h2>Vraag uw offerte online aan</h2>
+    <p>Via ons offerteformulier bezorgt u ons de gegevens van uw project. We reageren snel en plannen graag een vrijblijvend plaatsbezoek.</p>
+    <ul class="checks"><li>Binnen- en buitenschilderwerken</li><li>Decoratieve technieken</li><li>Gordijnen en lamellen</li></ul>
+    <div class="btns"><a class="btn" href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Naar het offerteformulier</a>
+    <a class="btn btn--ghost no-arrow" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+    <p class="offer-note">Het formulier opent op offerteschilderwerken.be, de offertepagina van SDAD.</p>
   </div>
-  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>Uw e-mailprogramma opent met uw aanvraag. Verstuur ze daar, dan nemen we snel contact op.</p></div>
-</form></div></div>
 </div></section>
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="cookie-en-privacybeleid/" data-title="cookie-en privacybeleid SDAD" hidden>
 <section class="page-hero page-hero--plain"><div class="wrap">
@@ -1412,7 +1400,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/" data-title="Realisaties schilderwerken SDAD Izegem" hidden>
 <section class="lh"><div class="wrap">
@@ -1428,7 +1416,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/3-tips-om-uw-trap-te-schilderen/" data-title="3 tips om jouw trap te schilderen | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1447,7 +1435,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/5-tips-om-afplaktape-te-gebruiken/" data-title="5 tips om afplaktape te gebruiken | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1466,7 +1454,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/aluminium-schrijnwerk-schilderen-kan-dat/" data-title="Aluminium schrijnwerk schilderen, kan dat? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1485,7 +1473,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/behangen-zo-begin-je-er-aan/" data-title="Behangen, zo begin je eraan! | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1504,7 +1492,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/binnen-en-buitendeuren-schilderen-in-5-stappen/" data-title="Binnen- en buitendeuren schilderen in 5 stappen | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1523,7 +1511,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/de-voordelen-van-vliesbehang-en-waarom-je-het-best-laat-hangen-bij-renovatiewerken/" data-title="Wat is vliesbehang? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1542,7 +1530,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/een-plafond-schilderen-in-8-stappen/" data-title="Een plafond schilderen in 8 stappen | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1561,7 +1549,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/een-vochtige-ruimte-schilderen-enkele-tips-en-tricks/" data-title="Een vochtige ruimte schilderen: enkele tips en tricks | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1580,7 +1568,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/gyproc-schilderen-een-stappenplan/" data-title="Gyproc schilderen, een stappenplan! | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1599,7 +1587,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/het-schilderen-van-een-houten-tuinhuis/" data-title="Houten tuinhuis schilderen | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1618,7 +1606,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/hoe-een-muur-verven-zonder-strepen/" data-title="Hoe een muur verven zonder strepen? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1637,7 +1625,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/hoe-kan-ik-mijn-muren-ontvetten-voor-het-schilderen/" data-title="Hoe kan ik mijn muren ontvetten voor het schilderen? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1656,7 +1644,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/interieurtip-magnetische-en-schrijfondergronden/" data-title="Interieurtip: magnetische verf en schrijfondergronden | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1675,7 +1663,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/jarenlang-genot-dankzij-de-troeven-van-kwaliteitsverf/" data-title="Wat is kwaliteitsverf? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1694,7 +1682,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/je-bakstenen-muur-schilderen-het-kan/" data-title="Je bakstenen muur schilderen? Het kan! | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1713,7 +1701,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/kan-ik-mijn-faiences-of-wandtegels-schilderen/" data-title="Kan ik mijn faiences of wandtegels schilderen? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1732,7 +1720,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/kan-je-pvc-schilderen/" data-title="Kan je pvc schilderen? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1751,7 +1739,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/keukens-en-keukenkasten-verven-doe-je-zo/" data-title="Keukens en keukenkasten verven doe je zo! | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1770,7 +1758,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/laat-je-woning-kaleien-door-een-professional/" data-title="Wat is kaleien? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1789,7 +1777,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/mdf-schilderen-hoe-doe-je-dat/" data-title="MDF schilderen: hoe doe je dat? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1808,7 +1796,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/naadloos-fotobehang-is-hip-en-trendy/" data-title="Naadloos fotobehang is hip en trendy | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1827,7 +1815,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/netjes-afkitten-voor-of-na-het-schilderen/" data-title="Waarom afkitten? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1846,7 +1834,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/oude-verf-verwijderen-hoe-doe-je-dat/" data-title="Oude verf verwijderen, hoe doe je dat? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1865,7 +1853,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/schilder-je-gevel-en-geef-je-huis-een-nieuwe-look/" data-title="Schilder je gevel en geef je huis een nieuwe look | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1884,7 +1872,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/trappenhal-schilderen-hoe-begin-je-eraan/" data-title="Trappenhal schilderen, hoe begin je eraan? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1903,7 +1891,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/wanneer-is-het-tijd-voor-een-nieuwe-lik-verf/" data-title="Wanneer moet je denken aan herschilderen? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1922,7 +1910,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="blog/welke-kleur-kies-je-best/" data-title="Welke kleur voor verf kiezen? | Blog SDAD" hidden>
 <div class="progress" aria-hidden="true"><span></span></div>
@@ -1941,7 +1929,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/babu-gent/" data-title="Babu@Gent | Realisaties SDAD" hidden>
 <section class="ih">
@@ -1965,7 +1953,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/boetiek-gastronomiek-culix-te-merelbeke/" data-title="Boetiek gastronomiek Culix te Merelbeke | Realisaties SDAD" hidden>
 <section class="ih">
@@ -1989,7 +1977,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/bowls-kortrijk/" data-title="Bowls Kortrijk | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2013,7 +2001,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/buitenschilderwerken-kasteel-blauwhuis-te-izegem/" data-title="Buiten- &amp; binnenschilderwerken kasteel Blauwhuis te Izegem | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2037,7 +2025,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/frituur-de-platse-lendelede/" data-title="Frituur De Platse Lendelede | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2061,7 +2049,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/gevel-villa-te-knokke/" data-title="Gevel villa te Knokke | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2085,7 +2073,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/gevel-villa-te-kortrijk/" data-title="Kaleien gevel van villa te Kortrijk | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2109,7 +2097,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/kaleien-van-achtergevel-te-kortrijk/" data-title="Kaleien van achtergevel te Kortrijk | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2133,7 +2121,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/kaleiproject-te-oudenaarde/" data-title="Kaleien van 3 woningen te Oudenaarde | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2157,7 +2145,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/leefruimte-te-aalbeke/" data-title="Leefruimte en keuken te Aalbeke | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2181,7 +2169,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/make-over-voorgevel-te-izegem/" data-title="Make-over voorgevel te Izegem | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2205,7 +2193,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/nieuwbouwappartement-te-kuurne/" data-title="Nieuwbouwappartement te Kuurne | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2229,7 +2217,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/plak-en-schilderwerken-te-poperinge/" data-title="Pleister en schilderwerken volledig appartementsgebouw te Poperinge | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2253,7 +2241,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/plakwerken-boerenhoeve-te-koolskamp/" data-title="Plamuurwerken boerenhoeve te Koolskamp | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2277,7 +2265,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-jolies-te-moorslede/" data-title="Residentie Jolies te Moorslede | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2301,7 +2289,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-kolleblomme-te-roeselare/" data-title="Residentie Kolleblomme te Roeselare in een kaleien jasje | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2325,7 +2313,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-sint-rafael-te-izegem/" data-title="Residentie Sint Rafaël - betonlazuur | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2349,7 +2337,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/residentie-ter-vichte/" data-title="Residentie Ter Vichte | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2373,7 +2361,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/rood-leefruimte-te-marke-stop-rood/" data-title="Leefruimte te Marke | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2397,7 +2385,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/rood-residentie-porto-fino-te-wenduine-stop-rood/" data-title="Residentie Porto Fino te Wenduine | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2421,7 +2409,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/schilderen-gevel-te-kortrijk/" data-title="Schilderen gevel te Kortrijk | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2445,7 +2433,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/schilderen-gevel-te-marke/" data-title="Schilderen gevel bungalow te Marke | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2469,7 +2457,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/sportcomplex-rhizo-te-kortrijk/" data-title="Sportcomplex Rhizo te Kortrijk | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2493,7 +2481,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/tastoe-roeselare/" data-title="Broodbar Tastoe te Roeselare | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2517,7 +2505,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/villa-te-meulebeke/" data-title="Villa te Meulebeke | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2541,7 +2529,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/villa-te-zwijnaarde/" data-title="Villa van boven tot onder te Zwijnaarde | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2565,7 +2553,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="realisaties/woonkamer-te-deerlijk/" data-title="Woonkamer te deerlijk | Realisaties SDAD" hidden>
 <section class="ih">
@@ -2589,7 +2577,7 @@ html.menu-lock { overflow: hidden; }
 <section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/interieurafwerking/gordijnen/" data-title="Gordijnen op maat | gordijnen Izegem | SDAD" hidden>
 <section class="sh"><div class="wrap sh__grid">
@@ -2614,7 +2602,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/interieurafwerking/lamellen/" data-title="Lamellen op maat | Lamellen Izegem | SDAD" hidden>
 <section class="sh"><div class="wrap sh__grid">
@@ -2639,7 +2627,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/schilderwerken/binnen/" data-title="Binnenschilderwerken Izegem | SDAD" hidden>
 <section class="sh"><div class="wrap sh__grid">
@@ -2669,7 +2657,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/schilderwerken/buiten/" data-title="Buitenschilderwerken Izegem | SDAD" hidden>
 <section class="sh"><div class="wrap sh__grid">
@@ -2707,7 +2695,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div><div class="pv-page" data-page="diensten/schilderwerken/decoratieve-technieken/" data-title="Decoratieve technieken | kalkverf en betonlook | SDAD Izegem" hidden>
 <section class="sh"><div class="wrap sh__grid">
@@ -2748,7 +2736,7 @@ html.menu-lock { overflow: hidden; }
 </div></section><section class="section"><div class="wrap"><div class="cta">
   <h2>Een mooi resultaat begint met een goed gesprek.</h2><p>Tijdens een vrijblijvend plaatsbezoek luisteren we naar uw wensen, geven we professioneel advies en bekijken we samen de mogelijkheden voor uw schilderwerken of interieurafwerking.</p>
   <div class="btns"><a class="btn" href="https://afspraaksdad.youcanbook.me/" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="#/contact/">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="https://www.offerteschilderwerken.be/#Offerteaanvraag" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>
 </div></main>
 <footer class="footer"><div class="wrap">

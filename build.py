@@ -15,6 +15,7 @@ SITE = "https://sdad.be"
 DEMO = True
 # Basisadres voor deel-links (WhatsApp, Facebook, LinkedIn…): de demo op GitHub Pages of de echte site.
 BASE = "https://birgen82.github.io/SDAD/" if DEMO else SITE + "/"
+OFFERTE = "https://www.offerteschilderwerken.be/#Offerteaanvraag"
 BOOKING = "https://afspraaksdad.youcanbook.me/"
 MAIL = "info@sdad.be"
 PHONES = [("Lies Nuyttens", "0473 52 09 20", "+32473520920"), ("Arne Deseure", "0478 42 81 95", "+32478428195")]
@@ -271,7 +272,7 @@ def cta(pg, title="Een mooi resultaat begint met een goed gesprek.",
     return f"""<section class="section"><div class="wrap"><div class="cta">
   <h2>{title}</h2><p>{text}</p>
   <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever eerst een vraag stellen? <a href="{pg.u('contact/')}">Contacteer ons</a>.</p>
+  <p class="cta-sub">Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="{OFFERTE}" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
 </div></div></section>"""
 
 
@@ -396,7 +397,7 @@ def home():
     <h1><span class="line"><span style="--i:0">Een mooi resultaat</span></span><span class="line"><span style="--i:1">begint lang voor de</span></span><span class="line"><span style="--i:2"><em class="stroke">eerste verflaag.</em></span></span></h1>
     <p class="lead">Van kleuradvies tot een perfect afgewerkt eindresultaat, met persoonlijk advies en een ervaren team.</p>
     <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
-    <p class="hx__note">Daarna ontvangt u een duidelijke offerte en planning. Liever eerst een vraag? <a href="{pg.u('contact/')}">Contacteer ons</a>.</p>
+    <p class="hx__note">Daarna ontvangt u een duidelijke offerte en planning. Liever meteen een offerte? <a href="{OFFERTE}" target="_blank" rel="noopener">Vraag ze online aan</a>.</p>
     <ul class="hx__stats">
       <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring</li>
       <li><b data-count="10">10</b>jaar garantie op gevels* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
@@ -984,8 +985,15 @@ def contact():
     <div class="contact-card"><h3>E-mail</h3><p><a href="mailto:{MAIL}">{MAIL}</a></p></div>
     <div class="contact-card" style="background:var(--ink);border-color:var(--ink);color:#c9cbcd"><h3 style="color:#fff">Liever meteen een afspraak?</h3><p style="margin-bottom:14px">Plan zelf een vrijblijvend plaatsbezoek in. Na het vrijblijvende plaatsbezoek ontvangt u een duidelijke offerte en planning.</p><a class="btn" href="{BOOKING}" target="_blank" rel="noopener" style="font-size:1rem;color:#fff">Plaatsbezoek inplannen</a></div>
   </div>
-  <div><h2 style="font-size:clamp(1.8rem,3vw,2.4rem)">Stel uw vraag in 4 korte stappen</h2>
-  {wizard()}</div>
+  <div class="offer-card">
+    <span class="eyebrow">Offerte aanvragen</span>
+    <h2>Vraag uw offerte online aan</h2>
+    <p>Via ons offerteformulier bezorgt u ons de gegevens van uw project. We reageren snel en plannen graag een vrijblijvend plaatsbezoek.</p>
+    <ul class="checks"><li>Binnen- en buitenschilderwerken</li><li>Decoratieve technieken</li><li>Gordijnen en lamellen</li></ul>
+    <div class="btns"><a class="btn" href="{OFFERTE}" target="_blank" rel="noopener">Naar het offerteformulier</a>
+    <a class="btn btn--ghost no-arrow" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
+    <p class="offer-note">Het formulier opent op offerteschilderwerken.be, de offertepagina van SDAD.</p>
+  </div>
 </div></section>
 {cta(pg)}"""
     write(pg, layout(pg, "Contacteer ons voor schilderwerken, gordijnen of lamellen",
