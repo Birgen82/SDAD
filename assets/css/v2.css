@@ -911,3 +911,6 @@ html.menu-lock { overflow: hidden; }
   .btool .fchips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 4px; width: calc(100% + 2 * var(--gutter)); }
   .btool .fchips button { flex-shrink: 0; }
 }
+
+/* Desktop: carrousel uitlijnen met de inhoud erboven */
+.rail { --edge: max(var(--gutter), calc((100vw - var(--wrap)) / 2 + var(--gutter))); padding-left: var(--edge); padding-right: var(--edge); scroll-padding: 0 var(--edge); }
