@@ -1221,13 +1221,19 @@ def offerte_page():
           ("Laten jullie de woning netjes achter?", "Ja. Netheid op de werf is een van onze vaste afspraken.")]
     faqs = "".join(f"<details><summary>{q}</summary><div class=\"answer\">{a}</div></details>" for q, a in qa)
     body = f"""<section class="lp-hero">
-  <div class="lp-hero__bg" aria-hidden="true">{pg.img("1893_kortrijk_afgewerkt.webp", "", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
+  <div class="lp-hero__bg" aria-hidden="true">
+    <video class="hx__video" autoplay muted loop playsinline preload="metadata" poster="{pg.r}assets/video/hero-poster.webp">
+      <source src="{pg.r}assets/video/hero-m.mp4" type="video/mp4" media="(max-width: 700px)">
+      <source src="{pg.r}assets/video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="wrap lp-hero__grid">
     <div class="lp-hero__text">
       {trust}
       <h1>Schilderwerken in West- en Oost-Vlaanderen, afgewerkt tot in de <em class="stroke">kleinste details</em></h1>
       <p class="lead">Binnen- en buitenschilderwerken door het team van Arne en Lies uit Izegem. Met persoonlijk advies en een vlotte planning.</p>
       <ul class="lp-usp"><li>Gratis plaatsbezoek en offerte</li><li>Meer dan 25 jaar vakmanschap</li><li>10 jaar garantie op gevelschilderwerk*</li></ul>
+      <div class="hx__vctl lp-vctl"><button type="button" class="hx__pause" aria-label="Video pauzeren" aria-pressed="false"></button><span>Video: Lion Eyes</span></div>
       <p class="lp-alt">Liever bellen? <a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="{BOOKING}" target="_blank" rel="noopener">Zelf een plaatsbezoek inplannen</a></p>
     </div>
     <div id="offerte" class="lp-hero__form">{offerte_wizard(pg)}</div>
