@@ -18,7 +18,7 @@ BASE = "https://birgen82.github.io/SDAD/" if DEMO else SITE + "/"
 BOOKING = "https://afspraaksdad.youcanbook.me/"
 MAIL = "info@sdad.be"
 PHONES = [("Lies Nuyttens", "0473 52 09 20", "+32473520920"), ("Arne Deseure", "0478 42 81 95", "+32478428195")]
-REGIO = "Oost- en West-Vlaanderen"
+REGIO = "West- en Oost-Vlaanderen"
 MAPS = "https://www.google.com/maps/search/?api=1&query=Prinsdomlaan+50+8870+Izegem"
 SOCIAL = {
     "Facebook": "https://www.facebook.com/DeseureArneNuyttensLies/",
@@ -143,7 +143,7 @@ SCHEMA = json.dumps({
     "telephone": PHONES[0][2], "vatID": "BE0823.935.816", "image": SITE + "/site/assets/files/1/kleurbepaling_linkedin.jpeg",
     "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870",
                 "addressLocality": "Izegem", "addressCountry": "BE"},
-    "areaServed": [{"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "West-Vlaanderen"}],
+    "areaServed": [{"@type": "AdministrativeArea", "name": "West-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}],
     "sameAs": list(SOCIAL.values()),
 }, ensure_ascii=False)
 
@@ -254,7 +254,7 @@ def werkgebied(pg):
   <div><span class="eyebrow">Werkgebied</span><h2>Actief in heel {REGIO}</h2>
   <p>Vanuit Izegem werken we voor particulieren en bedrijven in heel {REGIO}. We reageren snel op uw vraag en komen graag bij u ter plaatse.</p>
 </div>
-  <div><h3>Hier werkten we al</h3><ul class="tags place-tags">{"".join(tags)}</ul></div>
+  <div><h3>Een greep uit onze realisaties</h3><p class="place-note">Tik op een gemeente om het project te bekijken.</p><ul class="tags place-tags">{"".join(tags)}</ul></div>
 </div></section>"""
 
 
@@ -379,7 +379,7 @@ def home():
   <div class="hx__slides" aria-hidden="true">{slides}</div>
   <div class="wrap hx__inner">
     <div class="hx__content">
-    <span class="eyebrow">Schilderwerken &amp; interieurafwerking · {REGIO}</span>
+    <span class="eyebrow">Schilderwerken &amp; interieurafwerking<span class="hide-m"> · {REGIO}</span></span>
     <h1><span class="line"><span style="--i:0">Een mooi resultaat</span></span><span class="line"><span style="--i:1">begint lang voor de</span></span><span class="line"><span style="--i:2"><em class="stroke">eerste verflaag.</em></span></span></h1>
     <p class="lead">Van kleuradvies tot een perfect afgewerkt eindresultaat, met persoonlijk advies en een ervaren team.</p>
     <div class="btns"><a class="btn" href="{BOOKING}" target="_blank" rel="noopener">Plaatsbezoek inplannen</a></div>
@@ -432,7 +432,7 @@ def home():
 {werkgebied(pg)}
 {cta(pg)}"""
     write(pg, layout(pg, "Schilderwerken SDAD | binnen, buiten en interieurafwerking",
-                     "Bij schilderwerken SDAD uit Izegem kunt u terecht voor professionele binnen en buiten schilderwerken, decoratieve afwerkingen en raamdecoratie in Oost- en West-Vlaanderen.", body))
+                     "Bij schilderwerken SDAD uit Izegem kunt u terecht voor professionele binnen en buiten schilderwerken, decoratieve afwerkingen en raamdecoratie in West- en Oost-Vlaanderen.", body))
 
 
 def wizard():
@@ -963,7 +963,7 @@ def contact():
     portraits = {"Lies Nuyttens": "2436_profielfoto_lies.webp", "Arne Deseure": "1423_arne_bewerkt.webp"}
     people = "".join(f'<div class="contact-card person-card">{pg.img(thumb(portraits[n], 300), n, w=120, h=120)}<div><h3>{n}</h3><p><a href="tel:{t}">{d}</a></p></div></div>' for n, d, t in PHONES)
     body = page_hero(pg, [("Contact", None)], "Contact", "Contacteer ons",
-                     '<p class="lead">Schilderwerken, gordijnen of lamellen in het vooruitzicht? Neem contact op. Wij helpen u graag verder en reageren snel op uw vraag. We werken in heel Oost- en West-Vlaanderen.</p>') + f"""
+                     '<p class="lead">Schilderwerken, gordijnen of lamellen in het vooruitzicht? Neem contact op. Wij helpen u graag verder en reageren snel op uw vraag. We werken in heel West- en Oost-Vlaanderen.</p>') + f"""
 <section class="section"><div class="wrap split" style="align-items:start">
   <div class="contact-cards"><h2 class="sr-only">Contactgegevens</h2>
     <div class="contact-card"><h3>SDAD bv</h3><p>Prinsdomlaan 50<br>8870 Izegem<br>BE0823.935.816</p><p style="margin-top:10px"><a href="{MAPS}" target="_blank" rel="noopener" style="font-size:1rem">Route plannen →</a></p></div>
