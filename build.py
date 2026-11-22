@@ -16,6 +16,13 @@ DEMO = True
 # Basisadres voor deel-links (WhatsApp, Facebook, LinkedIn…): de demo op GitHub Pages of de echte site.
 BASE = "https://birgen82.github.io/SDAD/" if DEMO else SITE + "/"
 TRUSTPILOT = "https://nl-be.trustpilot.com/review/sdad.be"
+REVIEWS = [  # letterlijk overgenomen van Trustpilot (nl-be.trustpilot.com/review/sdad.be)
+    ("Roger V.", "september 2026", 5, "In enkele woorden: TOP resultaat. En niet te vergeten: na de werken is alles netjes achtergelaten."),
+    ("Sofie C.", "oktober 2025", 5, "Zeer correcte en vlotte communicatie! Alles wordt duidelijk afgesproken en nadien ook zo uitgevoerd. Schilderwerken zijn tot in de puntjes verzorgd."),
+    ("Febe V.", "augustus 2025", 5, "Je voelt dat je in bekwame handen bent, vanaf het begin bij het advies en planning tot de uiteindelijke schilderswerken. … Zeer correcte mensen, zowel qua prijs als communicatie."),
+    ("Bart", "buitengevel · juli 2024", 5, "Van A tot Z was alles zoals afgesproken. Vanaf de offerte, de uitvoering en tenslotte de eindfactuur was alles in orde. … Zeer tevreden over het resultaat!"),
+]
+TP_SCORE, TP_COUNT = "4,7", 40
 OFFERTE = "https://www.offerteschilderwerken.be/#Offerteaanvraag"
 BOOKING = "https://afspraaksdad.youcanbook.me/"
 MAIL = "info@sdad.be"
@@ -444,6 +451,7 @@ def home():
 
 
 
+{reviews_block(pg, soft=True, cta=False)}
 {werkgebied(pg)}
 {cta(pg)}"""
     write(pg, layout(pg, "Schilderwerken SDAD | binnen, buiten en interieurafwerking",
@@ -1144,6 +1152,17 @@ def landing_footer(pg):
 <div class="mobile-bar"><a href="tel:{PHONES[0][2]}">Bel ons</a><a href="#offerte">Gratis offerte</a></div>"""
 
 
+def reviews_block(pg, soft=False, cta=True):
+    cards = "".join(f'''<figure class="rv-card rv" style="--i:{n}"><div class="rv-stars" aria-label="{st} op 5 sterren">{"★" * st}</div>
+      <blockquote>“{t}”</blockquote><figcaption><b>{nm}</b> · {d}</figcaption></figure>''' for n, (nm, d, st, t) in enumerate(REVIEWS))
+    more = f'<a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a>' if cta else ""
+    return f"""<section class="section{' section--soft' if soft else ''}" id="reviews"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Wat klanten zeggen</span><h2><span class="tp-big">{TP_SCORE}</span> op 5 op Trustpilot</h2>
+    <p class="rv-sub">Gemiddelde van {TP_COUNT} reviews. <a href="{TRUSTPILOT}" target="_blank" rel="noopener">Lees alle reviews</a></p></div>{more}</div>
+  <div class="rv-grid">{cards}</div>
+</div></section>"""
+
+
 def offerte_wizard(pg):
     def opts(name, items, kind="radio", need=None):
         n = f' data-need="{need}"' if need else ""
@@ -1184,7 +1203,7 @@ OFFER_SHOTS = [("1893_kortrijk_afgewerkt.webp", "Gevel geschilderd", "Kortrijk")
 
 def offerte_page():
     pg = Page("offerte/")
-    trust = f'<a class="tp" href="{TRUSTPILOT}" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>4,7</b> op 5 op Trustpilot</span></a>'
+    trust = f'<a class="tp" href="{TRUSTPILOT}" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>{TP_SCORE}</b> op 5 · {TP_COUNT} reviews op Trustpilot</span></a>'
     services = "".join(f'<li class="rv" style="--i:{n}">{pg.img(thumb(i, 640), t, w=320, h=240)}<div><h3>{t}</h3><p>{x}</p></div></li>' for n, (i, t, x) in enumerate([
         ("1627_nieuwpoort_living.webp", "Binnenschilderwerken", "Muren, plafonds, deuren en trappen. Met gratis kleuradvies en een strakke afwerking."),
         ("1893_kortrijk_afgewerkt.webp", "Buitenschilderwerken", "Gevel schilderen of kaleien, ramen en deuren. 10 jaar garantie op gevelschilderwerk*."),
@@ -1215,12 +1234,14 @@ def offerte_page():
   </div>
 </section>
 
-<section class="section"><div class="wrap">
+{reviews_block(pg)}
+
+<section class="section section--soft"><div class="wrap">
   <div class="rv"><span class="eyebrow">Wat we doen</span><h2>Schilderwerken met een hoge afwerkingsgraad</h2></div>
   <ul class="lp-services">{services}</ul>
 </div></section>
 
-<section class="section section--soft"><div class="wrap">
+<section class="section"><div class="wrap">
   <div class="head-row rv"><div><span class="eyebrow">Eigen werk</span><h2>Recente realisaties</h2></div><a class="arrow-link" href="#offerte">Vraag uw offerte</a></div>
   <div class="lp-gallery">{shots}</div>
 </div></section>
@@ -1230,7 +1251,6 @@ def offerte_page():
   <div class="rv" style="--i:1"><span class="eyebrow">Wie komt er langs?</span><h2>Arne en Lies, met hun team</h2>
     <p>Arne Deseure leeft al meer dan 25 jaar voor het schildersvak en bewaakt de kwaliteit op de werf. Lies begeleidt u van het eerste contact tot de oplevering.</p>
     <ul class="checks">{ticks}</ul>
-    <div class="lp-review-slot">{trust}<p>Lees wat klanten over ons schrijven op Trustpilot.</p></div>
     <div class="btns"><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div></div>
 </div></section>
 

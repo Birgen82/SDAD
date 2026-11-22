@@ -22,7 +22,7 @@
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts/fonts.css?v=40c2f637">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=d3e0844c">
 <style>/* SDAD – huisstijl: rood #da291c, antraciet #4b4f54, zwart #00080a, Avenir Next */
 :root {
   --red: #da291c;
@@ -1286,6 +1286,19 @@ html.menu-lock { overflow: hidden; }
   .lp-wiz { padding: 20px 18px; }
   .lp-wiz .opts span { min-height: 50px; padding: 11px 14px; }
 }
+
+/* Reviews */
+.tp-big { color: var(--red); }
+.rv-sub { margin: 8px 0 0; color: var(--muted); }
+.rv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.rv-card { margin: 0; background: #fff; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 1px 0 rgba(0,8,10,.06); }
+.section--soft .rv-card { background: #fff; }
+.rv-stars { color: #00b67a; letter-spacing: 2px; font-size: 1.05rem; }
+.rv-card blockquote { margin: 0; color: var(--ink); font-size: 1rem; line-height: 1.55; flex: 1; }
+.rv-card figcaption { font-size: .88rem; color: var(--muted); }
+.rv-card figcaption b { color: var(--ink); }
+@media (max-width: 980px) { .rv-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .rv-grid { grid-template-columns: 1fr; gap: 10px; } .rv-card { padding: 18px; } }
 .pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HousePainter", "name": "SDAD bv", "slogan": "Schilderkracht tot de vierde macht", "url": "https://sdad.be/", "email": "info@sdad.be", "telephone": "+32473520920", "vatID": "BE0823.935.816", "image": "https://sdad.be/site/assets/files/1/kleurbepaling_linkedin.jpeg", "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870", "addressLocality": "Izegem", "addressCountry": "BE"}, "areaServed": [{"@type": "AdministrativeArea", "name": "West-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}], "sameAs": ["https://www.facebook.com/DeseureArneNuyttensLies/", "https://www.instagram.com/schilderwerken_sdad/", "https://www.linkedin.com/company/sdad-arne-deseure/"]}</script>
@@ -1372,6 +1385,15 @@ html.menu-lock { overflow: hidden; }
 
 
 
+<section class="section section--soft" id="reviews"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Wat klanten zeggen</span><h2><span class="tp-big">4,7</span> op 5 op Trustpilot</h2>
+    <p class="rv-sub">Gemiddelde van 40 reviews. <a href="https://nl-be.trustpilot.com/review/sdad.be" target="_blank" rel="noopener">Lees alle reviews</a></p></div></div>
+  <div class="rv-grid"><figure class="rv-card rv" style="--i:0"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“In enkele woorden: TOP resultaat. En niet te vergeten: na de werken is alles netjes achtergelaten.”</blockquote><figcaption><b>Roger V.</b> · september 2026</figcaption></figure><figure class="rv-card rv" style="--i:1"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“Zeer correcte en vlotte communicatie! Alles wordt duidelijk afgesproken en nadien ook zo uitgevoerd. Schilderwerken zijn tot in de puntjes verzorgd.”</blockquote><figcaption><b>Sofie C.</b> · oktober 2025</figcaption></figure><figure class="rv-card rv" style="--i:2"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“Je voelt dat je in bekwame handen bent, vanaf het begin bij het advies en planning tot de uiteindelijke schilderswerken. … Zeer correcte mensen, zowel qua prijs als communicatie.”</blockquote><figcaption><b>Febe V.</b> · augustus 2025</figcaption></figure><figure class="rv-card rv" style="--i:3"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“Van A tot Z was alles zoals afgesproken. Vanaf de offerte, de uitvoering en tenslotte de eindfactuur was alles in orde. … Zeer tevreden over het resultaat!”</blockquote><figcaption><b>Bart</b> · buitengevel · juli 2024</figcaption></figure></div>
+</div></section>
 <section class="section" id="werkgebied" style="scroll-margin-top:90px"><div class="wrap split" style="align-items:start">
   <div><span class="eyebrow">Werkgebied</span><h2>Actief in heel West- en Oost-Vlaanderen</h2>
   <p>Vanuit Izegem werken we voor particulieren en bedrijven in heel West- en Oost-Vlaanderen. We reageren snel op uw vraag en komen graag bij u ter plaatse.</p>
@@ -1446,7 +1468,7 @@ html.menu-lock { overflow: hidden; }
   <div class="lp-hero__bg" aria-hidden="true"><img fetchpriority="high" data-img="51" alt="" width="800" height="800"></div>
   <div class="wrap lp-hero__grid">
     <div class="lp-hero__text">
-      <a class="tp" href="https://nl-be.trustpilot.com/review/sdad.be" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>4,7</b> op 5 op Trustpilot</span></a>
+      <a class="tp" href="https://nl-be.trustpilot.com/review/sdad.be" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>4,7</b> op 5 · 40 reviews op Trustpilot</span></a>
       <h1>Schilderwerken in West- en Oost-Vlaanderen, afgewerkt tot in de <em class="stroke">kleinste details</em></h1>
       <p class="lead">Binnen- en buitenschilderwerken door het team van Arne en Lies uit Izegem. Met persoonlijk advies en een vlotte planning.</p>
       <ul class="lp-usp"><li>Gratis plaatsbezoek en offerte</li><li>Meer dan 25 jaar vakmanschap</li><li>10 jaar garantie op gevelschilderwerk*</li></ul>
@@ -1478,12 +1500,22 @@ html.menu-lock { overflow: hidden; }
   </div>
 </section>
 
-<section class="section"><div class="wrap">
+<section class="section" id="reviews"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Wat klanten zeggen</span><h2><span class="tp-big">4,7</span> op 5 op Trustpilot</h2>
+    <p class="rv-sub">Gemiddelde van 40 reviews. <a href="https://nl-be.trustpilot.com/review/sdad.be" target="_blank" rel="noopener">Lees alle reviews</a></p></div><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div>
+  <div class="rv-grid"><figure class="rv-card rv" style="--i:0"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“In enkele woorden: TOP resultaat. En niet te vergeten: na de werken is alles netjes achtergelaten.”</blockquote><figcaption><b>Roger V.</b> · september 2026</figcaption></figure><figure class="rv-card rv" style="--i:1"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“Zeer correcte en vlotte communicatie! Alles wordt duidelijk afgesproken en nadien ook zo uitgevoerd. Schilderwerken zijn tot in de puntjes verzorgd.”</blockquote><figcaption><b>Sofie C.</b> · oktober 2025</figcaption></figure><figure class="rv-card rv" style="--i:2"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“Je voelt dat je in bekwame handen bent, vanaf het begin bij het advies en planning tot de uiteindelijke schilderswerken. … Zeer correcte mensen, zowel qua prijs als communicatie.”</blockquote><figcaption><b>Febe V.</b> · augustus 2025</figcaption></figure><figure class="rv-card rv" style="--i:3"><div class="rv-stars" aria-label="5 op 5 sterren">★★★★★</div>
+      <blockquote>“Van A tot Z was alles zoals afgesproken. Vanaf de offerte, de uitvoering en tenslotte de eindfactuur was alles in orde. … Zeer tevreden over het resultaat!”</blockquote><figcaption><b>Bart</b> · buitengevel · juli 2024</figcaption></figure></div>
+</div></section>
+
+<section class="section section--soft"><div class="wrap">
   <div class="rv"><span class="eyebrow">Wat we doen</span><h2>Schilderwerken met een hoge afwerkingsgraad</h2></div>
   <ul class="lp-services"><li class="rv" style="--i:0"><img data-img="1" alt="Binnenschilderwerken" width="320" height="240" loading="lazy" decoding="async"><div><h3>Binnenschilderwerken</h3><p>Muren, plafonds, deuren en trappen. Met gratis kleuradvies en een strakke afwerking.</p></div></li><li class="rv" style="--i:1"><img data-img="52" alt="Buitenschilderwerken" width="320" height="240" loading="lazy" decoding="async"><div><h3>Buitenschilderwerken</h3><p>Gevel schilderen of kaleien, ramen en deuren. 10 jaar garantie op gevelschilderwerk*.</p></div></li><li class="rv" style="--i:2"><img data-img="53" alt="Decoratieve technieken" width="320" height="240" loading="lazy" decoding="async"><div><h3>Decoratieve technieken</h3><p>Kalk, betonlook of een accentmuur met karakter.</p></div></li><li class="rv" style="--i:3"><img data-img="4" alt="Gordijnen en lamellen" width="320" height="240" loading="lazy" decoding="async"><div><h3>Gordijnen en lamellen</h3><p>Advies, opmeting en plaatsing op maat.</p></div></li></ul>
 </div></section>
 
-<section class="section section--soft"><div class="wrap">
+<section class="section"><div class="wrap">
   <div class="head-row rv"><div><span class="eyebrow">Eigen werk</span><h2>Recente realisaties</h2></div><a class="arrow-link" href="#offerte">Vraag uw offerte</a></div>
   <div class="lp-gallery"><figure class="rv" style="--i:0"><img data-img="51" alt="Gevel geschilderd in Kortrijk" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Gevel geschilderd</b> · Kortrijk</figcaption></figure><figure class="rv" style="--i:1"><img data-img="15" alt="Leefruimte in Nieuwpoort" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Leefruimte</b> · Nieuwpoort</figcaption></figure><figure class="rv" style="--i:2"><img data-img="7" alt="Kasteel, binnen en buiten in Izegem" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Kasteel, binnen en buiten</b> · Izegem</figcaption></figure><figure class="rv" style="--i:0"><img data-img="54" alt="Horeca-interieur in Gent" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Horeca-interieur</b> · Gent</figcaption></figure><figure class="rv" style="--i:1"><img data-img="9" alt="Villa, gevel in Knokke" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Villa, gevel</b> · Knokke</figcaption></figure><figure class="rv" style="--i:2"><img data-img="55" alt="Restaurant in Merelbeke" width="600" height="450" loading="lazy" decoding="async"><figcaption><b>Restaurant</b> · Merelbeke</figcaption></figure></div>
 </div></section>
@@ -1493,7 +1525,6 @@ html.menu-lock { overflow: hidden; }
   <div class="rv" style="--i:1"><span class="eyebrow">Wie komt er langs?</span><h2>Arne en Lies, met hun team</h2>
     <p>Arne Deseure leeft al meer dan 25 jaar voor het schildersvak en bewaakt de kwaliteit op de werf. Lies begeleidt u van het eerste contact tot de oplevering.</p>
     <ul class="checks"><li>Ervaren vakmensen</li><li>Tijdige en heldere offertes</li><li>Nakomen van afspraken &amp; planning</li><li>Netheid op de werf</li></ul>
-    <div class="lp-review-slot"><a class="tp" href="https://nl-be.trustpilot.com/review/sdad.be" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>4,7</b> op 5 op Trustpilot</span></a><p>Lees wat klanten over ons schrijven op Trustpilot.</p></div>
     <div class="btns"><a class="btn" href="#offerte">Vraag mijn gratis offerte aan</a></div></div>
 </div></section>
 
