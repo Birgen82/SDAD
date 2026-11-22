@@ -1136,7 +1136,7 @@ def landing_nav(pg):
     return f"""<a class="skip" href="#main">Naar inhoud</a>
 <header class="header lp-header"><div class="wrap">
   <span class="logo">{pg.img("logo_dark.png", "SDAD – Schilderkracht tot de vierde macht", lazy=False, w=42, h=58)}</span>
-  <div class="lp-actions"><a class="lp-tel" href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a><a class="btn no-arrow" href="#offerte">Gratis offerte</a></div>
+  <div class="lp-actions"><a class="lp-tel" href="tel:{PHONES[0][2]}">Bel {PHONES[0][1]}</a><a class="btn no-arrow" href="#offerte">Gratis offerte</a></div>
 </div></header>"""
 
 

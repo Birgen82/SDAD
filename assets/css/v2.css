@@ -889,3 +889,10 @@ html.menu-lock { overflow: hidden; }
 .rv-card figcaption b { color: var(--ink); }
 @media (max-width: 980px) { .rv-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .rv-grid { grid-template-columns: 1fr; gap: 10px; } .rv-card { padding: 18px; } }
+
+/* Consistentie tussen site en offertepagina */
+.nav > a.btn { border-radius: 999px; }
+.nav > a.btn::after { content: none; }
+.faq summary { font-stretch: 80%; font-size: 1.4rem; }
+.lp-tel::before { content: none; }
+.lp-tel { padding: 10px 4px; }
