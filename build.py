@@ -1218,9 +1218,9 @@ CURTAIN_REVIEWS = [  # letterlijk van Trustpilot; reviews die gordijnen/raamdeco
     ("Sofie C.", "oktober 2025", 5, "Zeer correcte en vlotte communicatie! Alles wordt duidelijk afgesproken en nadien ook zo uitgevoerd."),
     ("Roger V.", "september 2026", 5, "In enkele woorden: TOP resultaat. En niet te vergeten: na de werken is alles netjes achtergelaten."),
 ]
-CURTAIN_SHOTS = [("1644_app_kortrijk_4.webp", "Overgordijnen", "Kortrijk"), ("1647_lamel_combo_gordijn.webp", "Lamellen met gordijn", None),
-                 ("1644_0166.webp", "Rolgordijnen", None), ("1644_cambr_diaz_3_-_kopie_0.webp", "Rolgordijn", None),
-                 ("1351_modelapp_3.webp", "Overgordijnen", None), ("1647_0085.webp", "Lamellen", None)]
+CURTAIN_SHOTS = [("c_1644_0166.webp", "Vouwgordijnen", None), ("1647_lamel_combo_gordijn_3.webp", "Overgordijn met houten lamellen", None),
+                 ("1644_rolgordijnen_2.webp", "Rolgordijn, lichtdoorlatend", None), ("1647_0105.webp", "Aluminium lamellen", None),
+                 ("c_1644_cambr_diaz_3_-_kopie_0.webp", "Rolgordijn in kleur", None), ("1644_sleepend_gordijn.webp", "Linnen overgordijn", None)]
 
 
 def curtain_wizard(pg):
@@ -1261,10 +1261,10 @@ def offerte_gordijnen_page():
     pg = Page("offerte-gordijnen/")
     trust = f'<a class="tp" href="{TRUSTPILOT}" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>{TP_SCORE}</b> op 5 · {TP_COUNT} reviews op Trustpilot</span></a>'
     types = "".join(f'<li class="rv" style="--i:{n}">{pg.img(thumb(i, 640), t, w=320, h=240)}<div><h3>{t}</h3><p>{x}</p></div></li>' for n, (i, t, x) in enumerate([
-        ("1644_app_kortrijk_4.webp", "Overgordijnen", "Sfeer, warmte en een betere akoestiek. Elegant tot op de vloer."),
-        ("1644_0166.webp", "Rol- en vouwgordijnen", "Strak en praktisch, ook verduisterend voor de slaapkamer."),
-        ("1647_lamel_combo_gordijn.webp", "Lamellen", "Hout, aluminium, pvc of textiel. Horizontaal of verticaal."),
-        ("1647_0085.webp", "Elektrische bediening", "Manueel of elektrisch, afgestemd op uw gebruiksgemak.")]))
+        ("c_1351_modelapp_3.webp", "Overgordijnen", "Sfeer, warmte en een betere akoestiek. Elegant tot op de vloer."),
+        ("c_1644_0166.webp", "Rol- en vouwgordijnen", "Strak en praktisch, ook verduisterend voor de slaapkamer."),
+        ("1647_0105.webp", "Lamellen", "Hout, aluminium, pvc of textiel. Horizontaal of verticaal."),
+        ("c_1647_vb_tr_014_diaz_2_-_kopie_1_0.webp", "Elektrische bediening", "Manueel of elektrisch, ideaal voor grote of hoge ramen.")]))
     shots = "".join(f'<button type="button" class="rv" style="--i:{n % 3}" data-full="{pg.r}assets/img/{i}">{pg.img(i, t, w=600, h=450)}<span class="lp-cap"><b>{t}</b>{f"<span class=lp-sep> · </span>{pl}" if pl else ""}</span></button>' for n, (i, t, pl) in enumerate(CURTAIN_SHOTS))
     cards = "".join(f'''<figure class="rv-card rv" style="--i:{n}"><div class="rv-stars" aria-label="{st} op 5 sterren">{"★" * st}</div>
       <blockquote>“{t}”</blockquote><figcaption><b>{nm}</b> · {d}</figcaption></figure>''' for n, (nm, d, st, t) in enumerate(CURTAIN_REVIEWS))
@@ -1279,7 +1279,7 @@ def offerte_gordijnen_page():
           ("Kunnen jullie ook schilderen?", f"Ja. SDAD is in de eerste plaats een schildersbedrijf. Muren, kleuren en raamdecoratie stemmen we graag samen op elkaar af. <a href=\"{site_link(pg, 'offerte/')}\">Offerte voor schilderwerken</a>")]
     faqs = "".join(f"<details><summary>{q}</summary><div class=\"answer\">{a}</div></details>" for q, a in qa)
     body = f"""<section class="lp-hero">
-  <div class="lp-hero__bg" aria-hidden="true">{pg.img("1644_app_kortrijk_4.webp", "", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
+  <div class="lp-hero__bg" aria-hidden="true">{pg.img("1647_lamel_combo_gordijn_2.webp", "", lazy=False).replace("<img", '<img fetchpriority="high"')}</div>
   <div class="wrap lp-hero__grid">
     <div class="lp-hero__text">
       {trust}

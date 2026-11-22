@@ -959,3 +959,5 @@ html.menu-lock { overflow: hidden; }
 @media (max-width: 980px) {
   .theme-soft .lp-hero__bg::after { background: linear-gradient(0deg, var(--ink-soft), rgba(42,33,27,0)); }
 }
+.theme-soft .lp-hero__bg img { object-position: 70% 40%; }
+@media (max-width: 980px) { .theme-soft .lp-hero__bg img { object-position: 60% 30%; } }
