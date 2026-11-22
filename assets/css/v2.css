@@ -970,3 +970,12 @@ html.menu-lock { overflow: hidden; }
 .wish__tip { font-size: .88rem; font-weight: 700; color: var(--red-text); }
 @media (max-width: 980px) { .wish { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .wish { grid-template-columns: 1fr; } }
+
+/* Gsm: reviews als veegrij, leesbare fotolabels */
+@media (max-width: 600px) {
+  .rv-grid { display: grid; grid-auto-flow: column; grid-auto-columns: 82%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px;
+    margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 10px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .rv-grid::-webkit-scrollbar { display: none; }
+  .rv-card { scroll-snap-align: start; }
+  .lp-cap { font-size: .8rem; }
+}

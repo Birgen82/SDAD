@@ -22,7 +22,7 @@
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts/fonts.css?v=f709757a">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=7bfffacd">
 <style>/* SDAD – huisstijl: rood #da291c, antraciet #4b4f54, zwart #00080a, Avenir Next */
 :root {
   --red: #da291c;
@@ -1380,6 +1380,15 @@ html.menu-lock { overflow: hidden; }
 .wish__tip { font-size: .88rem; font-weight: 700; color: var(--red-text); }
 @media (max-width: 980px) { .wish { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .wish { grid-template-columns: 1fr; } }
+
+/* Gsm: reviews als veegrij, leesbare fotolabels */
+@media (max-width: 600px) {
+  .rv-grid { display: grid; grid-auto-flow: column; grid-auto-columns: 82%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px;
+    margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 10px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .rv-grid::-webkit-scrollbar { display: none; }
+  .rv-card { scroll-snap-align: start; }
+  .lp-cap { font-size: .8rem; }
+}
 .pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HousePainter", "name": "SDAD bv", "slogan": "Schilderkracht tot de vierde macht", "url": "https://sdad.be/", "email": "info@sdad.be", "telephone": "+32473520920", "vatID": "BE0823.935.816", "image": "https://sdad.be/site/assets/files/1/kleurbepaling_linkedin.jpeg", "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870", "addressLocality": "Izegem", "addressCountry": "BE"}, "areaServed": [{"@type": "AdministrativeArea", "name": "West-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}], "sameAs": ["https://www.facebook.com/DeseureArneNuyttensLies/", "https://www.instagram.com/schilderwerken_sdad/", "https://www.linkedin.com/company/sdad-arne-deseure/"]}</script>
