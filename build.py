@@ -353,11 +353,11 @@ def places():
     return out
 
 
-SLIDES = [("buitenschilderwerken-kasteel-blauwhuis-te-izegem", "1918_blauwhuis_buiten_1.webp", "Kasteel Blauwhuis, Izegem"),
-          ("schilderen-gevel-te-kortrijk", "1893_kortrijk_afgewerkt.webp", "Gevel te Kortrijk"),
-          ("rood-residentie-porto-fino-te-wenduine-stop-rood", "2020_wenduine_4.webp", "Residentie Porto Fino, Wenduine"),
-          ("gevel-villa-te-knokke", "2044_knokke_na_1_3.webp", "Villa te Knokke"),
-          ("frituur-de-platse-lendelede", "1965_frituur_15.webp", "Frituur De Platse, Lendelede")]
+SLIDES = [("buitenschilderwerken-kasteel-blauwhuis-te-izegem", "1913_blauwhuis_voorzijde_afgewerkt.webp", "Kasteel Blauwhuis, Izegem"),
+          ("boetiek-gastronomiek-culix-te-merelbeke", "1835_oblix_1.webp", "Culix, Merelbeke"),
+          ("babu-gent", "2306_babu_na_3.webp", "Babu@Gent"),
+          ("tastoe-roeselare", "1526_tastoe_website_1.webp", "Broodbar Tastoe, Roeselare"),
+          ("schilderen-gevel-te-kortrijk", "1893_kortrijk_afgewerkt.webp", "Gevel te Kortrijk")]
 
 
 def home():
