@@ -172,41 +172,54 @@ document.querySelectorAll('.rail-wrap').forEach(w => {
   rail.addEventListener('click', e => { if (moved) { e.preventDefault(); moved = false; } }, true);
 });
 
-// Offerte-wizard
+// Offerte-wizard (algemeen: velden worden automatisch in de aanvraag opgenomen)
 document.querySelectorAll('.wiz').forEach(wiz => {
+  const form = wiz.querySelector('form');
   const steps = [...wiz.querySelectorAll('.wiz__step')];
   const bar = wiz.querySelector('.wiz__bar span'), back = wiz.querySelector('.wiz__back'), next = wiz.querySelector('.wiz__next'), err = wiz.querySelector('.wiz__err');
   let i = 0;
   const show = n => {
     i = n; steps.forEach((s, k) => s.classList.toggle('on', k === i));
     bar.style.width = ((i + 1) / steps.length * 100) + '%';
-    back.hidden = i === 0; next.textContent = i === steps.length - 1 ? 'Verstuur aanvraag' : 'Volgende';
+    back.hidden = i === 0; next.textContent = i === steps.length - 1 ? (wiz.dataset.submit || 'Verstuur aanvraag') : 'Volgende';
     err.textContent = '';
   };
   const valid = () => {
-    const s = steps[i];
-    if (s.querySelector('input[type=checkbox], input[type=radio]') && !s.querySelector('input:checked')) { err.textContent = 'Kies minstens één optie.'; return false; }
-    for (const f of s.querySelectorAll('[required]')) if (!f.checkValidity()) { err.textContent = 'Vul de verplichte velden correct in.'; f.focus(); return false; }
+    for (const g of steps[i].querySelectorAll('[data-need]')) if (!g.querySelector('input:checked')) { err.textContent = g.dataset.need; return false; }
+    for (const f of steps[i].querySelectorAll('[required]')) if (!f.closest('[hidden]') && !f.checkValidity()) { err.textContent = 'Vul de verplichte velden correct in.'; f.focus(); return false; }
     return true;
   };
+  // Velden tonen/verbergen op basis van een keuze (bv. professionele klant)
+  form.addEventListener('change', () => wiz.querySelectorAll('[data-show-if]').forEach(el => {
+    const [name, val] = el.dataset.showIf.split('=');
+    el.hidden = !form.querySelector(`[name="${name}"][value="${val}"]:checked`);
+  }));
   back.addEventListener('click', () => show(Math.max(0, i - 1)));
   next.addEventListener('click', () => {
     if (!valid()) return;
     if (i < steps.length - 1) { show(i + 1); steps[i].querySelector('input, textarea')?.focus({ preventScroll: true }); return; }
-    if (wiz.querySelector('[name=website]').value) return;
-    const d = new FormData(wiz.querySelector('form'));
-    const body = [
-      'Diensten: ' + d.getAll('dienst').join(', '),
-      'Type pand: ' + d.get('pand'),
-      'Timing: ' + d.get('timing'),
-      '', 'Naam: ' + d.get('naam'), 'Telefoon: ' + d.get('telefoon'), 'E-mail: ' + d.get('email'), 'Gemeente: ' + d.get('gemeente'),
-      '', d.get('bericht') || ''
-    ].join('\n');
-    location.href = 'mailto:info@sdad.be?subject=' + encodeURIComponent('Offerteaanvraag via sdad.be – ' + d.get('naam')) + '&body=' + encodeURIComponent(body);
+    if (form.website && form.website.value) return;
+    const d = new FormData(form), lines = [], seen = {};
+    for (const [k, v] of d) {
+      if (k === 'website' || k === 'privacy' || !String(v).trim()) continue;
+      const el = form.querySelector(`[name="${k}"]`); if (el && el.closest('[hidden]')) continue;
+      if (seen[k] !== undefined) { lines[seen[k]] += ', ' + v; continue; }
+      seen[k] = lines.push(k + ': ' + v) - 1;
+    }
+    const who = [d.get('Voornaam'), d.get('Achternaam')].filter(Boolean).join(' ') || d.get('Naam') || '';
+    location.href = 'mailto:info@sdad.be?subject=' + encodeURIComponent((wiz.dataset.subject || 'Offerteaanvraag') + ' – ' + who) + '&body=' + encodeURIComponent(lines.join('\n'));
     wiz.querySelector('.wiz__body').hidden = true; wiz.querySelector('.wiz__done').hidden = false;
   });
   show(0);
 });
+
+// Terugbelformulier
+document.querySelectorAll('.callback').forEach(f => f.addEventListener('submit', e => {
+  e.preventDefault();
+  const tel = f.querySelector('input[type=tel]').value;
+  location.href = 'mailto:info@sdad.be?subject=' + encodeURIComponent('Graag terugbellen') + '&body=' + encodeURIComponent('Gelieve mij terug te bellen op ' + tel + '.');
+  f.querySelector('.callback__ok').hidden = false;
+}));
 
 // Dienstpagina's: header-status doorgeven (voor de plakkende paginanavigatie)
 if (header) addEventListener('scroll', () => document.body.classList.toggle('hdr-hidden', header.classList.contains('is-hidden')), { passive: true });

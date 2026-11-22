@@ -15,6 +15,7 @@ SITE = "https://sdad.be"
 DEMO = True
 # Basisadres voor deel-links (WhatsApp, Facebook, LinkedIn…): de demo op GitHub Pages of de echte site.
 BASE = "https://birgen82.github.io/SDAD/" if DEMO else SITE + "/"
+TRUSTPILOT = "https://nl-be.trustpilot.com/review/sdad.be"
 OFFERTE = "https://www.offerteschilderwerken.be/#Offerteaanvraag"
 BOOKING = "https://afspraaksdad.youcanbook.me/"
 MAIL = "info@sdad.be"
@@ -157,7 +158,7 @@ def asset_version():
     return h.hexdigest()[:8]
 
 
-def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
+def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp", landing=False):
     return f"""<!doctype html>
 <html lang="nl-BE">
 <head>
@@ -189,11 +190,11 @@ def layout(pg, title, desc, body, og_img="1_kleurbepaling_linkedin.webp"):
 <script type="application/ld+json">{SCHEMA}</script>
 </head>
 <body>
-{nav(pg)}
+{landing_nav(pg) if landing else nav(pg)}
 <main id="main">
 {body}
 </main>
-{footer(pg)}
+{landing_footer(pg) if landing else footer(pg)}
 <script src="{pg.r}assets/js/main.js?v={VER}" defer></script>
 </body>
 </html>
@@ -401,6 +402,7 @@ def home():
     <ul class="hx__stats">
       <li><b data-count="25" data-suffix="+">25+</b>jaar ervaring</li>
       <li><b data-count="10">10</b>jaar garantie op gevels* <a href="{pg.u('diensten/schilderwerken/buiten/')}#garantie">voorwaarden</a></li>
+      <li><b>4,7</b><a class="tp-link" href="{TRUSTPILOT}" target="_blank" rel="noopener">op 5 op Trustpilot</a></li>
     </ul>
     </div>
     <div class="hx__vctl"><button type="button" class="hx__pause" aria-label="Video pauzeren" aria-pressed="false"></button><span>Video: Lion Eyes</span></div>
@@ -1122,6 +1124,135 @@ def blog_pages():
         write(pg, layout(pg, f"{d['title']} | Blog SDAD", d["desc"] or b["excerpt"], body))
 
 
+# ---------- Offertepagina (landingspagina, voorstel voor offerteschilderwerken.be) ----------
+def landing_nav(pg):
+    return f"""<a class="skip" href="#main">Naar inhoud</a>
+<header class="header lp-header"><div class="wrap">
+  <a class="logo" href="{pg.u()}" aria-label="SDAD – naar sdad.be">{pg.img("logo_dark.png", "SDAD – Schilderkracht tot de vierde macht", lazy=False, w=42, h=58)}</a>
+  <div class="lp-actions"><a class="lp-tel" href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a><a class="btn no-arrow" href="#offerte">Offerte aanvragen</a></div>
+</div></header>"""
+
+
+def landing_footer(pg):
+    socials = "".join(f'<a href="{u}" target="_blank" rel="noopener" aria-label="{n}">{ICONS[n]}</a>' for n, u in SOCIAL.items())
+    return f"""<footer class="footer lp-footer"><div class="wrap">
+  <div class="lp-foot">
+    <div>{pg.img("logo.png", "SDAD", cls="footer-logo", w=66, h=92)}</div>
+    <div><h4>SDAD</h4><p>Schilderkracht tot de vierde macht<br>Prinsdomlaan 50, 8870 Izegem<br><a href="tel:{PHONES[0][2]}">{PHONES[0][1]}</a> · <a href="mailto:{MAIL}">{MAIL}</a></p></div>
+    <div><h4>Meer over SDAD</h4><p><a href="{pg.u()}">Naar de website</a><br><a href="{pg.u('realisaties/')}">Realisaties</a><br><a href="{pg.u('over-sdad/')}">Over SDAD</a></p><div class="socials">{socials}</div></div>
+  </div>
+  <div class="subfooter"><span>© SDAD BV, BV Schilder &amp; Decoratiebedrijf Arne Deseure, BE 0823.935.816, Prinsdomlaan 50, 8870 Izegem</span>
+    <a href="{pg.u('cookie-en-privacybeleid/')}">Privacybeleid</a></div>
+</div></footer>
+<div class="mobile-bar"><a href="tel:{PHONES[0][2]}">Bel ons</a><a href="#offerte">Offerte</a></div>"""
+
+
+def offerte_wizard(pg):
+    def opts(name, items, kind="radio", need=None):
+        n = f' data-need="{need}"' if need else ""
+        return f'<div class="opts"{n}>' + "".join(f'<label><input type="{kind}" name="{name}" value="{v}"><span>{v}</span></label>' for v in items) + "</div>"
+    def field(label, name, typ="text", req=True, full=False, ac="", ph=""):
+        return (f'<div{" class=full" if full else ""}><label for="o-{name}">{label}{" *" if req else ""}</label>'
+                f'<input id="o-{name}" name="{name}" type="{typ}"{" required" if req else ""}{f" autocomplete={ac!r}" if ac else ""}{f" placeholder={ph!r}" if ph else ""}></div>')
+    return f"""<div class="wiz lp-wiz" data-subject="Offerteaanvraag via offerteschilderwerken.be" data-submit="Offerte aanvragen"><form onsubmit="return false" novalidate>
+  <div class="wiz__body">
+    <p class="lp-wiz__title">Vrijblijvende offerte <span>Gratis &amp; zonder verplichtingen</span></p>
+    <div class="wiz__bar"><span></span></div>
+    <fieldset class="wiz__step"><legend>Wat mogen we voor u doen?</legend><p class="hint">Meerdere keuzes mogelijk.</p>
+      {opts("Werken", ["Binnenschilderwerken", "Buitenschilderwerken", "Decoratieve technieken", "Ramen, deuren of trap", "Gordijnen, lamellen of raamfolie"], "checkbox", "Kies minstens één dienst.")}</fieldset>
+    <fieldset class="wiz__step"><legend>Over uw project</legend><p class="hint">Bent u een particulier of een professionele klant?</p>
+      {opts("Klanttype", ["Particulier", "Professioneel"], "radio", "Kies particulier of professioneel.")}
+      <div class="form-grid" style="margin-top:14px">
+        <div class="full" data-show-if="Klanttype=Professioneel" hidden><div class="form-grid">{field("Bedrijfsnaam", "Bedrijfsnaam", req=False, ac="organization")}{field("Btw-nummer", "Btw-nummer", req=False)}</div></div>
+        {field("Wanneer wilt u de werken laten uitvoeren?", "Gewenste periode", full=True, ph="bv. voorjaar 2027")}
+        <div class="full"><label class="check"><input type="checkbox" name="Zo snel mogelijk" value="ja"> <span>Zo snel mogelijk</span></label></div>
+      </div></fieldset>
+    <fieldset class="wiz__step"><legend>Hoe bereiken we u?</legend><p class="hint">We nemen zo snel mogelijk contact met u op.</p>
+      <div class="form-grid">{field("Voornaam", "Voornaam", ac="given-name")}{field("Achternaam", "Achternaam", ac="family-name")}{field("Telefoon", "Telefoon", "tel", ac="tel")}{field("E-mail", "E-mail", "email", ac="email")}</div></fieldset>
+    <fieldset class="wiz__step"><legend>Waar en wat?</legend><p class="hint">Het adres van de werken en een korte beschrijving.</p>
+      <div class="form-grid">{field("Straat", "Straat", ac="address-line1")}{field("Huisnummer + bus", "Huisnummer")}{field("Postcode", "Postcode", ac="postal-code")}{field("Stad", "Stad", ac="address-level2")}
+        <div class="full"><label for="o-besch">Beschrijving *</label><textarea id="o-besch" name="Beschrijving" rows="4" required placeholder="Beschrijf uw project zo gedetailleerd mogelijk…"></textarea></div>
+        <div class="full"><label class="check"><input type="checkbox" name="privacy" required> <span>Ik ga akkoord met het <a href="{pg.u('cookie-en-privacybeleid/')}" target="_blank">privacybeleid</a></span></label></div>
+        <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px"><input name="website" tabindex="-1" autocomplete="off"></div>
+      </div></fieldset>
+    <p class="wiz__err" aria-live="polite"></p>
+    <div class="wiz__nav"><button type="button" class="wiz__back">← Vorige</button><button type="button" class="btn wiz__next">Volgende</button></div>
+  </div>
+  <div class="wiz__done" hidden><div class="ok"></div><h3>Bedankt!</h3><p>We nemen zo snel mogelijk contact met u op.</p></div>
+</form></div>"""
+
+
+def offerte_page():
+    pg = Page("offerte/")
+    trust = f'<a class="tp" href="{TRUSTPILOT}" target="_blank" rel="noopener"><span class="tp__stars" aria-hidden="true">★★★★★</span><span><b>4,7</b> op 5 op Trustpilot</span></a>'
+    tiles = "".join(f'<a class="tile rv" style="--i:{n}" href="#offerte">{pg.img(i, t)}<span class="go" aria-hidden="true">→</span><h3>{t}</h3><p>{x}</p></a>' for n, (i, t, x) in enumerate([
+        ("1627_nieuwpoort_living.webp", "Binnenschilderwerken", "Met oog voor detail, gratis kleuradvies en een perfecte afwerking."),
+        ("2502_aqua_sensa_1.webp", "Decoratieve technieken", "Geef muren meer pit met unieke decoratieve technieken."),
+        ("1893_kortrijk_afgewerkt.webp", "Buitenschilderwerken", "Het schilderen van uw gevel met verf of kalei, ramen en deuren.")]))
+    ticks = "".join(f'<li class="rv" style="--i:{i % 4}">{b}</li>' for i, b in enumerate([
+        "Ervaren vakmensen", "Capaciteit en flexibiliteit", "Persoonlijke aanpak", "Tijdige en heldere offertes",
+        "Meedenkend advies", "Duidelijke communicatie", "Nakomen van afspraken &amp; planning", "Netheid op de werf"]))
+    picks = ["buitenschilderwerken-kasteel-blauwhuis-te-izegem", "boetiek-gastronomiek-culix-te-merelbeke", "gevel-villa-te-knokke", "babu-gent",
+             "tastoe-roeselare", "schilderen-gevel-te-kortrijk", "villa-te-zwijnaarde", "frituur-de-platse-lendelede"]
+    shots = "".join(shot(pg, r) for sl in picks for r in REAL if r["slug"] == sl)
+    body = f"""<section class="lp-hero">
+  <div class="lp-hero__bg" aria-hidden="true"><video autoplay muted loop playsinline preload="auto" poster="{pg.r}assets/video/hero-poster.webp">
+    <source src="{pg.r}assets/video/hero-m.mp4" type="video/mp4" media="(max-width: 700px)"><source src="{pg.r}assets/video/hero.mp4" type="video/mp4"></video></div>
+  <div class="wrap lp-hero__grid">
+    <div class="lp-hero__text">
+      {trust}
+      <h1>Uw betrouwbare, kwalitatieve &amp; betaalbare partner voor <em class="stroke">schilderwerken</em></h1>
+      <p class="lead">U kunt rekenen op een hoge afwerking in combinatie met een vlotte service, binnen de gewenste opleveringstermijn.</p>
+      <ul class="lp-usp"><li>Gratis &amp; vrijblijvende offerte</li><li>Gratis kleuradvies</li><li>Meer dan 25 jaar vakmanschap</li></ul>
+      <p class="lp-alt">Liever meteen een afspraak? <a href="{BOOKING}" target="_blank" rel="noopener">Plan zelf een plaatsbezoek</a></p>
+    </div>
+    <div id="offerte" class="lp-hero__form">{offerte_wizard(pg)}</div>
+  </div>
+</section>
+
+<section class="section"><div class="wrap">
+  <div class="intro-row rv"><div><span class="eyebrow">Onze diensten</span><h2>Schilderwerken met een hoge <em class="stroke">afwerkingsgraad</em></h2></div>
+  <p>Voor uw living, keuken, slaapkamer, gevel… Ook ramen, deuren en trappen werken we af in een kleur die past in het totaalplaatje. Gordijnen, raamfolie en lamellen kunnen we eveneens voorzien.</p></div>
+  <div class="lp-tiles">{tiles}</div>
+</div></section>
+
+<section class="section four"><div class="wrap split">
+  <div class="rv"><span class="eyebrow">Elke klant is uniek</span><h2>Woningen, appartementen, winkels en kantoren</h2>
+    <p>Elke klant wil dat zijn woning of bedrijfspand eruit springt. Net daar houden wij van. Uitdagende projecten zien we even graag komen als de alledaagse schilderwerken. Aarzel dus niet om speciale verzoeken voor te leggen.</p>
+    <p>Houdt u van strak en modern, of liever huiselijk en warm? SDAD past zich aan uw stijl en voorkeuren aan.</p>
+    <div class="btns"><a class="btn" href="#offerte">Offerte aanvragen</a></div></div>
+  <div class="rv" style="--i:1"><h3 style="color:#fff;font-size:1.6rem;margin-bottom:16px">Daarom kiezen klanten voor SDAD</h3><ul class="ticks lp-ticks">{ticks}</ul></div>
+</div></section>
+
+<section class="section rail-wrap"><div class="wrap">
+  <div class="head-row rv"><div><span class="eyebrow">Realisaties</span><h2>Raak geïnspireerd</h2></div>
+  <div class="rail-nav"><a class="arrow-link" href="{pg.u('realisaties/')}" style="align-self:center;margin-right:10px">Alle realisaties</a><button type="button" data-dir="-1" aria-label="Vorige">←</button><button type="button" data-dir="1" aria-label="Volgende">→</button></div></div>
+</div><div><div class="rail" tabindex="0" aria-label="Realisaties, horizontaal scrollen">{shots}</div></div></section>
+
+<section class="section section--soft"><div class="wrap split">
+  <div class="rv">{pg.img("2509_arne_en_lies_samen.webp", "Arne Deseure en Lies Nuyttens")}</div>
+  <div class="rv" style="--i:1"><span class="eyebrow">Zaakvoerders</span><h2>Drijvende kracht achter SDAD</h2>
+    <p>Achter SDAD staan ondernemers Arne en Lies. Samen met hun team bouwen zij dagelijks verder aan een bedrijf waarin vakmanschap, kwaliteit en persoonlijke opvolging centraal staan.</p>
+    <p>Al meer dan 25 jaar leeft Arne Deseure voor het schildersvak. Lies begeleidt klanten van eerste contact tot oplevering. Elk geslaagd project wordt mogelijk gemaakt door een team van gemotiveerde vakmensen.</p>
+    <a class="arrow-link" href="{pg.u('over-sdad/')}">Meer over SDAD</a></div>
+</div></section>
+
+<section class="section"><div class="wrap split">
+  <div class="rv"><span class="eyebrow">Samen met Verthe Interieurs</span><h2>Samen naar een interieur dat klopt</h2>
+    <p>Een geslaagd interieur is meer dan een mooie afwerking. Daarom bundelen we onze expertise met <a href="https://www.verthe-interieurs.be/" target="_blank" rel="noopener">Verthe Interieurs</a> uit Harelbeke: SDAD zorgt voor hoogwaardig schilderwerk, Verthe voor een doordachte totaalaanpak van interieur en maatwerk.</p></div>
+  <div class="rv" style="--i:1">{video(pg, "2434_thumbnail_video_sdad_verthe.webp", "https://www.youtube.com/watch?v=zO2ZFUFUiMw", "Bekijk de film: SDAD × Verthe Interieurs", "Film over de samenwerking tussen SDAD en Verthe Interieurs")}</div>
+</div></section>
+
+<section class="section"><div class="wrap"><div class="cta lp-cta">
+  <h2>Een project in het vooruitzicht?</h2><p>Vraag een vrijblijvende offerte aan, of laat uw nummer achter en we bellen u terug.</p>
+  <div class="btns"><a class="btn" href="#offerte">Offerte aanvragen</a></div>
+  <form class="callback" novalidate><label for="cb-tel" class="sr-only">Telefoonnummer</label><input id="cb-tel" type="tel" required autocomplete="tel" placeholder="Uw telefoonnummer"><button class="btn btn--ghost no-arrow" type="submit">Bel mij terug</button>
+  <p class="callback__ok" hidden>Bedankt! We bellen u zo snel mogelijk terug.</p></form>
+</div></div></section>"""
+    write(pg, layout(pg, "Offerte schilderwerken | SDAD Izegem",
+                     "Vraag gratis en vrijblijvend een offerte aan voor binnen- en buitenschilderwerken, decoratieve technieken en raamdecoratie bij SDAD uit Izegem.", body, landing=True))
+
+
 # ---------- Juridische pagina's ----------
 def legal_pages():
     meta = {
@@ -1139,5 +1270,5 @@ def legal_pages():
 
 if __name__ == "__main__":
     VER = asset_version()
-    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages, legal_pages):
+    for f in (home, over, binnen, buiten, decoratief, gordijnen, lamellen, realisaties, blog, contact, realisatie_pages, blog_pages, legal_pages, offerte_page):
         f()
