@@ -22,7 +22,7 @@
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts/fonts.css?v=59dd4689">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=73fb958e">
 <style>/* SDAD – huisstijl: rood #da291c, antraciet #4b4f54, zwart #00080a, Avenir Next */
 :root {
   --red: #da291c;
@@ -1391,6 +1391,15 @@ html.menu-lock { overflow: hidden; }
 }
 .rv-grid--2 { grid-template-columns: repeat(2, minmax(0, 420px)); }
 @media (max-width: 600px) { .rv-grid--2 { grid-auto-flow: row; grid-template-columns: 1fr; overflow: visible; margin: 0; padding: 0; } }
+
+/* Desktop: vaste menubalk zonder verberg-animatie (voorkomt flikkeren) */
+.header, .header.is-scrolled, .header.is-hidden { transform: none !important; transition: none; }
+.header.is-scrolled { box-shadow: 0 1px 0 var(--line); }
+.subnav, .fbar, body.hdr-hidden .subnav, body.hdr-hidden .fbar { transition: none; }
+@media (min-width: 981px) { body.hdr-hidden .subnav, body.hdr-hidden .fbar { top: 76px; } }
+/* Uitklapmenu: geen gat tussen knop en paneel */
+.dd-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+.dd-panel { transition: opacity .15s, visibility .15s; }
 .pv-note{background:#fff8d6;color:#5a4a00;font-size:.85rem;text-align:center;padding:6px 12px}</style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HousePainter", "name": "SDAD bv", "slogan": "Schilderkracht tot de vierde macht", "url": "https://sdad.be/", "email": "info@sdad.be", "telephone": "+32473520920", "vatID": "BE0823.935.816", "image": "https://sdad.be/site/assets/files/1/kleurbepaling_linkedin.jpeg", "address": {"@type": "PostalAddress", "streetAddress": "Prinsdomlaan 50", "postalCode": "8870", "addressLocality": "Izegem", "addressCountry": "BE"}, "areaServed": [{"@type": "AdministrativeArea", "name": "West-Vlaanderen"}, {"@type": "AdministrativeArea", "name": "Oost-Vlaanderen"}], "sameAs": ["https://www.facebook.com/DeseureArneNuyttensLies/", "https://www.instagram.com/schilderwerken_sdad/", "https://www.linkedin.com/company/sdad-arne-deseure/"]}</script>
@@ -3278,9 +3287,7 @@ addEventListener('scroll', () => {
   const y = scrollY;
   if (!desktop.matches) { if (header) header.classList.remove('is-hidden', 'is-scrolled'); lastY = y; return; }
   if (header && !document.body.classList.contains('menu-open')) {
-    header.classList.toggle('is-scrolled', y > 30);
-    header.classList.toggle('is-hidden', y > 400 && y > lastY + 4);
-    if (y < lastY - 4) header.classList.remove('is-hidden');
+    const sc = y > 30; if (sc !== header.classList.contains('is-scrolled')) header.classList.toggle('is-scrolled', sc);
   }
   lastY = y;
 }, { passive: true });

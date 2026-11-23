@@ -981,3 +981,12 @@ html.menu-lock { overflow: hidden; }
 }
 .rv-grid--2 { grid-template-columns: repeat(2, minmax(0, 420px)); }
 @media (max-width: 600px) { .rv-grid--2 { grid-auto-flow: row; grid-template-columns: 1fr; overflow: visible; margin: 0; padding: 0; } }
+
+/* Desktop: vaste menubalk zonder verberg-animatie (voorkomt flikkeren) */
+.header, .header.is-scrolled, .header.is-hidden { transform: none !important; transition: none; }
+.header.is-scrolled { box-shadow: 0 1px 0 var(--line); }
+.subnav, .fbar, body.hdr-hidden .subnav, body.hdr-hidden .fbar { transition: none; }
+@media (min-width: 981px) { body.hdr-hidden .subnav, body.hdr-hidden .fbar { top: 76px; } }
+/* Uitklapmenu: geen gat tussen knop en paneel */
+.dd-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+.dd-panel { transition: opacity .15s, visibility .15s; }

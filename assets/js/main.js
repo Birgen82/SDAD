@@ -121,9 +121,7 @@ addEventListener('scroll', () => {
   const y = scrollY;
   if (!desktop.matches) { if (header) header.classList.remove('is-hidden', 'is-scrolled'); lastY = y; return; }
   if (header && !document.body.classList.contains('menu-open')) {
-    header.classList.toggle('is-scrolled', y > 30);
-    header.classList.toggle('is-hidden', y > 400 && y > lastY + 4);
-    if (y < lastY - 4) header.classList.remove('is-hidden');
+    const sc = y > 30; if (sc !== header.classList.contains('is-scrolled')) header.classList.toggle('is-scrolled', sc);
   }
   lastY = y;
 }, { passive: true });
