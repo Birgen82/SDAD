@@ -1,0 +1,9 @@
+<!doctype html>
+<!-- TIJDELIJK: oude links (bv. /SDAD/offerte/) doorsturen naar /SDAD/docs/... Verwijderen zodra Pages op main /docs staat. -->
+<meta charset="utf-8"><meta name="robots" content="noindex">
+<title>SDAD</title>
+<script>
+  var base = '/SDAD/', path = location.pathname;
+  if (path.indexOf(base) === 0 && path.indexOf(base + 'docs/') !== 0) location.replace(base + 'docs/' + path.slice(base.length) + location.search + location.hash);
+</script>
+<p>Pagina niet gevonden. <a href="/SDAD/docs/">Naar de startpagina</a></p>
